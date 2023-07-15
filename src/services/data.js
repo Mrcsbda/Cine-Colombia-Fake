@@ -6,7 +6,7 @@ export const endpoints = {
     urlCinemaShows: `${URL_API_JSON}cinema_shows`,
     urlTickets: `${URL_API_JSON}tickets`,
     urlHistory: `${URL_API_JSON}history`,
-    urlUsers: `${URL_API_JSON}users`,
+    urlAdmins: `${URL_API_JSON}admins`,
 }
 
 export const endpointTrailer = (id) => {

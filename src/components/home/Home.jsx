@@ -1,7 +1,8 @@
 import React from 'react'
 import './home.scss'
 import MainHome from '../main-home/MainHome'
-import Carousel from '../carousel/carousel'
+import Carousel from '../carousel/Carousel'
+
 
 const Home = () => {
   return (
