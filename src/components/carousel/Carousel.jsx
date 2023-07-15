@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
@@ -8,6 +8,12 @@ import './carousel.scss';
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(4);
   const [slides, setSlides] = useState([2, 3, 4, 5, 6]);
+
+  useEffect(()=> {
+  }, [])
+
+  const getData = async () => {
+  }
 
   const handleClick = (index) => {
     const adjacentIndex = calculateAdjacentIndex(index, -2);
@@ -31,7 +37,7 @@ const Carousel = () => {
   return (
     <div>
       <Swiper
-        slidesPerView={3}
+        slidesPerView={5}
         spaceBetween={10}
         autoplay={{ delay: 1000 }}
         loop={true}
