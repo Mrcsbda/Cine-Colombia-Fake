@@ -6,11 +6,14 @@ import 'swiper/css/pagination';
 import './carousel.scss';
 import getMovies from '../../services/getMovies';
 import getCinemaShows from '../../services/getCinemaShows';
+import getMoviesGenre from '../../services/getGenreMovies';
+import CardCarousel from '../cardCarousel/CardCarousel';
 
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(4);
   const [slides, setSlides] = useState([2, 3, 4, 5, 6]);
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [moviesGenre, setMoviesGenre] = useState([]);
 
   useEffect(()=> {
     getData()
@@ -19,11 +22,13 @@ const Carousel = () => {
   const getData = async () => {
     const dataMovies = await getMovies()
     const dataCinemaShows = await getCinemaShows()
-    console.log(dataMovies)
-    console.log(dataCinemaShows)
     const moviesId = [...dataCinemaShows].map((show) => (show.movie))
     const filteredMovies = [...dataMovies].filter((movie) => moviesId.find(movieId => movie.id === movieId))
+    const dataMoviesGenre = await getMoviesGenre()
     setFilteredMovies(filteredMovies)
+    setMoviesGenre(dataMoviesGenre)
+    console.log(dataMovies)
+    console.log(dataMoviesGenre)
   }
 
   const handleClick = (index) => {
@@ -49,15 +54,14 @@ const Carousel = () => {
     <div>
       {filteredMovies.length > 0 && (
         <Swiper
-          slidesPerView={5}
+          slidesPerView={1}
           spaceBetween={10}
-          autoplay={{ delay: 1000 }}
           loop={true}
           pagination={{ clickable: true }}
           breakpoints={{
-            640: { slidesPerView: 5, spaceBetween: 20 },
-            768: { slidesPerView: 5, spaceBetween: 40 },
-            1024: { slidesPerView: 5, spaceBetween: 50 },
+            415: { slidesPerView: 5, spaceBetween: 0 },
+            768: { slidesPerView: 5, spaceBetween: 0 },
+            1024: { slidesPerView: 5, spaceBetween: 0 },
           }}
           modules={[Pagination]}
           className="mySwiper"
@@ -70,7 +74,7 @@ const Carousel = () => {
               onClick={() => handleClick(slide)}
               className={activeIndex === slide ? 'active-slide' : ''}
             >
-              {filteredMovies[slide - 1].title}
+              <CardCarousel movie={filteredMovies[slide - 1]} listGenre={moviesGenre}/>
             </SwiperSlide>
           ))}
         </Swiper>
