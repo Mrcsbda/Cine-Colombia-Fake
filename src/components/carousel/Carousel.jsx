@@ -4,15 +4,26 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import './carousel.scss';
+import getMovies from '../../services/getMovies';
+import getCinemaShows from '../../services/getCinemaShows';
 
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(4);
   const [slides, setSlides] = useState([2, 3, 4, 5, 6]);
 
   useEffect(()=> {
+    getData()
   }, [])
 
   const getData = async () => {
+    const dataMovies = await getMovies()
+    const dataCinemaShows = await getCinemaShows()
+    console.log(dataMovies)
+    console.log(dataCinemaShows)
+    const moviesId = [...dataCinemaShows].map((show) => (show.movie))
+    console.log(moviesId)
+    const filteredMovies = [...dataMovies].filter((movie) => moviesId.find(movieId => movie.id === movieId))
+    console.log(filteredMovies)
   }
 
   const handleClick = (index) => {
