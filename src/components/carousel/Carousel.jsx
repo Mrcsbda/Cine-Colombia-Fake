@@ -10,6 +10,7 @@ import getCinemaShows from '../../services/getCinemaShows';
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(4);
   const [slides, setSlides] = useState([2, 3, 4, 5, 6]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
   useEffect(()=> {
     getData()
@@ -21,9 +22,8 @@ const Carousel = () => {
     console.log(dataMovies)
     console.log(dataCinemaShows)
     const moviesId = [...dataCinemaShows].map((show) => (show.movie))
-    console.log(moviesId)
     const filteredMovies = [...dataMovies].filter((movie) => moviesId.find(movieId => movie.id === movieId))
-    console.log(filteredMovies)
+    setFilteredMovies(filteredMovies)
   }
 
   const handleClick = (index) => {
@@ -47,32 +47,34 @@ const Carousel = () => {
 
   return (
     <div>
-      <Swiper
-        slidesPerView={5}
-        spaceBetween={10}
-        autoplay={{ delay: 1000 }}
-        loop={true}
-        pagination={{ clickable: true }}
-        breakpoints={{
-          640: { slidesPerView: 5, spaceBetween: 20 },
-          768: { slidesPerView: 5, spaceBetween: 40 },
-          1024: { slidesPerView: 5, spaceBetween: 50 },
-        }}
-        modules={[Pagination]}
-        className="mySwiper"
-        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex + 1)}
-        simulateTouch={false}
-      >
-        {slides.map((slide) => (
-          <SwiperSlide
-            key={slide}
-            onClick={() => { activeIndex === slide ? console.log('hola') : handleClick(slide) }}
-            className={activeIndex === slide ? "active-slide" : ""}
-          >
-            Slide {slide}
-          </SwiperSlide>
-        ))}    
-      </Swiper>
+      {filteredMovies.length > 0 && (
+        <Swiper
+          slidesPerView={5}
+          spaceBetween={10}
+          autoplay={{ delay: 1000 }}
+          loop={true}
+          pagination={{ clickable: true }}
+          breakpoints={{
+            640: { slidesPerView: 5, spaceBetween: 20 },
+            768: { slidesPerView: 5, spaceBetween: 40 },
+            1024: { slidesPerView: 5, spaceBetween: 50 },
+          }}
+          modules={[Pagination]}
+          className="mySwiper"
+          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex + 1)}
+          simulateTouch={false}
+        >
+          {slides.map((slide) => (
+            <SwiperSlide
+              key={slide}
+              onClick={() => handleClick(slide)}
+              className={activeIndex === slide ? 'active-slide' : ''}
+            >
+              {filteredMovies[slide - 1].title}
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </div>
   );
 };
