@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './home.scss'
 import Carousel from '../../carousel/Carousel'
-import MainHome from '../../main-home/MainHome'
 import getCinemaShows from '../../../services/getCinemaShows'
 import getMoviesGenre from '../../../services/getGenreMovies'
 import getMovies from '../../../services/getMovies'
@@ -31,7 +30,6 @@ const Home = () => {
   return (
     <div>
       <Carousel  filteredMovies={filteredMovies} moviesGenre={moviesGenre}/>
-      <MainHome />
     </div>
   )
 }
