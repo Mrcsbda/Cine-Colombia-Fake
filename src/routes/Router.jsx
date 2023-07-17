@@ -1,15 +1,16 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Page from '../components/page/Page';
-import Home from '../components/home/Home';
-import Administrator from '../components/administrator/Administrator';
+import Layout from '../components/layout/Layout';
+import Home from '../components/pages/home/Home';
+import Administrator from '../components/pages/administrator/Administrator';
+
 
 
 const Router = () => {
     return (
         <BrowserRouter >
             <Routes>
-                <Route path="/" element={<Page />}>
+                <Route path="/" element={<Layout />}>
                     <Route path="/" element={<Home />} />
                     <Route path="/administrator" element={<Administrator />} />
                 </Route>

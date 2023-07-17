@@ -13,3 +13,7 @@ export const endpoints = {
 export const endpointTrailer = (id) => {
     return `https://api.themoviedb.org/3/movie/${id}/videos?api_key=1feb292ba6b836164398cc7b3245ab59&language=es-ES`;
 }
+
+export const endpointMovie = (id) => {
+    return `https://api.themoviedb.org/3/movie/${id}?api_key=1feb292ba6b836164398cc7b3245ab59&language=es-ES`;
+}

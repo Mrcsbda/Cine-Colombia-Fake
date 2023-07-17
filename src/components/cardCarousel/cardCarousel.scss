@@ -1,0 +1,10 @@
+.card {
+    width: 100%;
+  
+    &-content {
+      padding: 16px;
+      overflow-wrap: break-word;
+      background-color: rebeccapurple;
+      min-height: 266px;
+    }
+  }
