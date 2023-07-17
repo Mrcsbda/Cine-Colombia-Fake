@@ -1,10 +1,16 @@
-.card {
-    width: 100%;
-  
-    &-content {
-      padding: 16px;
-      overflow-wrap: break-word;
-      background-color: rebeccapurple;
-      min-height: 266px;
-    }
+@import "../../assets/styles/variables.scss";
+
+.card-carousel {
+  position: relative;
+
+  &__content {
+    position: absolute;
+    bottom: 0;
+    color: white;
+    font-family: $font-roboto;
+    padding: 1rem;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(360deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 12%, rgba(255, 255, 255, 0) 100%);
   }
+
+}

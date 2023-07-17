@@ -34,9 +34,12 @@ const Carousel = ({filteredMovies,moviesGenre}) => {
     <div>
       {filteredMovies.length > 0 && (
         <Swiper
-          slidesPerView={1}
-          spaceBetween={10}
+          slidesPerView={5}
+          spaceBetween={0}
           loop={true}
+          autoplay={{
+            delay: 5000, // Tiempo en milisegundos entre cada transición de slide
+          }}
           pagination={{ clickable: true }}
           breakpoints={{
             415: { slidesPerView: 5, spaceBetween: 0 },
@@ -47,6 +50,7 @@ const Carousel = ({filteredMovies,moviesGenre}) => {
           className="mySwiper"
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex + 1)}
           simulateTouch={false}
+
         >
           {slides.map((slide) => (
             <SwiperSlide
