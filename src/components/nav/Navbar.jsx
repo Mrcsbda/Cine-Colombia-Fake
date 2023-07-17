@@ -3,6 +3,7 @@ import Genres from '../genres/Genres'
 import logoCine from "../../assets/logoCine.jpg"
 import adminProfile from "../../assets/profile.svg"
 import "./navbar.scss"
+import LoginForm from '../loginForm/LoginForm'
 
 const Navbar = () => {
     const genres = ["Acción", "Terror", "Ciencia Ficción", "Comedia"]
@@ -29,6 +30,7 @@ const Navbar = () => {
                 <img src={adminProfile} alt="Icon for admin profile" />
             </figure>
         </div>
+        <LoginForm/>
     </nav>
   )
 }
