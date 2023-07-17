@@ -1,0 +1,45 @@
+@import "../../assets/styles/variables.scss";
+
+.header--navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: $almost-black;
+    padding: 2rem 2.5rem;
+    color: white;
+    align-items: center;
+    font-family: $font-roboto;
+    .navbar--logo {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        text-transform: uppercase;
+        font-weight: 300;
+        font-size: 16px;
+    }
+    .navbar--user {
+        display: flex;
+        gap: 25px;
+        align-items: center;
+        .navbar-choice {
+            opacity: 80%;
+            color: $light-gray;
+            select, input {
+                border: 1px solid $light-gray;
+                border-radius: 5px;
+                background-color: $almost-black;
+                color: $light-gray;
+                width: 15rem;
+                padding: 10px;
+                margin-top: 5px;
+            }
+        }
+        .admin-enter {
+            background-color: $light-blue;
+            border-radius: 50%;
+            height: fit-content;
+            img {
+                margin: 5px 8px;
+            }
+        }
+    }
+}
