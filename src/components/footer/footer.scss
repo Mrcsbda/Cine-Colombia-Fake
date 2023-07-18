@@ -1,0 +1,111 @@
+@import "../../assets/styles/variables.scss";
+
+.footer {
+    padding: 4rem 6rem;
+    background-color: $very-light-gray;
+    color: $text-blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__logo {
+        font-weight: 700;
+    }
+
+    &__nav {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.7rem;
+        hr {
+            display: none;
+        }
+    }
+
+    &__social-networks-container {
+        p {
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    &__social-networks {
+        display: flex;
+        gap: 0.2rem;
+        justify-content: center;
+        img {
+            width: 1.5rem;
+        }
+    }
+
+    &__rights {
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .footer {
+        gap: 3rem;
+
+        &__info {
+            justify-content: space-between;
+            align-items: self-start;
+            flex-direction: row;
+        }
+
+        &__logo:hover {
+            cursor: pointer;
+        }
+
+        &__nav {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.7rem;
+
+            hr {
+                display: inline;
+                height: 14px;
+                border: 1px solid $light-blue;
+                border-right: none;
+            }
+            li:hover {
+                cursor: pointer;
+                color: $principal-blue;
+            }
+        }
+
+        &__social-networks-container {
+            p:hover {
+                cursor: pointer;
+                color: $principal-blue;
+            }
+        }
+
+        &__social-networks {
+            gap: 0.4rem;
+            img {
+                width: 1.7rem;
+            }
+
+            img:hover {
+                cursor: pointer;
+            }
+        }
+
+        &__rights:hover {
+            cursor: pointer;
+            color: $principal-blue;
+        }
+    }
+}
