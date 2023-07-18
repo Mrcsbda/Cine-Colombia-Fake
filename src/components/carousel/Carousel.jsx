@@ -11,7 +11,20 @@ const Carousel = ({filteredMovies,moviesGenre}) => {
   const [activeIndex, setActiveIndex] = useState(4);
   const [slides, setSlides] = useState([2, 3, 4, 5, 6]);
 
-  const handleClick = (index) => {
+  useEffect(() => {
+
+    const interval = setInterval(() => {
+      const nextIndex = calculateAdjacentIndex(activeIndex, 1);
+      handleSlide(nextIndex);
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+    
+  }, [activeIndex]);
+
+  const handleSlide = (index) => {
     const adjacentIndex = calculateAdjacentIndex(index, -2);
     const newSlides = Array.from({ length: 5 }, (_, i) =>
       calculateAdjacentIndex(adjacentIndex, i)
@@ -55,7 +68,7 @@ const Carousel = ({filteredMovies,moviesGenre}) => {
           {slides.map((slide) => (
             <SwiperSlide
               key={slide}
-              onClick={() => handleClick(slide)}
+              onClick={() => handleSlide(slide)}
               className={activeIndex === slide ? 'active-slide' : ''}
             >
               <CardCarousel movie={filteredMovies[slide - 1]} listGenre={moviesGenre}/>
