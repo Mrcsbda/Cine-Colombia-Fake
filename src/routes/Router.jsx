@@ -10,7 +10,7 @@ import PrivateRouter from './PrivateRouter';
 
 const Router = () => {
 
-    const [isLogin, setIsLogin] = useState(false)
+    const [isLogin, setIsLogin] = useState(true)
     return (
         <BrowserRouter>
             <Routes>

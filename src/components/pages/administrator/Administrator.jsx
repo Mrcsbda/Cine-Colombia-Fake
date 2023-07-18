@@ -1,8 +1,13 @@
 import React from 'react'
+import "./admin.scss"
+import MainMovies from '../../MainMovies/MainMovies';
 
 const Administrator = () => {
+  
   return (
-    <div>Administrator</div>
+    <section className='main--movies'>
+      <MainMovies/>
+    </section>
   )
 }
 
