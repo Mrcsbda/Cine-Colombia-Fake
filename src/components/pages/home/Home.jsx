@@ -29,7 +29,8 @@ const Home = () => {
 
   return (
     <div>
-      <Carousel  filteredMovies={filteredMovies} moviesGenre={moviesGenre}/>
+      <Carousel className="carousel" filteredMovies={filteredMovies} moviesGenre={moviesGenre}/>
+
     </div>
   )
 }

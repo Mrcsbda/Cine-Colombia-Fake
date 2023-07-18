@@ -24,7 +24,7 @@ const Navbar = () => {
             </div>
             <div className='navbar-choice'>
                 <p>Fecha</p>
-                <input type="date" name="" id="" value="2023-08-14" min="2023-08-14"/>
+                {/* <input type="date" name="" id="" value="2023-08-14" min="2023-08-14"/> */}
             </div>
             <figure className='admin-enter'>
                 <img src={adminProfile} alt="Icon for admin profile" />

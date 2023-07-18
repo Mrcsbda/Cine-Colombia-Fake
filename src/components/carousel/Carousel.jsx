@@ -21,7 +21,7 @@ const Carousel = ({filteredMovies,moviesGenre}) => {
     return () => {
       clearInterval(interval);
     };
-    
+
   }, [activeIndex]);
 
   const handleSlide = (index) => {
@@ -44,7 +44,7 @@ const Carousel = ({filteredMovies,moviesGenre}) => {
   };
 
   return (
-    <div>
+    <div className='carousel'>
       {filteredMovies.length > 0 && (
         <Swiper
           slidesPerView={5}
