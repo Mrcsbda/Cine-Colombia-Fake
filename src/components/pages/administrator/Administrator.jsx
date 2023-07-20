@@ -1,12 +1,12 @@
 import React from 'react'
 import "./admin.scss"
-import MainMovies from '../../MainMovies/MainMovies';
+import { Outlet } from 'react-router-dom';
 
 const Administrator = () => {
-  
+
   return (
     <section className='main--movies'>
-      <MainMovies/>
+      <Outlet />
     </section>
   )
 }

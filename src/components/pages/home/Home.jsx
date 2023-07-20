@@ -4,6 +4,7 @@ import Carousel from '../../carousel/Carousel'
 import getCinemaShows from '../../../services/getCinemaShows'
 import getMoviesGenre from '../../../services/getGenreMovies'
 import getMovies from '../../../services/getMovies'
+import { Outlet } from 'react-router-dom'
 
 
 const Home = () => {
@@ -29,8 +30,10 @@ const Home = () => {
 
   return (
     <div>
-      <Carousel className="carousel" filteredMovies={filteredMovies} moviesGenre={moviesGenre}/>
-
+      <Carousel className="carousel" filteredMovies={filteredMovies} moviesGenre={moviesGenre} />
+      <div className='outlet'>
+        <Outlet />
+      </div>
     </div>
   )
 }
