@@ -36,11 +36,14 @@ const MainMovies = () => {
             <figure>
               <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
             </figure>
-            <h2>{movie.title}</h2>
-            <p>Titulo en ingles: {movie.original_title}</p>
-            <p>Estreno: {movie.release_date}</p>
-            <p>Genero: {filteredGenre(movie.genre_ids).map(genre => (<span key={genre.id}>{genre.name}, </span>))}</p>
-            <span className='age-restriction'>{movie.adult ? "Para mayores de 18 años" : "Para todo el público"}</span>
+            <div className='card-info'>
+              <h2>{movie.title}</h2>
+              <p>Titulo en ingles: {movie.original_title}</p>
+              <p>Estreno: {movie.release_date}</p>
+              <p>Genero: {filteredGenre(movie.genre_ids).map(genre => (<span key={genre.id}>{genre.name}, </span>))}</p>
+              <span className='age-restriction'>{movie.adult ? "Para mayores de 18 años" : "Para todo el público"}</span>
+            </div>
+            
           </div>
         )
         )}

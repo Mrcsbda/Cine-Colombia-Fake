@@ -5,12 +5,13 @@ import Home from '../components/pages/home/Home';
 import Administrator from '../components/pages/administrator/Administrator';
 import PublicRouter from './PublicRouter';
 import PrivateRouter from './PrivateRouter';
+import AdminDetail from '../components/pages/adminDetails/AdminDetail';
 
 
 
 const Router = () => {
 
-    const [isLogin, setIsLogin] = useState(false)
+    const [isLogin, setIsLogin] = useState(true)
 
     return (
         <BrowserRouter>

@@ -1,8 +1,11 @@
 @import "../../assets/styles/variables.scss";
 
-.navbar--genre {
-    background-color: $light-blue;
-    padding: 10px 20px;
-    border-radius: 20px;
-    margin: 0 5px;
-}
+    .navbar--genre {
+        background-color: $light-blue;
+        padding: 10px 20px;
+        border-radius: 20px;
+        margin: 0 5px;
+        cursor: pointer;
+        color: white;
+    }
+

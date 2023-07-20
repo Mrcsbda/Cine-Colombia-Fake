@@ -4,6 +4,7 @@ import logoCine from "../../assets/logoCine.jpg"
 import adminProfile from "../../assets/profile.svg"
 import "./navbar.scss"
 import LoginForm from '../loginForm/LoginForm'
+import NavbarChoice from '../nav-choice/NavbarChoice'
 
 const Navbar = () => {
     const genres = ["Acción", "Terror", "Ciencia Ficción", "Comedia"]
@@ -13,19 +14,15 @@ const Navbar = () => {
             <img src={logoCine} alt="Logo Cine Colombia" />
             <p>cine colombia</p>
         </div>
-        <Genres genres={genres}/>
+        <div className='nav-genres-container'>
+            <Genres genres={genres}/>
+        </div>
+
         <div className='navbar--user'>
-            <div className='navbar-choice'>
-                <p>Cines cercanos</p>
-                <select name="cines" id="cines">
-                    <option value="Los Molinos">Los Molinos</option>
-                    <option value="Santa Fe">Santa Fe</option>
-                </select>
+            <div className='nav--choice-container'>
+                {/* <NavbarChoice/> */}
             </div>
-            <div className='navbar-choice'>
-                <p>Fecha</p>
-                {/* <input type="date" name="" id="" value="2023-08-14" min="2023-08-14"/> */}
-            </div>
+
             <figure className='admin-enter'>
                 <img src={adminProfile} alt="Icon for admin profile" />
             </figure>

@@ -1,9 +1,14 @@
 import React from 'react'
 import "./adminDetails.scss"
+import MovieDetailsAdmin from '../../movieDetails/MovieDetailsAdmin'
+import DetailsShowsAdmin from '../../detailsShows/DetailsShowsAdmin'
 
 const AdminDetail = () => {
   return (
-    <div>AdminDetail</div>
+    <section className='movie-details'>
+      <MovieDetailsAdmin/>
+      <DetailsShowsAdmin/>
+    </section>
   )
 }
 
