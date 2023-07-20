@@ -17,12 +17,12 @@ const Navbar = () => {
         <div className='nav-genres-container'>
             <Genres genres={genres}/>
         </div>
-        
+
         <div className='navbar--user'>
             <div className='nav--choice-container'>
-                <NavbarChoice/>
+                {/* <NavbarChoice/> */}
             </div>
-            
+
             <figure className='admin-enter'>
                 <img src={adminProfile} alt="Icon for admin profile" />
             </figure>

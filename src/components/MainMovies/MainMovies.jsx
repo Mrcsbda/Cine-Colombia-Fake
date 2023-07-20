@@ -1,13 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import "./mainMovies.scss"
 import getMovies from '../../services/getMovies';
 import getCinemaShows from '../../services/getCinemaShows';
 import getMoviesGenre from '../../services/getGenreMovies';
+import { useNavigate } from 'react-router-dom';
 
 
-const MainMovies = () => {
-    const [filteredMovies, setFilteredMovies] = useState([]);
+const MainMovies = ({isLogin}) => {
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [moviesGenre, setMoviesGenre] = useState([]);
+  const navigate = useNavigate()
 
   useEffect(() => {
     getData()
@@ -26,13 +28,21 @@ const MainMovies = () => {
   const filteredGenre = (genres) => {
     const filteredGenres = [...moviesGenre].filter((genreItem) => (genres.find(genre => genre === genreItem.id)))
     return filteredGenres
-}
+  }
+
+  const changeView = (id, movieName) => {
+    const separateName = movieName.replace(/\s/g, "-")
+    if(!isLogin) {
+      navigate(`${separateName}`, { state: id })
+    }
+  }
+
   return (
     <>
-        <p className='title'>en cartelera</p>
+      <p className='title'>en cartelera</p>
       <div className='cards-container'>
         {filteredMovies.map((movie) => (
-          <div className='card' key={movie.title}>
+          <div className='card' key={movie.title} onClick={()=> changeView(movie.id, movie.title)} >
             <figure>
               <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
             </figure>
@@ -43,11 +53,11 @@ const MainMovies = () => {
               <p>Genero: {filteredGenre(movie.genre_ids).map(genre => (<span key={genre.id}>{genre.name}, </span>))}</p>
               <span className='age-restriction'>{movie.adult ? "Para mayores de 18 años" : "Para todo el público"}</span>
             </div>
-            
+
           </div>
         )
         )}
-        
+
       </div>
     </>
   )

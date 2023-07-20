@@ -11,7 +11,20 @@ const Carousel = ({filteredMovies,moviesGenre}) => {
   const [activeIndex, setActiveIndex] = useState(4);
   const [slides, setSlides] = useState([2, 3, 4, 5, 6]);
 
-  const handleClick = (index) => {
+  useEffect(() => {
+
+    const interval = setInterval(() => {
+      const nextIndex = calculateAdjacentIndex(activeIndex, 1);
+      handleSlide(nextIndex);
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+
+  }, [activeIndex]);
+
+  const handleSlide = (index) => {
     const adjacentIndex = calculateAdjacentIndex(index, -2);
     const newSlides = Array.from({ length: 5 }, (_, i) =>
       calculateAdjacentIndex(adjacentIndex, i)
@@ -31,12 +44,15 @@ const Carousel = ({filteredMovies,moviesGenre}) => {
   };
 
   return (
-    <div>
+    <div className='carousel'>
       {filteredMovies.length > 0 && (
         <Swiper
-          slidesPerView={1}
-          spaceBetween={10}
+          slidesPerView={5}
+          spaceBetween={0}
           loop={true}
+          autoplay={{
+            delay: 5000, // Tiempo en milisegundos entre cada transición de slide
+          }}
           pagination={{ clickable: true }}
           breakpoints={{
             415: { slidesPerView: 5, spaceBetween: 0 },
@@ -47,11 +63,12 @@ const Carousel = ({filteredMovies,moviesGenre}) => {
           className="mySwiper"
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex + 1)}
           simulateTouch={false}
+
         >
           {slides.map((slide) => (
             <SwiperSlide
               key={slide}
-              onClick={() => handleClick(slide)}
+              onClick={() => handleSlide(slide)}
               className={activeIndex === slide ? 'active-slide' : ''}
             >
               <CardCarousel movie={filteredMovies[slide - 1]} listGenre={moviesGenre}/>

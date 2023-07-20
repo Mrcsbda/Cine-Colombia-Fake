@@ -1,10 +1,49 @@
-.card {
+@import "../../assets/styles/variables.scss";
+
+.card-carousel {
+  position: relative;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    color: white;
+    font-family: $font-roboto;
+    padding: 1.4rem 1.2rem;
     width: 100%;
-  
-    &-content {
-      padding: 16px;
-      overflow-wrap: break-word;
-      background-color: rebeccapurple;
-      min-height: 266px;
-    }
+    background: rgb(0, 0, 0);
+    background: linear-gradient(360deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.7623249128753063) 49%, rgba(255, 255, 255, 0) 100%);
+
   }
+
+  &__title {
+    font-size: 1.5rem;
+    margin-bottom: 11px;
+  }
+
+  &__subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 9px;
+    font-weight: 600;
+  }
+
+  &__release,
+  &__genre {
+    font-size: 0.9rem;
+    margin-bottom: 5px
+  }
+
+  &__classification {
+    display: none;
+    font-size: 0.7rem;
+    padding: 0.5rem 0.7rem ;
+    width: max-content;
+    background-color: white;
+    color: black;
+    margin-top: 10px;
+    font-weight: 600;
+    border-radius: 3px;
+  }
+}
