@@ -5,6 +5,7 @@ import Home from '../components/pages/home/Home';
 import Administrator from '../components/pages/administrator/Administrator';
 import PublicRouter from './PublicRouter';
 import PrivateRouter from './PrivateRouter';
+import AdminDetail from '../components/pages/adminDetails/AdminDetail';
 
 
 
