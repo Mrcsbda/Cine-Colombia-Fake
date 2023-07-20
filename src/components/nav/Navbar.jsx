@@ -20,7 +20,7 @@ const Navbar = () => {
 
         <div className='navbar--user'>
             <div className='nav--choice-container'>
-                {/* <NavbarChoice/> */}
+                <NavbarChoice/>
             </div>
 
             <figure className='admin-enter'>

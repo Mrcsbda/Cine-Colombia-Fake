@@ -30,8 +30,8 @@ const MainMovies = ({isLogin}) => {
     return filteredGenres
   }
 
-  const changeView = (id, movieName) => {
-    const separateName = movieName.replace(/\s/g, "-")
+  const changeView = (id, nameMovie) => {
+    const separateName = nameMovie.replace(/\s/g, "-")
     if(!isLogin) {
       navigate(`${separateName}`, { state: id })
     }
