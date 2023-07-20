@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Genres from '../genres/Genres'
 import logoCine from "../../assets/logoCine.jpg"
 import adminProfile from "../../assets/profile.svg"
@@ -7,6 +7,7 @@ import LoginForm from '../loginForm/LoginForm'
 import NavbarChoice from '../nav-choice/NavbarChoice'
 
 const Navbar = () => {
+    const [showForm, setShowForm] = useState(false)
     const genres = ["Acción", "Terror", "Ciencia Ficción", "Comedia"]
   return (
     <nav className='header--navbar'>
@@ -23,11 +24,11 @@ const Navbar = () => {
                 <NavbarChoice/>
             </div>
             
-            <figure className='admin-enter'>
+            <figure className='admin-enter' onClick={() => setShowForm(true)}>
                 <img src={adminProfile} alt="Icon for admin profile" />
             </figure>
         </div>
-        <LoginForm/>
+        <LoginForm showForm={showForm} setShowForm={setShowForm}/>
     </nav>
   )
 }

@@ -1,1 +1,110 @@
-@import "../../assets/styles/variables.scss"
+@import "../../assets/styles/variables.scss";
+
+.main-admin--second-section {
+    display: flex;
+    .movie-long-info {
+        padding: 4rem 2rem 0;
+        max-width: 30%;
+        p {
+            color: $dark-gray;
+            opacity: 70%;
+            font-size: 14px;
+            line-height: 22px;
+        }
+        span {
+            display: inline-block;
+            color: $dark-gray;
+            margin: 2rem 0 5px 0;
+        }
+    }
+    .schedules-cinemas {
+        width: 70%;
+        padding: 3rem 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        .schedule {
+            .schedule--title {
+                color: $text-blue;
+                text-transform: uppercase;
+                margin-bottom: 15px;
+            }
+            .schedule--dates {
+                display: flex;
+                gap: 5%;
+                .date-box {
+                    background-color: $text-blue;
+                    opacity: 60%;
+                    color: white;
+                    border-radius: 5px;
+                    padding: 5px 15px;
+                    text-align: center;
+                    span {
+                        font-size: 26px;
+                    }
+                    p {
+                        text-transform: uppercase;
+                        font-size: 14px;
+                    }
+                }
+                .calendar {
+                    padding: 0 5px;
+                    display: flex;
+                    align-items: center;
+                }
+                .points {
+                    display: flex;
+                    align-items: center;
+                    opacity: 60%;
+                }
+            }
+        }
+        .shows-container {
+            width: 100%;
+            border: 1px solid $light-gray;
+            border-radius: 10px;
+            .show {
+                border: 1px solid $light-gray;
+                border-radius: 5px;
+                background-color: #F6F6F6;
+                color: $dark-gray;
+                margin: 1px;
+                .show-title {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 2rem 1rem;
+                    p {
+                        text-transform: uppercase;
+                    }
+                    button {
+                        background-color: white;
+                        color: $text-blue;
+                        border: 1px solid $text-blue;
+                        border-radius: 20px;
+                        padding: 10px 15px;
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        font-size: 12px;
+                        
+                    }
+                }
+                
+            }
+            .show-cinema {
+                display: flex;
+                justify-content: space-between;
+                padding: 1rem 1rem 1rem 3rem;
+                align-items: center;
+                span {
+                    background-color: white;
+                    border-radius: 50%;
+                    padding: 5px;
+                    height: fit-content;
+                }
+            }
+        }
+    }
+}
