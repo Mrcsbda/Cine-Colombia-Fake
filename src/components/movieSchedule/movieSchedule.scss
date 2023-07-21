@@ -1,3 +1,111 @@
-.trailer {
-    width: 100px;
+@import "../../assets/styles/variables.scss";
+
+.movie {
+    display: flex;
+    flex-direction: column;
+
+    &__title {
+        text-align: center;
+    }
+
+    &__text {
+        color: $almost-black;
+        margin-bottom: 0.2rem;
+    }
+
+    &__subtitle {
+        margin-bottom: 0.5rem;
+    }
+
+    &__separation-line {
+        margin-bottom: 1.5rem;
+        border: 1px solid $light-gray;
+    }
+
+    &__details {
+        &__content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        &__poster {
+            min-width: 250px;
+            max-width: 300px;
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid $light-gray;
+            margin-bottom: 0.5rem;
+            border-radius: 5px;
+        }
+
+        &__info-container {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        &__classification, &__runtime, &__genres {
+            color: white;
+            padding: 0.5rem 0.6rem;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &__classification {
+            background-color: $dark-gray;
+        }
+
+        &__runtime {
+            background-color: $almost-black;
+        }
+
+        &__genres {
+            background-color: $principal-blue;
+            gap: 0.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            flex-shrink: 20000;
+        }
+
+        &__trailer {
+            width: 100%;
+            height: 50vw;
+            margin-bottom: 2rem;
+        }
+
+        &__overview {
+            color: $almost-black;
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    &__schedule {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        &__items {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        &__item {
+            padding: 0.3rem 0.5rem;
+            border-radius: 5px;
+            border: 1px solid $inactive-gray;
+            margin-bottom: 0.5rem;
+        }
+
+        &__button {
+            padding: 0.7rem;
+            background-color: $inactive-gray;
+            border: none;
+            border-radius: 20px;
+            color: white;
+        }
+    }
 }
