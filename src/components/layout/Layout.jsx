@@ -7,11 +7,11 @@ import { useState } from 'react'
 
 const Layout = () => {
     const location = useLocation()
-    const {nameMovie} = useParams()
+    const {idMovie} = useParams()
     const [isCheckout, setIsCheckout] = useState(false)
 
     useEffect(() => {
-        location.pathname === `/${nameMovie}` ? setIsCheckout(true) : setIsCheckout(false)
+        location.pathname === `/${idMovie}` ? setIsCheckout(true) : setIsCheckout(false)
     }, [location])
 
     return (

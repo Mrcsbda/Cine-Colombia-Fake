@@ -22,7 +22,7 @@ const Router = () => {
                     <Route element={<PublicRouter isAutenticate={isLogin} />}>
                         <Route path="/" element={<Home />}>
                             <Route index element={<MainMovies isLogin={isLogin} />} />
-                            <Route path=":nameMovie" element={<MovieCheckout />} />
+                            <Route path=":idMovie" element={<MovieCheckout />} />
                         </Route>
                     </Route>
                     <Route element={<PrivateRouter isAutenticate={isLogin} />}>

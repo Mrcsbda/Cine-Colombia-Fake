@@ -14,7 +14,6 @@ const Carousel = ({ filteredMovies, moviesGenre }) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-
     const interval = setInterval(() => {
       const nextIndex = calculateAdjacentIndex(activeIndex, 1);
       handleSlide(nextIndex);

@@ -55,10 +55,9 @@ const MainMovies = ({ isLogin }) => {
     }
   }
 
-  const changeView = (id, nameMovie) => {
-    const separateName = nameMovie.replace(/\s/g, "-")
+  const changeView = (id) => {
     if (!isLogin) {
-      navigate(`${separateName}`, { state: id })
+      navigate(`${id}`, { state: id })
     }
   }
 
@@ -67,7 +66,7 @@ const MainMovies = ({ isLogin }) => {
       <p className='title'>en cartelera</p>
       <div className='cards-container'>
         {filteredMovies.map((movie) => (
-          <div className='card' key={movie.title} onClick={() => changeView(movie.id, movie.title)} >
+          <div className='card' key={movie.title} onClick={() => changeView(movie.id)} >
             <figure>
               <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
             </figure>

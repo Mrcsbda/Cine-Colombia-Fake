@@ -6,8 +6,8 @@ import getTrailer from '../../services/getTrailer'
 
 const MovieCheckout = () => {
   const location = useLocation()
-  const [movie, setMovie] = useState()
-  const [trailer, setTrailer] = useState()
+  const [movie, setMovie] = useState("")
+  const [trailer, setTrailer] = useState("")
 
   useEffect(() => {
     getMovie()
