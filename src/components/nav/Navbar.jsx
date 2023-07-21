@@ -6,7 +6,7 @@ import "./navbar.scss"
 import LoginForm from '../loginForm/LoginForm'
 import NavbarChoice from '../nav-choice/NavbarChoice'
 
-const Navbar = () => {
+const Navbar = ({isCheckout}) => {
     const genres = ["Acción", "Terror", "Ciencia Ficción", "Comedia"]
   return (
     <nav className='header--navbar'>
@@ -14,7 +14,7 @@ const Navbar = () => {
             <img src={logoCine} alt="Logo Cine Colombia" />
             <p>cine colombia</p>
         </div>
-        <div className='nav-genres-container'>
+        <div  className={isCheckout ? 'hidden' : 'nav-genres-container' }>
             <Genres genres={genres}/>
         </div>
 

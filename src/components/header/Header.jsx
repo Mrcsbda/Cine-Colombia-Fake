@@ -4,21 +4,21 @@ import Genres from '../genres/Genres'
 import "./header.scss"
 import NavbarChoice from '../nav-choice/NavbarChoice'
 
-const Header = () => {
+const Header = ({isCheckout}) => {
   const genres = ["Acción", "Terror", "Ciencia Ficción", "Comedia"]
   return (
     <header>
-      <Navbar/>
+      <Navbar isCheckout={isCheckout}/>
       <section>
         <div className='header--choice-container'>
           <NavbarChoice/>
         </div>
-        <div className='header--genre-container'>
+        <div className={isCheckout ? 'hidden' : 'header--genre-container' }>
           <Genres genres={genres}/>
         </div>
       </section>
-      
-      
+
+
     </header>
   )
 }
