@@ -4,12 +4,14 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import './carousel.scss';
+import { useNavigate } from 'react-router-dom';
 
 import CardCarousel from '../cardCarousel/CardCarousel';
 
-const Carousel = ({filteredMovies,moviesGenre}) => {
+const Carousel = ({ filteredMovies, moviesGenre }) => {
   const [activeIndex, setActiveIndex] = useState(4);
   const [slides, setSlides] = useState([2, 3, 4, 5, 6]);
+  const navigate = useNavigate()
 
   useEffect(() => {
 
@@ -43,6 +45,11 @@ const Carousel = ({filteredMovies,moviesGenre}) => {
     return newIndex;
   };
 
+  const viewDatailMovie = (id, nameMovie) => {
+    const separateName = nameMovie.replace(/\s/g, "-")
+    navigate(`${separateName}`, { state: id })
+  }
+
   return (
     <div className='carousel'>
       {filteredMovies.length > 0 && (
@@ -68,10 +75,15 @@ const Carousel = ({filteredMovies,moviesGenre}) => {
           {slides.map((slide) => (
             <SwiperSlide
               key={slide}
-              onClick={() => handleSlide(slide)}
+              onClick={() => {
+                activeIndex === slide
+                  ? viewDatailMovie(filteredMovies[slide - 1].id, filteredMovies[slide - 1].title)
+                  : handleSlide(slide)
+              }
+              }
               className={activeIndex === slide ? 'active-slide' : ''}
             >
-              <CardCarousel movie={filteredMovies[slide - 1]} listGenre={moviesGenre}/>
+              <CardCarousel movie={filteredMovies[slide - 1]} listGenre={moviesGenre} />
             </SwiperSlide>
           ))}
         </Swiper>
