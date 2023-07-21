@@ -13,18 +13,17 @@ const Carousel = ({ filteredMovies, moviesGenre }) => {
   const [slides, setSlides] = useState([2, 3, 4, 5, 6]);
   const navigate = useNavigate()
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     const nextIndex = calculateAdjacentIndex(activeIndex, 1);
+  //     handleSlide(nextIndex);
+  //   }, 5000);
 
-    const interval = setInterval(() => {
-      const nextIndex = calculateAdjacentIndex(activeIndex, 1);
-      handleSlide(nextIndex);
-    }, 5000);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
 
-    return () => {
-      clearInterval(interval);
-    };
-
-  }, [activeIndex]);
+  // }, [activeIndex]);
 
   const handleSlide = (index) => {
     const adjacentIndex = calculateAdjacentIndex(index, -2);
@@ -45,9 +44,8 @@ const Carousel = ({ filteredMovies, moviesGenre }) => {
     return newIndex;
   };
 
-  const viewDatailMovie = (id, nameMovie) => {
-    const separateName = nameMovie.replace(/\s/g, "-")
-    navigate(`${separateName}`, { state: id })
+  const viewDatailMovie = (id) => {
+    navigate(`${id}`)
   }
 
   return (
@@ -77,7 +75,7 @@ const Carousel = ({ filteredMovies, moviesGenre }) => {
               key={slide}
               onClick={() => {
                 activeIndex === slide
-                  ? viewDatailMovie(filteredMovies[slide - 1].id, filteredMovies[slide - 1].title)
+                  ? viewDatailMovie(filteredMovies[slide - 1].id)
                   : handleSlide(slide)
               }
               }

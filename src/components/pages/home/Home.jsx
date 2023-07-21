@@ -31,9 +31,9 @@ const Home = () => {
   return (
     <div>
       <Carousel className="carousel" filteredMovies={filteredMovies} moviesGenre={moviesGenre} />
-      <div className='outlet'>
+      <article className='outlet'>
         <Outlet />
-      </div>
+      </article>
     </div>
   )
 }
