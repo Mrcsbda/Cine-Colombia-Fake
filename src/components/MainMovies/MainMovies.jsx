@@ -57,7 +57,7 @@ const MainMovies = ({ isLogin }) => {
 
   const changeView = (id) => {
     if (!isLogin) {
-      navigate(`${id}`, { state: id })
+      navigate(`${id}`)
     }
   }
 
