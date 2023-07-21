@@ -20,7 +20,10 @@ const Router = () => {
                         <Route path="/" element={<Home />} />
                     </Route>
                     <Route element={<PrivateRouter isAutenticate={isLogin} />}>
-                        <Route path="administrator" element={<Administrator />} />
+                        <Route path="administrator">
+                            <Route index element={<Administrator/>}/>
+                            <Route path='movie' element={<AdminDetail/>}/>
+                        </Route>
                     </Route>
                 </Route>
             </Routes>

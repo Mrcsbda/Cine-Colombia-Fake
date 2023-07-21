@@ -3,6 +3,7 @@ import "./mainMovies.scss"
 import getMovies from '../../services/getMovies';
 import getCinemaShows from '../../services/getCinemaShows';
 import getMoviesGenre from '../../services/getGenreMovies';
+import { useNavigate } from 'react-router-dom';
 
 
 const MainMovies = () => {
@@ -27,12 +28,17 @@ const MainMovies = () => {
     const filteredGenres = [...moviesGenre].filter((genreItem) => (genres.find(genre => genre === genreItem.id)))
     return filteredGenres
 }
+
+const navigate = useNavigate()
+const handleClick = () => {
+  navigate("movie")
+}
   return (
     <>
         <p className='title'>en cartelera</p>
       <div className='cards-container'>
         {filteredMovies.map((movie) => (
-          <div className='card' key={movie.title}>
+          <div className='card' key={movie.title} onClick={handleClick}>
             <figure>
               <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
             </figure>

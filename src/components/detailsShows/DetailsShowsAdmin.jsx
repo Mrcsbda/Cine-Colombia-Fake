@@ -1,11 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 import arrowDown from "../../assets/arrow-down.svg";
 import calendar from "../../assets/calendar.svg"
 import points from "../../assets/three-point.svg"
 import plus from "../../assets/plus.svg"
 import "./detailsShows.scss"
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 const DetailsShowsAdmin = () => {
+    const [showCalendar, setShowCalendar] = useState(false)
+    const [value, onChange] = useState(new Date());
+    const [showSalas, setShowSalas] = useState(false)
     const dates = [
         {
             day: 14,
@@ -67,9 +72,13 @@ const DetailsShowsAdmin = () => {
                     <div className="points">
                         <img src={points} alt="Icon for three points" />
                     </div>
-                    <div className="date-box calendar">
+                    <div className="date-box calendar" onClick={() => setShowCalendar(!showCalendar)}>
                         <img src={calendar} alt="Icon for calendar" />
                     </div>
+                    
+                </div>
+                <div className={showCalendar? "opening-calendar" : "opening-calendar inactive-calendar"}>
+                    <Calendar onChange={onChange} value={value} />
                 </div>
             </div>
             <div className="shows-container">
@@ -83,12 +92,24 @@ const DetailsShowsAdmin = () => {
                     </div>
                     <div className="show-cinema">
                         <p>Los Molinos</p>
-                        <span>
+                        <span onClick={() => setShowSalas(!showSalas)}>
                             <img src={arrowDown} alt="Icon for arrow" />
                         </span>
                     </div>
                 </div>
-                
+                <div className={showSalas ? "salas" : "salas inactive-details"}>
+                    <div>
+                        <p>Sala 1</p>
+                        <div className="show-time">
+                            <span>13:00</span>
+                            <span>16:00</span>
+                        </div>
+                        
+                    </div>
+                    <button>Nueva función
+                        <img src={plus} alt="Icon for add" />
+                    </button>
+                </div>
                 <div className="show show-cinema">
                     <p>Santa Fe</p>
                     <span>
