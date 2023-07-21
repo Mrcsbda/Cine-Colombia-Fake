@@ -12,20 +12,20 @@ const LoginForm = ({showForm, setShowForm}) => {
             <h2>Bienvenido</h2>
             <p>Inicia Sesión</p>
             <form>
-                <label htmlFor="email">Correo electrónico</label>
+                <label>Correo electrónico</label>
                 <input type="email" name="email" placeholder='example.email@gmail.com'/>
-                <label htmlFor="password">Contraseña</label>
+                <label>Contraseña</label>
                 <input type="password" name="password" placeholder='Ingresa tu contraseña'/>
                 <div className='recordarme'>
-                    <input type="checkbox" name="" id="" />
+                    <input type="checkbox"/>
                     <p>Recordarme</p>
                 </div>
                 <button type="submit">Iniciar sesión</button>
             </form>
         </div>
-        
+
     </section>
-    
+
   )
 }
 

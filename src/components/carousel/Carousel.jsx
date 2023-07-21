@@ -4,14 +4,29 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import './carousel.scss';
+import { useNavigate } from 'react-router-dom';
 
 import CardCarousel from '../cardCarousel/CardCarousel';
 
-const Carousel = ({filteredMovies,moviesGenre}) => {
+const Carousel = ({ filteredMovies, moviesGenre }) => {
   const [activeIndex, setActiveIndex] = useState(4);
   const [slides, setSlides] = useState([2, 3, 4, 5, 6]);
+  const navigate = useNavigate()
 
-  const handleClick = (index) => {
+  useEffect(() => {
+
+    const interval = setInterval(() => {
+      const nextIndex = calculateAdjacentIndex(activeIndex, 1);
+      handleSlide(nextIndex);
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+
+  }, [activeIndex]);
+
+  const handleSlide = (index) => {
     const adjacentIndex = calculateAdjacentIndex(index, -2);
     const newSlides = Array.from({ length: 5 }, (_, i) =>
       calculateAdjacentIndex(adjacentIndex, i)
@@ -30,13 +45,21 @@ const Carousel = ({filteredMovies,moviesGenre}) => {
     return newIndex;
   };
 
+  const viewDatailMovie = (id, nameMovie) => {
+    const separateName = nameMovie.replace(/\s/g, "-")
+    navigate(`${separateName}`, { state: id })
+  }
+
   return (
-    <div>
+    <div className='carousel'>
       {filteredMovies.length > 0 && (
         <Swiper
-          slidesPerView={1}
-          spaceBetween={10}
+          slidesPerView={5}
+          spaceBetween={0}
           loop={true}
+          autoplay={{
+            delay: 5000, // Tiempo en milisegundos entre cada transición de slide
+          }}
           pagination={{ clickable: true }}
           breakpoints={{
             415: { slidesPerView: 5, spaceBetween: 0 },
@@ -47,14 +70,20 @@ const Carousel = ({filteredMovies,moviesGenre}) => {
           className="mySwiper"
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex + 1)}
           simulateTouch={false}
+
         >
           {slides.map((slide) => (
             <SwiperSlide
               key={slide}
-              onClick={() => handleClick(slide)}
+              onClick={() => {
+                activeIndex === slide
+                  ? viewDatailMovie(filteredMovies[slide - 1].id, filteredMovies[slide - 1].title)
+                  : handleSlide(slide)
+              }
+              }
               className={activeIndex === slide ? 'active-slide' : ''}
             >
-              <CardCarousel movie={filteredMovies[slide - 1]} listGenre={moviesGenre}/>
+              <CardCarousel movie={filteredMovies[slide - 1]} listGenre={moviesGenre} />
             </SwiperSlide>
           ))}
         </Swiper>

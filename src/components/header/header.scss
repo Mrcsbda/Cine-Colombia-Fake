@@ -1,5 +1,10 @@
 @import "../../assets/styles/variables.scss";
 
+
+.hidden {
+    display: none;
+}
+
 section {
     .header--choice-container {
         margin: 2rem 20px;
@@ -23,7 +28,7 @@ section {
             display: none;
         }
     }
-    
+
 }
 
 @media (min-width: 850px) {
@@ -32,5 +37,5 @@ section {
             display: none;
         }
     }
-    
+
 }
