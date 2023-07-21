@@ -12,9 +12,6 @@ const Layout = () => {
 
     useEffect(() => {
         location.pathname === `/${nameMovie}` ? setIsCheckout(true) : setIsCheckout(false)
-        console.log(location.pathname)
-        console.log(`/${nameMovie}`)
-        console.log(isCheckout)
     }, [location])
 
     return (
