@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 import CardCarousel from '../cardCarousel/CardCarousel';
 
-const Carousel = ({ filteredMovies, moviesGenre }) => {
+const Carousel = ({ props }) => {
   const [activeIndex, setActiveIndex] = useState(4);
   const [slides, setSlides] = useState([2, 3, 4, 5, 6]);
   const navigate = useNavigate()
@@ -50,7 +50,7 @@ const Carousel = ({ filteredMovies, moviesGenre }) => {
 
   return (
     <div className='carousel'>
-      {filteredMovies.length > 0 && (
+      {props.filteredMovies.length > 0 && (
         <Swiper
           slidesPerView={5}
           spaceBetween={0}
@@ -74,14 +74,16 @@ const Carousel = ({ filteredMovies, moviesGenre }) => {
             <SwiperSlide
               key={slide}
               onClick={() => {
-                activeIndex === slide
-                  ? viewDatailMovie(filteredMovies[slide - 1].id)
-                  : handleSlide(slide)
+                if (activeIndex === slide && !props.isBuying) {
+                  viewDatailMovie(props.filteredMovies[slide - 1].id)
+                } else {
+                  handleSlide(slide)
+                }
               }
               }
               className={activeIndex === slide ? 'active-slide' : ''}
             >
-              <CardCarousel movie={filteredMovies[slide - 1]} listGenre={moviesGenre} />
+              <CardCarousel movie={props.filteredMovies[slide - 1]} listGenre={props.moviesGenre} />
             </SwiperSlide>
           ))}
         </Swiper>

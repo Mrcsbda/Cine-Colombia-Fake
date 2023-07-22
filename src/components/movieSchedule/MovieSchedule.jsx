@@ -1,21 +1,26 @@
 import React from 'react'
 import "./movieSchedule.scss"
 
-const MovieSchedule = ({ movie, trailer }) => {
+const MovieSchedule = ({ props }) => {
+
+  const handleClick = () => {
+    props.setIsBuying(true)
+    props.setStep(props.step + 1)
+  }
   return (
     <section className='movie'>
       <div className='movie__details'>
         <div className='movie__details__content'>
-          <img className='movie__details__poster' src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
+          <img className='movie__details__poster' src={`https://image.tmdb.org/t/p/original${props.movie.poster_path}`} alt={props.movie.title} />
          <div className='movie__details__container'>
-         <h2 className='movie__title'>{movie.title}</h2>
-          <p className='movie__text'>{movie.original_title}</p>
+         <h2 className='movie__title'>{props.movie.title}</h2>
+          <p className='movie__text'>{props.movie.original_title}</p>
           <div className='movie__details__info-container'>
-            <p className='movie__details__classification'>{movie.adult ? "NC-17" : "G"}</p>
-            <p className='movie__details__runtime'>{movie.runtime} min</p>
+            <p className='movie__details__classification'>{props.movie.adult ? "NC-17" : "G"}</p>
+            <p className='movie__details__runtime'>{props.movie.runtime} min</p>
             <p className='movie__details__genres'>
               {
-                movie.genres.map(genre => (<span key={genre.id}> {genre.name} </span>))
+                props.movie.genres.map(genre => (<span key={genre.id}> {genre.name} </span>))
               }
             </p>
          </div>
@@ -26,12 +31,12 @@ const MovieSchedule = ({ movie, trailer }) => {
           <iframe
 
             className='movie__details__trailer'
-            src={`https://www.youtube.com/embed/${trailer.key}`}
+            src={`https://www.youtube.com/embed/${props.trailer.key}`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen></iframe>
           <h3 className='movie__subtitle'>Sinopsis</h3>
-          <p className='movie__details__overview'>{movie.overview}</p>
+          <p className='movie__details__overview'>{props.movie.overview}</p>
         </div>
       </div>
       <hr className='movie__separation-line' />
@@ -44,7 +49,7 @@ const MovieSchedule = ({ movie, trailer }) => {
           <span className='movie__schedule__item'>19:30</span>
           <span className='movie__schedule__item'>21:05</span>
         </p>
-        <button className='movie__schedule__button'>Seleccionar Boletos</button>
+        <button className='movie__schedule__button' onClick={handleClick}>Seleccionar Boletos</button>
       </div>
     </section>
   )

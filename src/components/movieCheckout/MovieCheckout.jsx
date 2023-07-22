@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import MovieSchedule from '../movieSchedule/MovieSchedule'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useOutletContext, useParams } from 'react-router-dom'
 import getMovieInfo from '../../services/getMovieInfo'
 import getTrailer from '../../services/getTrailer'
 import "./movieCheckout.scss"
@@ -10,6 +10,15 @@ const MovieCheckout = () => {
   const [movie, setMovie] = useState("")
   const [trailer, setTrailer] = useState("")
   const {idMovie} = useParams()
+  const [setIsBuying] = useOutletContext()
+  const [step, setStep] = useState(1)
+  const props = {
+    movie,
+    trailer,
+    setIsBuying,
+    setStep,
+    step
+  }
 
   useEffect(() => {
     getMovie()
@@ -27,7 +36,7 @@ const MovieCheckout = () => {
   if (movie && trailer) {
     return (
       <div className='movie-checkout-container'>
-        <MovieSchedule movie={movie} trailer={trailer} />
+         {step === 1 && <MovieSchedule movie={movie} trailer={trailer} props={props}/> }
       </div>
     )
   }
