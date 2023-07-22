@@ -3,6 +3,7 @@ import MovieSchedule from '../movieSchedule/MovieSchedule'
 import { useLocation, useParams } from 'react-router-dom'
 import getMovieInfo from '../../services/getMovieInfo'
 import getTrailer from '../../services/getTrailer'
+import "./movieCheckout.scss"
 
 const MovieCheckout = () => {
   const location = useLocation()
@@ -25,9 +26,9 @@ const MovieCheckout = () => {
 
   if (movie && trailer) {
     return (
-      <>
+      <div className='movie-checkout-container'>
         <MovieSchedule movie={movie} trailer={trailer} />
-      </>
+      </div>
     )
   }
 }

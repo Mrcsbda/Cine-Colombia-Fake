@@ -30,6 +30,7 @@
             gap: 0.5rem;
             margin-bottom: 2rem;
         }
+
         &__poster {
             min-width: 250px;
             max-width: 300px;
@@ -39,12 +40,14 @@
             margin-bottom: 0.5rem;
             border-radius: 5px;
         }
+
         &__container {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
             align-items: center;
         }
+
         &__info-container {
             display: flex;
             align-items: center;
@@ -52,13 +55,16 @@
             font-size: 0.8rem;
         }
 
-        &__classification, &__runtime, &__genres {
+        &__classification,
+        &__runtime,
+        &__genres {
             color: white;
             padding: 0.5rem 0.6rem;
             border-radius: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
         }
 
         &__classification {
@@ -125,6 +131,85 @@
             &__trailer {
                 height: 40vw;
             }
+        }
+    }
+}
+
+
+@media (min-width: 1000px) {
+    .movie {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 2rem;
+
+        &__title {
+            text-align: left;
+        }
+
+        &__separation-line {
+            display: none;
+        }
+
+        &__details {
+            width: 60%;
+            flex-direction: column;
+
+            &__content {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 2rem;
+                margin-bottom: 0;
+            }
+
+            &__poster {
+                min-width: 200px;
+                max-width: 250px;
+            }
+
+            &__container {
+                gap: 0.7rem;
+                align-items: flex-start;
+            }
+
+            &__trailer {
+                width: 90%;
+                height: 25vw;
+                margin-bottom: 2rem;
+            }
+        }
+
+        &__schedule {
+            width: 35%;
+
+            &__item {
+                cursor: pointer;
+            }
+
+            &__button {
+               cursor: pointer;
+            }
+        }
+    }
+}
+
+@media (min-width: 1320px) {
+    .movie {
+        width: 85vw;
+    }
+}
+
+@media (min-width: 1500px) {
+    .movie {
+        width: 70vw;
+
+        &__details {
+            &__trailer {
+                width: 90%;
+                height: 20vw;
+                margin-bottom: 2rem;
+            }
+
         }
     }
 }
