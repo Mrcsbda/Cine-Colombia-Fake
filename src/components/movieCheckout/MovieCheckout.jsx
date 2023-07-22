@@ -4,6 +4,7 @@ import { useLocation, useOutletContext, useParams } from 'react-router-dom'
 import getMovieInfo from '../../services/getMovieInfo'
 import getTrailer from '../../services/getTrailer'
 import "./movieCheckout.scss"
+import PurchaseData from '../purchaseData/PurchaseData'
 
 const MovieCheckout = () => {
   const location = useLocation()
@@ -11,10 +12,17 @@ const MovieCheckout = () => {
   const [trailer, setTrailer] = useState("")
   const {idMovie} = useParams()
   const [setIsBuying] = useOutletContext()
-  const [step, setStep] = useState(1)
-  const props = {
+  const [step, setStep] = useState(2)
+  const propsMovieSchedule = {
     movie,
     trailer,
+    setIsBuying,
+    setStep,
+    step
+  }
+
+  const propsPurchaseData = {
+    movie,
     setIsBuying,
     setStep,
     step
@@ -35,9 +43,9 @@ const MovieCheckout = () => {
 
   if (movie && trailer) {
     return (
-      <div className='movie-checkout-container'>
-         {step === 1 && <MovieSchedule movie={movie} trailer={trailer} props={props}/> }
-      </div>
+      <section className='movie-checkout-container'>
+         {step === 1 ? <MovieSchedule props={propsMovieSchedule}/> : <PurchaseData props={propsPurchaseData} />}
+      </section>
     )
   }
 }

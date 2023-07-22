@@ -7,8 +7,9 @@ const MovieSchedule = ({ props }) => {
     props.setIsBuying(true)
     props.setStep(props.step + 1)
   }
+  
   return (
-    <section className='movie'>
+    <div className='movie'>
       <div className='movie__details'>
         <div className='movie__details__content'>
           <img className='movie__details__poster' src={`https://image.tmdb.org/t/p/original${props.movie.poster_path}`} alt={props.movie.title} />
@@ -51,7 +52,7 @@ const MovieSchedule = ({ props }) => {
         </p>
         <button className='movie__schedule__button' onClick={handleClick}>Seleccionar Boletos</button>
       </div>
-    </section>
+    </div>
   )
 }
 
