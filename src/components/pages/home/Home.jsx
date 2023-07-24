@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import './home.scss'
+import { Outlet } from 'react-router-dom'
 import Carousel from '../../carousel/Carousel'
-import getCinemaShows from '../../../services/getCinemaShows'
 import getMoviesGenre from '../../../services/getGenreMovies'
 import getMovies from '../../../services/getMovies'
-import { Outlet } from 'react-router-dom'
+import getCinemaShows from '../../../services/cinemaShowsServices'
+import './home.scss'
 
 
 const Home = () => {

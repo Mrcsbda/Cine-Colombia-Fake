@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import "./mainMovies.scss"
 import getMovies from '../../services/getMovies';
-import getCinemaShows from '../../services/getCinemaShows';
 import getMoviesGenre from '../../services/getGenreMovies';
+import getCinemaShows from '../../services/cinemaShowsServices';
 import { useNavigate } from 'react-router-dom';
+import "./mainMovies.scss"
 
 
 const MainMovies = ({ isLogin }) => {

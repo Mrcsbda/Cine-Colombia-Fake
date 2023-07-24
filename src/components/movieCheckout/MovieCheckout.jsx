@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import MovieSchedule from '../movieSchedule/MovieSchedule'
 import { useLocation, useOutletContext, useParams } from 'react-router-dom'
+import MovieSchedule from '../movieSchedule/MovieSchedule'
 import getMovieInfo from '../../services/getMovieInfo'
 import getTrailer from '../../services/getTrailer'
-import "./movieCheckout.scss"
 import PurchaseData from '../purchaseData/PurchaseData'
+import "./movieCheckout.scss"
 
 const MovieCheckout = () => {
   const location = useLocation()
