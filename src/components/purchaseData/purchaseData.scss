@@ -1,0 +1,145 @@
+@import "../../assets/styles/variables.scss";
+
+.purchase-data {
+    &__summary {
+        background-color: $light-gray;
+        padding: 1.5rem;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    &__title {
+        text-align: center;
+    }
+
+    &__content-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__poster {
+        min-width: 100px;
+        max-width: 200px;
+        align-self: center;
+        padding: 0.5rem;
+        border: 1px solid $inactive-gray;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+
+    }
+
+    &__total-to-pay-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__total-to-pay {
+        font-size: 1.2rem;
+    }
+
+    &__continue-button {
+        padding: 0.5rem;
+        border-radius: 20px;
+        border: none;
+        color: white;
+        background-color: $inactive-gray;
+        cursor: pointer;
+    }
+
+    &__parting-line {
+        width: 100%;
+        margin-bottom: 1rem;
+        border: 1px solid $light-gray;
+        border-bottom: none;
+    }
+}
+
+@media (min-width: 750px) {
+    .purchase-data {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 4rem;
+        padding: 1.5rem 1rem;
+        justify-content: space-between;
+
+        &__summary {
+           width: 60%;
+        }
+
+        &__parting-line {
+            display: none;
+        }
+
+    }
+}
+
+@media (min-width: 1100px) {
+    .purchase-data {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 4rem;
+        justify-content: space-between;
+        width: 90vw;
+
+        &__summary {
+           width: 47%;
+           padding: 2rem;
+        }
+
+        &__title {
+            text-align: left;
+        }
+
+        &__content-container {
+            flex-direction: row;
+            gap: 1rem;
+        }
+
+        &__continue-button {
+            padding: 0.7rem;
+            font-size: 1.1rem;
+        }
+
+        &__parting-line {
+            display: none;
+        }
+
+    }
+}
+
+@media (min-width: 1300px) {
+    .purchase-data {
+        width: 80vw;
+        &__summary {
+            width: 47%;
+         }
+    }
+}
+
+@media (min-width: 1500px) {
+    .purchase-data {
+        width: 70vw;
+        &__summary {
+            width: 47%;
+         }
+    }
+}
+
+@media (min-width: 1700px) {
+    .purchase-data {
+        width: 60vw;
+        &__summary {
+            width: 47%;
+         }
+    }
+}
