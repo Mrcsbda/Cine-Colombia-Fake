@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TicketQuantity = () => {
+const TicketQuantity = ({ classification }) => {
   return (
     <div>TicketQuantity</div>
   )
