@@ -2,20 +2,30 @@ import React, { useState } from 'react'
 import { numberToMoney } from '../../utils/numberToMoney'
 import TicketsQuantity from '../ticketsQuantity/TicketsQuantity'
 import "./purchaseData.scss"
+import PurchaseForm from '../purchaseForm/PurchaseForm'
 
 
 const PurchaseData = ({ props }) => {
     const [totalToPay, setTotalToPay] = useState(0)
 
+    const showComponets = () => {
+        switch (true) {
+            case props.step === 2:
+                return (<TicketsQuantity classification={props.movie.adult} setTotalToPay={setTotalToPay} />);
+            case props.step === 4:
+                return (<PurchaseForm />);
+            default: return ""
+        }
+    }
     return (
         <div className='purchase-data'>
             <div className='purchase-data__summary'>
                 <h2 className='purchase-data__title'>Resumen de Compra</h2>
                 <div className='purchase-data__content-container'>
                     <img
-                    className='purchase-data__poster'
-                    src={`https://image.tmdb.org/t/p/original${props.movie.poster_path}`}
-                    alt={props.movie.title} />
+                        className='purchase-data__poster'
+                        src={`https://image.tmdb.org/t/p/original${props.movie.poster_path}`}
+                        alt={props.movie.title} />
                     <div className='purchase-data__info'>
                         <p><strong>Pelicula:</strong> {props.movie.title}</p>
                         <p><strong>Complejo:</strong> Los Molinos</p>
@@ -37,8 +47,10 @@ const PurchaseData = ({ props }) => {
                 </div>
                 <button className='purchase-data__continue-button'>Continuar</button>
             </div>
-            <hr className='purchase-data__parting-line'/>
-            <TicketsQuantity classification={props.movie.adult} setTotalToPay={setTotalToPay}/>
+            <hr className='purchase-data__parting-line' />
+            {
+                showComponets()
+            }
         </div>
     )
 }
