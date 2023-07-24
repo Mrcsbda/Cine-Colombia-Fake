@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import TicketQuantity from '../ticketQuantity/TicketQuantity'
 import { numberToMoney } from '../../utils/numberToMoney'
+import TicketsQuantity from '../ticketsQuantity/TicketsQuantity'
 import "./purchaseData.scss"
+
 
 const PurchaseData = ({ props }) => {
     const [totalToPay, setTotalToPay] = useState(1000000)
@@ -36,7 +37,8 @@ const PurchaseData = ({ props }) => {
                 </div>
                 <button className='purchase-data__continue-button'>Continuar</button>
             </div>
-            <TicketQuantity classification={props.movie.adult}/>
+            <hr className='purchase-data__parting-line'/>
+            <TicketsQuantity classification={props.movie.adult} setTotalToPay={setTotalToPay}/>
         </div>
     )
 }
