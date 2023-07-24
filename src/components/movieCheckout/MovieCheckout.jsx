@@ -10,9 +10,9 @@ const MovieCheckout = () => {
   const location = useLocation()
   const [movie, setMovie] = useState("")
   const [trailer, setTrailer] = useState("")
-  const {idMovie} = useParams()
+  const { idMovie } = useParams()
   const [setIsBuying] = useOutletContext()
-  const [step, setStep] = useState(2)
+  const [step, setStep] = useState(1)
   const propsMovieSchedule = {
     movie,
     trailer,
@@ -36,18 +36,22 @@ const MovieCheckout = () => {
     const movieInfo = await getMovieInfo(idMovie)
     const videosInfo = await getTrailer(idMovie)
     const trailerInfo = videosInfo.find(video => video.type === 'Trailer')
-    ?? videosInfo.find(video => video.type === 'Teaser')  ;
+      ?? videosInfo.find(video => video.type === 'Teaser');
     setMovie(movieInfo)
     setTrailer(trailerInfo)
   }
 
-  if (movie && trailer) {
-    return (
-      <section className='movie-checkout-container'>
-         {step === 1 ? <MovieSchedule props={propsMovieSchedule}/> : <PurchaseData props={propsPurchaseData} />}
-      </section>
-    )
-  }
+  return (
+    <>
+      {
+        movie && trailer && (
+          <section className='movie-checkout-container'>
+            {step === 1 ? <MovieSchedule props={propsMovieSchedule} /> : <PurchaseData props={propsPurchaseData} />}
+          </section>
+        )
+      }
+    </>
+  )
 }
 
 export default MovieCheckout

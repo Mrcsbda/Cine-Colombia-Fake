@@ -55,12 +55,8 @@ const Carousel = ({ props }) => {
           slidesPerView={5}
           spaceBetween={0}
           loop={true}
-          autoplay={{
-            delay: 5000, // Tiempo en milisegundos entre cada transición de slide
-          }}
           pagination={{ clickable: true }}
           breakpoints={{
-            415: { slidesPerView: 5, spaceBetween: 0 },
             768: { slidesPerView: 5, spaceBetween: 0 },
             1024: { slidesPerView: 5, spaceBetween: 0 },
           }}
