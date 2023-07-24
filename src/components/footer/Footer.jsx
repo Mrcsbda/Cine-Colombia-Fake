@@ -1,8 +1,5 @@
 import React from 'react'
 import "./footer.scss"
-import facebook from "../../assets/images/facebook-logo.svg"
-import twitter from "../../assets/images/twitter-logo.svg"
-import instagram from "../../assets/images/instagram-logo.svg"
 
 const Footer = () => {
   return (
@@ -21,9 +18,9 @@ const Footer = () => {
         <section className='footer__social-networks-container' >
           <p>Síguenos en redes sociales</p>
           <figure className='footer__social-networks'>
-            <img src={facebook} alt="facebook icon" />
-            <img src={twitter} alt="twitter icon" />
-            <img src={instagram} alt="instagram icon" />
+            <img src="images/facebook-logo.svg" alt="facebook icon" />
+            <img src="images/twitter-logo.svg" alt="twitter icon" />
+            <img src="images/instagram-logo.svg" alt="instagram icon" />
           </figure>
         </section>
       </article>
