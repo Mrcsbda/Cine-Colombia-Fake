@@ -5,7 +5,7 @@ import "./purchaseData.scss"
 
 
 const PurchaseData = ({ props }) => {
-    const [totalToPay, setTotalToPay] = useState(1000000)
+    const [totalToPay, setTotalToPay] = useState(0)
 
     return (
         <div className='purchase-data'>
