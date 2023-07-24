@@ -10,28 +10,22 @@ import CardCarousel from '../cardCarousel/CardCarousel';
 
 const Carousel = ({ props }) => {
   const [activeIndex, setActiveIndex] = useState(4);
-  const [slides, setSlides] = useState([2, 3, 4, 5, 6]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     const nextIndex = calculateAdjacentIndex(activeIndex, 1);
-  //     handleSlide(nextIndex);
-  //   }, 5000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const nextIndex = calculateAdjacentIndex(activeIndex, 1);
+      handleSlide(nextIndex);
+    }, 5000);
 
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
+    return () => {
+      clearInterval(interval);
+    };
 
-  // }, [activeIndex]);
+  }, [activeIndex]);
 
   const handleSlide = (index) => {
-    const adjacentIndex = calculateAdjacentIndex(index, -2);
-    const newSlides = Array.from({ length: 5 }, (_, i) =>
-      calculateAdjacentIndex(adjacentIndex, i)
-    );
     setActiveIndex(index);
-    setSlides(newSlides);
   };
 
   const calculateAdjacentIndex = (index, increment) => {
@@ -44,9 +38,11 @@ const Carousel = ({ props }) => {
     return newIndex;
   };
 
-  const viewDatailMovie = (id) => {
+  const viewDetailMovie = (id) => {
     navigate(`${id}`)
   }
+
+  const slides = Array.from({ length: 10 }, (_, i) => calculateAdjacentIndex(activeIndex, i - 2));
 
   return (
     <div className='carousel'>
@@ -56,28 +52,24 @@ const Carousel = ({ props }) => {
           spaceBetween={0}
           loop={true}
           pagination={{ clickable: true }}
-          breakpoints={{
-            768: { slidesPerView: 5, spaceBetween: 0 },
-            1024: { slidesPerView: 5, spaceBetween: 0 },
-          }}
+     
           modules={[Pagination]}
           className="mySwiper"
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex + 1)}
           simulateTouch={false}
-
         >
-          {slides.map((slide) => (
+          {slides.map((slide, index) => (
             <SwiperSlide
               key={slide}
               onClick={() => {
-                if (activeIndex === slide && !props.isBuying) {
-                  viewDatailMovie(props.filteredMovies[slide - 1].id)
+                if (index === 2 && !props.isBuying) {
+                  viewDetailMovie(props.filteredMovies[slide - 1].id)
                 } else {
                   handleSlide(slide)
                 }
               }
               }
-              className={activeIndex === slide ? 'active-slide' : ''}
+              className={index === 2 ? 'active-slide' : ''}
             >
               <CardCarousel movie={props.filteredMovies[slide - 1]} listGenre={props.moviesGenre} />
             </SwiperSlide>
