@@ -1,7 +1,6 @@
 @import "../../assets/styles/variables.scss";
 
 .login {
-    display: none;
     position: absolute;
     top: 0;
     right: 0;
@@ -47,10 +46,15 @@
             input {
                 border: none;
                 border-bottom: 1px solid $dark-gray;
-                color: $light-gray;
+                color: $dark-gray;
                 padding: 5px 0;
                 margin: 0 20px;
                 opacity: 80%;
+            }
+            input:focus{
+                outline: none;
+                border-bottom: $light-blue 2px solid;
+                color: $dark-gray;
             }
             button {
                 border: none;
@@ -79,4 +83,8 @@
             }
         }
     }
+    
 }
+.inactive {
+        display: none;
+    }

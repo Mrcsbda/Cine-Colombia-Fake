@@ -3,7 +3,6 @@ import "./movieDetails.scss"
 
 const MovieDetailsAdmin = () => {
   return (
-    <>
       <article className="movie-short-info">
         <figure className="movie-poster">
           <img
@@ -23,31 +22,6 @@ const MovieDetailsAdmin = () => {
           <source src="movie.mp4" type="video/mp4"></source>
         </video>
       </article>
-      <div className="movie-long-info">
-        <p>
-          La querida banda de los Guardianes se instala en Knowhere. Pero sus
-          vidas no tardan en verse alteradas por los ecos del turbulento pasado
-          de Rocket. Peter Quill, aún conmocionado por la pérdida de Gamora,
-          debe reunir a su equipo en una peligrosa misión para salvar la vida de
-          Rocket, una misión que, si no se completa con éxito, podría muy
-          posiblemente conducir al final de los Guardianes tal y como los
-          conocemos
-        </p>
-        <span>Titulo Original</span>
-        <p>Guardians of the Galaxy Vol. 3</p>
-        <span>Pais de origen</span>
-        <p>Estados Unidos</p>
-        <span>Director</span>
-        <p>James Gunn</p>
-        <span>Actores</span>
-        <p>
-          Chris Pratt, Zoe Saldaña, Dave Bautista, Karen Gillan, Pom
-          Klementieff, Vin Diesel, Bradley Cooper, Sean Gunn and Chukwudi Iwuji
-        </p>
-        <span>Lenguaje</span>
-        <p>Inglés</p>
-      </div>
-    </>
   );
 };
 

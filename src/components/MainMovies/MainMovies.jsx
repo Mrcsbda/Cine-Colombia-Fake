@@ -59,6 +59,9 @@ const MainMovies = ({ isLogin }) => {
     if (!isLogin) {
       navigate(`${id}`)
     }
+    else {
+      navigate("movie")
+    }
   }
 
   return (

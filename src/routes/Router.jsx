@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import React, { createContext, useEffect, useState } from 'react'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import Layout from '../components/layout/Layout';
 import Home from '../components/pages/home/Home';
 import Administrator from '../components/pages/administrator/Administrator';
@@ -9,30 +9,45 @@ import AdminDetail from '../components/pages/adminDetails/AdminDetail';
 import MainMovies from '../components/MainMovies/MainMovies';
 import MovieCheckout from '../components/movieCheckout/MovieCheckout';
 
-
+export const AppContext = createContext({})
 
 const Router = () => {
 
     const [isLogin, setIsLogin] = useState(false)
 
+    useEffect(() => {
+        const dataAdmin = JSON.parse(localStorage.getItem('admin')) || {}
+        if (dataAdmin?.adminName) {
+            setIsLogin(true)
+        }
+        else {
+            setIsLogin(false)
+        }
+    }, [isLogin])
+
+
+
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Layout />} >
-                    <Route element={<PublicRouter isAutenticate={isLogin} />}>
-                        <Route path="/" element={<Home />}>
-                            <Route index element={<MainMovies isLogin={isLogin} />} />
-                            <Route path=":idMovie" element={<MovieCheckout />} />
+        <AppContext.Provider value={{ isLogin, setIsLogin }}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Layout />} >
+                        <Route element={<PublicRouter isAutenticate={isLogin} />}>
+                            <Route path="/" element={<Home />}>
+                                <Route index element={<MainMovies isLogin={isLogin} />} />
+                                <Route path=":idMovie" element={<MovieCheckout />} />
+                            </Route>
+                        </Route>
+                        <Route element={<PrivateRouter isAutenticate={isLogin} />}>
+                            <Route path="administrator" element={<Administrator />}>
+                                <Route index element={<MainMovies isLogin={isLogin} />} />
+                                <Route path='movie' element={<AdminDetail />} />
+                            </Route>
                         </Route>
                     </Route>
-                    <Route element={<PrivateRouter isAutenticate={isLogin} />}>
-                        <Route path="administrator" element={<Administrator />}>
-                            <Route index element={<MainMovies isLogin={isLogin} />} />
-                        </Route>
-                    </Route>
-                </Route>
-            </Routes>
-        </BrowserRouter>
+                </Routes>
+            </BrowserRouter>
+        </AppContext.Provider>
     )
 }
 
