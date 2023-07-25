@@ -1,15 +1,15 @@
 import React, {useState} from "react";
-import arrowDown from "../../assets/arrow-down.svg";
-import calendar from "../../assets/calendar.svg";
-import points from "../../assets/three-point.svg";
-import plus from "../../assets/plus.svg";
-import deleteEl from "../../assets/delete.svg";
-import edit from "../../assets/edit-circle.svg";
+import arrowDown from "/images/arrow-down.svg";
+import calendar from "/images/calendar.svg";
+import points from "/images/three-point.svg";
+import plus from "/images/plus.svg";
+import deleteEl from "/images/delete.svg";
+import edit from "/images/edit-circle.svg";
 import "./detailsShows.scss";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-const DetailsShowsAdmin = () => {
+const DetailsShowsAdmin = ({movie}) => {
     const [showActions, setShowActions] = useState(false)
     const [showCalendar, setShowCalendar] = useState(false)
     const [value, onChange] = useState(new Date());
@@ -38,21 +38,15 @@ const DetailsShowsAdmin = () => {
     ]
     const showTime = ['13:00', '16:00']
   return (
+    
     <article className="main-admin--second-section">
+        {movie?.title && (
         <div className="movie-long-info">
-            <p>
-              La querida banda de los Guardianes se instala en Knowhere. Pero sus
-              vidas no tardan en verse alteradas por los ecos del turbulento pasado
-              de Rocket. Peter Quill, aún conmocionado por la pérdida de Gamora,
-              debe reunir a su equipo en una peligrosa misión para salvar la vida de
-              Rocket, una misión que, si no se completa con éxito, podría muy
-              posiblemente conducir al final de los Guardianes tal y como los
-              conocemos
-            </p>
+            <p>{movie.overview}</p>
             <span>Titulo Original</span>
-            <p>Guardians of the Galaxy Vol. 3</p>
+            <p>{movie.original_title}</p>
             <span>Pais de origen</span>
-            <p>Estados Unidos</p>
+            <p>{movie.production_countries[0].name}</p>
             <span>Director</span>
             <p>James Gunn</p>
             <span>Actores</span>
@@ -61,8 +55,8 @@ const DetailsShowsAdmin = () => {
               Klementieff, Vin Diesel, Bradley Cooper, Sean Gunn and Chukwudi Iwuji
             </p>
             <span>Lenguaje</span>
-            <p>Inglés</p>
-        </div>
+            <p>{movie.original_language === "en" ? "Inglés" : "Español"}</p>
+        </div>)}
         <div className="schedules-cinemas">
             <div className="schedule">
                 <p className="schedule--title">Agosto</p>

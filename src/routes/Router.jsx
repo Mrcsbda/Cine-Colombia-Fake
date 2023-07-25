@@ -12,23 +12,26 @@ import MovieCheckout from '../components/movieCheckout/MovieCheckout';
 export const AppContext = createContext({})
 
 const Router = () => {
-
+    
+    const [admin, setAdmin] = useState({})
     const [isLogin, setIsLogin] = useState(false)
 
     useEffect(() => {
     const dataAdmin = JSON.parse(localStorage.getItem('admin')) || {}
         if (dataAdmin?.adminName) {
             setIsLogin(true)
+            setAdmin(dataAdmin)
         }
         else {
             setIsLogin(false)
+            setAdmin(false)
         }
     }, [isLogin])
 
     
 
     return (
-        <AppContext.Provider value={{isLogin, setIsLogin}}>
+        <AppContext.Provider value={{isLogin, setIsLogin, admin}}>
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />} >
@@ -41,7 +44,7 @@ const Router = () => {
                     <Route element={<PrivateRouter isAutenticate={isLogin} />}>
                         <Route path="administrator" element={<Administrator />}>
                             <Route index element={<MainMovies isLogin={isLogin} />} />
-                            <Route path='movie' element={<AdminDetail/>}/>
+                            <Route path=':idMovie' element={<AdminDetail/>}/>
                         </Route>
                     </Route>
                 </Route>

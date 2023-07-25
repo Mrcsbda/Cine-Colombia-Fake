@@ -11,7 +11,7 @@ const Layout = () => {
     const [isCheckout, setIsCheckout] = useState(false)
 
     useEffect(() => {
-        location.pathname === `/${idMovie}` ? setIsCheckout(true) : setIsCheckout(false)
+        location.pathname === `/${idMovie}` || location.pathname === `/administrator/${idMovie}` ? setIsCheckout(true) : setIsCheckout(false)
     }, [location])
 
     return (

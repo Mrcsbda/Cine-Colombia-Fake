@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import "./login.scss"
-import close from "../../assets/close.svg"
+import close from "/images/close.svg"
 import useForm from '../../hooks/UseForm'
 import getAdmins from '../../services/adminsServices'
 import Swal from 'sweetalert2'

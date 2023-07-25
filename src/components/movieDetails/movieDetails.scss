@@ -16,11 +16,11 @@
             border-radius: 5px;
         }
     }
-    video {
+    .trailer {
         height: 80vh;
         width: 68%;
         position: relative;
-        opacity: 70%;
+        opacity: 50%;
     }
     .movie-short-info-text {
         position: absolute;
@@ -36,10 +36,9 @@
         }
         p {
             margin-bottom: 8px;
-            opacity: 70%;
             font-size: 14px;
         }
-        span {
+        .span-info {
             background-color: $light-gray;
             color: black;
             padding: 7px 10px;

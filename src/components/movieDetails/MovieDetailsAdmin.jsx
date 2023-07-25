@@ -1,27 +1,34 @@
 import React from "react";
 import "./movieDetails.scss"
 
-const MovieDetailsAdmin = () => {
+const MovieDetailsAdmin = ({movie, trailer}) => {
   return (
+    <>
+    {movie?.title && (
       <article className="movie-short-info">
         <figure className="movie-poster">
           <img
-            src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/6GkKzdNosVAL7UGgwTtCHSxLQ67.jpg"
-            alt=""
+            src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            alt={movie.title}
           />
         </figure>
         <div className="movie-short-info-text">
-          <h2>Guardianes de la Galaxia: Volumen 3</h2>
-          <p>Titulo en ingles: Guardians of the Galaxy Vol. 3</p>
-          <p>Estreno: Mayo 4 2023</p>
-          <p>Ciencia ficción, Aventura, Acción</p>
-          <span>Recomendada para Mayores de 12 años</span>
-          <span>2h 30m</span>
+          <h2>{movie.title}</h2>
+          <p>Titulo en ingles: {movie.original_title}</p>
+          <p>Estreno: {movie.release_date}</p>
+          <p>{movie.genres.map(genre => (<span key={genre.id}> {genre.name} </span>))}</p>
+          <span className="span-info">{ movie.adult ? "Recomendada para Mayores de 18 años" : "Para todo el público"}</span>
+          <span className="span-info">{movie.runtime} min</span>
         </div>
-        <video controls>
-          <source src="movie.mp4" type="video/mp4"></source>
-        </video>
+        <iframe
+            className='trailer'
+            src={`https://www.youtube.com/embed/${trailer.key}`}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen>
+        </iframe>
       </article>
+      )}</>
   );
 };
 

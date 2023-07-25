@@ -14,8 +14,9 @@
 
 .main-admin--second-section {
     display: flex;
+    margin-bottom: 2rem;
     .movie-long-info {
-        padding: 4rem 2rem 0;
+        padding: 6rem 2rem 0;
         max-width: 30%;
         p {
             color: $dark-gray;
