@@ -16,7 +16,7 @@ const Router = () => {
     const [isLogin, setIsLogin] = useState(false)
 
     useEffect(() => {
-    const dataAdmin = JSON.parse(localStorage.getItem('admin')) || {}
+        const dataAdmin = JSON.parse(localStorage.getItem('admin')) || {}
         if (dataAdmin?.adminName) {
             setIsLogin(true)
         }
@@ -25,28 +25,28 @@ const Router = () => {
         }
     }, [isLogin])
 
-    
+
 
     return (
-        <AppContext.Provider value={{isLogin, setIsLogin}}>
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Layout />} >
-                    <Route element={<PublicRouter isAutenticate={isLogin} />}>
-                        <Route path="/" element={<Home />}>
-                            <Route index element={<MainMovies isLogin={isLogin} />} />
-                            <Route path=":idMovie" element={<MovieCheckout />} />
+        <AppContext.Provider value={{ isLogin, setIsLogin }}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Layout />} >
+                        <Route element={<PublicRouter isAutenticate={isLogin} />}>
+                            <Route path="/" element={<Home />}>
+                                <Route index element={<MainMovies isLogin={isLogin} />} />
+                                <Route path=":idMovie" element={<MovieCheckout />} />
+                            </Route>
+                        </Route>
+                        <Route element={<PrivateRouter isAutenticate={isLogin} />}>
+                            <Route path="administrator" element={<Administrator />}>
+                                <Route index element={<MainMovies isLogin={isLogin} />} />
+                                <Route path='movie' element={<AdminDetail />} />
+                            </Route>
                         </Route>
                     </Route>
-                    <Route element={<PrivateRouter isAutenticate={isLogin} />}>
-                        <Route path="administrator" element={<Administrator />}>
-                            <Route index element={<MainMovies isLogin={isLogin} />} />
-                            <Route path='movie' element={<AdminDetail/>}/>
-                        </Route>
-                    </Route>
-                </Route>
-            </Routes>
-        </BrowserRouter>
+                </Routes>
+            </BrowserRouter>
         </AppContext.Provider>
     )
 }
