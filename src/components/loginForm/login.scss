@@ -1,7 +1,6 @@
 @import "../../assets/styles/variables.scss";
 
 .login {
-    display: none;
     position: absolute;
     top: 0;
     right: 0;
@@ -79,4 +78,8 @@
             }
         }
     }
+    
 }
+.inactive {
+        display: none;
+    }

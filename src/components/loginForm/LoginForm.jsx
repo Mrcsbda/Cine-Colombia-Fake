@@ -2,11 +2,11 @@ import React from 'react'
 import "./login.scss"
 import close from "../../assets/close.svg"
 
-const LoginForm = () => {
+const LoginForm = ({showForm, setShowForm}) => {
   return (
-    <section className='login'>
+    <section className={showForm ? "login" : "login inactive"}>
         <div className='login-container'>
-            <figure className='login-close'>
+            <figure className='login-close' onClick={() => setShowForm(false)}>
                 <img src={close} alt="Icon for close" />
             </figure>
             <h2>Bienvenido</h2>

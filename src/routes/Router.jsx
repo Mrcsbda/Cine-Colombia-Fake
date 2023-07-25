@@ -13,7 +13,7 @@ import MovieCheckout from '../components/movieCheckout/MovieCheckout';
 
 const Router = () => {
 
-    const [isLogin, setIsLogin] = useState(false)
+    const [isLogin, setIsLogin] = useState(true)
 
     return (
         <BrowserRouter>
@@ -28,6 +28,7 @@ const Router = () => {
                     <Route element={<PrivateRouter isAutenticate={isLogin} />}>
                         <Route path="administrator" element={<Administrator />}>
                             <Route index element={<MainMovies isLogin={isLogin} />} />
+                            <Route path='movie' element={<AdminDetail/>}/>
                         </Route>
                     </Route>
                 </Route>
