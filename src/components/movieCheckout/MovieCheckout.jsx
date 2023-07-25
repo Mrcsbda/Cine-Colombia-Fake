@@ -5,13 +5,14 @@ import getMovieInfo from '../../services/getMovieInfo'
 import getTrailer from '../../services/getTrailer'
 import PurchaseData from '../purchaseData/PurchaseData'
 import "./movieCheckout.scss"
+import DownloadTickets from '../downloadTickets/DownloadTickets'
 
 const MovieCheckout = () => {
   const location = useLocation()
   const [movie, setMovie] = useState("")
   const [trailer, setTrailer] = useState("")
   const { idMovie } = useParams()
-  const [step, setStep] = useState(5)
+  const [step, setStep] = useState(6)
   const propsMovieSchedule = {
     movie,
     trailer,
@@ -22,6 +23,9 @@ const MovieCheckout = () => {
     movie,
     setStep,
     step
+  }
+  const propsDownloadTickets = {
+    movie,
   }
 
   useEffect(() => {
@@ -43,6 +47,8 @@ const MovieCheckout = () => {
         return (<MovieSchedule props={propsMovieSchedule} />);
       case step < 6:
         return (<PurchaseData props={propsPurchaseData} />);
+      case step === 6:
+        return (<DownloadTickets props={propsDownloadTickets} />);
       default: return ""
     }
   }
