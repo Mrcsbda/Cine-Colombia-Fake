@@ -26,7 +26,6 @@ const Router = () => {
     }, [isLogin])
 
 
-
     return (
         <AppContext.Provider value={{ isLogin, setIsLogin }}>
             <BrowserRouter>

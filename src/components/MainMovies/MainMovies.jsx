@@ -65,7 +65,7 @@ const MainMovies = ({ isLogin }) => {
   }
 
   return (
-    <>
+    <div className='main-movies'>
       <p className='title'>en cartelera</p>
       <div className='cards-container'>
         {filteredMovies.map((movie) => (
@@ -86,7 +86,7 @@ const MainMovies = ({ isLogin }) => {
         )}
 
       </div>
-    </>
+    </div>
   )
 }
 
