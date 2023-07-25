@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import getMovies from '../../services/getMovies';
 import getMoviesGenre from '../../services/getGenreMovies';
 import getCinemaShows from '../../services/cinemaShowsServices';
 import { useNavigate } from 'react-router-dom';
 import "./mainMovies.scss"
+import { getMonth } from '../../utils/getMonth';
+import { AppContext } from '../../routes/Router';
 
 
-const MainMovies = ({ isLogin }) => {
+const MainMovies = () => {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [moviesGenre, setMoviesGenre] = useState([]);
   const navigate = useNavigate()
+  const { isLogin } = useContext(AppContext)
 
   useEffect(() => {
     getData()
@@ -35,24 +38,6 @@ const MainMovies = ({ isLogin }) => {
     const month = getMonth(date[1])
 
     return `${date[2]} ${month} ${date[0]}`
-  }
-
-  const getMonth = (month) => {
-    switch (month) {
-      case "01": return "Ene"
-      case "02": return "Feb"
-      case "03": return "Mar"
-      case "04": return "Abr"
-      case "05": return "May"
-      case "06": return "Jun"
-      case "07": return "Jul"
-      case "08": return "Ago"
-      case "09": return "Sep"
-      case "10": return "Oct"
-      case "11": return "Nov"
-      case "12": return "Dic"
-      default: return "Unknown"
-    }
   }
 
   const changeView = (id) => {

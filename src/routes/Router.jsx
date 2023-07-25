@@ -33,13 +33,13 @@ const Router = () => {
                     <Route path="/" element={<Layout />} >
                         <Route element={<PublicRouter isAutenticate={isLogin} />}>
                             <Route path="/" element={<Home />}>
-                                <Route index element={<MainMovies isLogin={isLogin} />} />
+                                <Route index element={<MainMovies />} />
                                 <Route path=":idMovie" element={<MovieCheckout />} />
                             </Route>
                         </Route>
                         <Route element={<PrivateRouter isAutenticate={isLogin} />}>
                             <Route path="administrator" element={<Administrator />}>
-                                <Route index element={<MainMovies isLogin={isLogin} />} />
+                                <Route index element={<MainMovies />} />
                                 <Route path='movie' element={<AdminDetail />} />
                             </Route>
                         </Route>

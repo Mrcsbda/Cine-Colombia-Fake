@@ -69,10 +69,10 @@
 
 @media (max-width: 1290px) {
     .cards-container {
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        width: 100%;
 
         .card {
             max-width: 270px;
