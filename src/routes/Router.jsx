@@ -14,6 +14,7 @@ export const AppContext = createContext({})
 const Router = () => {
 
     const [isLogin, setIsLogin] = useState(false)
+    const [isBuying, setIsBuying] = useState(false)
 
     useEffect(() => {
         const dataAdmin = JSON.parse(localStorage.getItem('admin')) || {}
@@ -27,7 +28,7 @@ const Router = () => {
 
 
     return (
-        <AppContext.Provider value={{ isLogin, setIsLogin }}>
+        <AppContext.Provider value={{ isLogin, setIsLogin, isBuying , setIsBuying }}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Layout />} >

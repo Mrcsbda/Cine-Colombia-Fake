@@ -5,6 +5,7 @@ import "./purchaseData.scss"
 import PurchaseForm from '../purchaseForm/PurchaseForm'
 
 
+
 const PurchaseData = ({ props }) => {
     const [totalToPay, setTotalToPay] = useState(0)
 
@@ -17,6 +18,7 @@ const PurchaseData = ({ props }) => {
             default: return ""
         }
     }
+
     return (
         <div className='purchase-data'>
             <div className='purchase-data__summary'>

@@ -11,12 +11,7 @@ const Home = () => {
 
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [moviesGenre, setMoviesGenre] = useState([]);
-  const [isBuying, setIsBuying] = useState(false)
-  const props = {
-    filteredMovies,
-    moviesGenre,
-    isBuying,
-  }
+
   useEffect(() => {
     getData()
   }, [])
@@ -36,9 +31,9 @@ const Home = () => {
   return (
 
     <div>
-      <Carousel className="carousel" props={props}/>
+      <Carousel className="carousel" filteredMovies={filteredMovies} moviesGenre={moviesGenre}/>
       <article className='outlet'>
-        <Outlet context={[setIsBuying]}/>
+        <Outlet />
       </article>
     </div>
   )

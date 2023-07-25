@@ -11,19 +11,16 @@ const MovieCheckout = () => {
   const [movie, setMovie] = useState("")
   const [trailer, setTrailer] = useState("")
   const { idMovie } = useParams()
-  const [setIsBuying] = useOutletContext()
   const [step, setStep] = useState(4)
   const propsMovieSchedule = {
     movie,
     trailer,
-    setIsBuying,
     setStep,
     step
   }
 
   const propsPurchaseData = {
     movie,
-    setIsBuying,
     setStep,
     step
   }

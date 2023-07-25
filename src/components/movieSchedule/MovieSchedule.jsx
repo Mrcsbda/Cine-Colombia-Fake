@@ -1,13 +1,16 @@
 import React from 'react'
 import "./movieSchedule.scss"
+import { AppContext } from '../../routes/Router'
 
 const MovieSchedule = ({ props }) => {
 
+  const { setIsBuying } = useContext(AppContext)
+
   const handleClick = () => {
-    props.setIsBuying(true)
+    setIsBuying(true)
     props.setStep(props.step + 1)
   }
-  
+
   return (
     <div className='movie'>
       <div className='movie__details'>
