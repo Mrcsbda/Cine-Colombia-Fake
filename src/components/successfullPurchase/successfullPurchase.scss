@@ -1,0 +1,66 @@
+@import "../../assets/styles/variables.scss";
+
+.succesfull-purchase {
+    width: 100%;
+    margin-bottom: 2rem;
+    &__alert-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $success;
+        padding: 1rem;
+        border-radius: 5px;
+        border: 1px solid $dark-green;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    &__icon-success {
+        width: 1.7rem;
+    }
+
+    &__text-success {
+        color: $dark-green;
+    }
+
+    &__title-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    &__title {
+        font-size: 1.2rem;
+    }
+
+    &__invoicing {
+        background-color: $very-light-blue;
+        color: $light-blue;
+        padding: 0.3rem 0.5rem;
+        border-radius: 5px;
+    }
+
+    &__info-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    &__subtitle {
+        color: $dark-gray;
+        font-weight: 500;
+    }
+
+    &__payment-method {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__icon {
+        width: 1.2rem;
+    }
+}

@@ -28,7 +28,14 @@ const Router = () => {
 
 
     return (
-        <AppContext.Provider value={{ isLogin, setIsLogin, isBuying , setIsBuying }}>
+        <AppContext.Provider value={
+            {
+                isLogin,
+                setIsLogin,
+                isBuying,
+                setIsBuying
+            }
+        }>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Layout />} >

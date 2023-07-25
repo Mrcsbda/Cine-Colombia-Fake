@@ -3,8 +3,7 @@ import { numberToMoney } from '../../utils/numberToMoney'
 import TicketsQuantity from '../ticketsQuantity/TicketsQuantity'
 import "./purchaseData.scss"
 import PurchaseForm from '../purchaseForm/PurchaseForm'
-import SuccesfullPurchase from '../succesfullPurchase/SuccesfullPurchase'
-
+import SuccessfullPurchase from '../successfullPurchase/SuccessfullPurchase'
 
 
 const PurchaseData = ({ props }) => {
@@ -17,7 +16,7 @@ const PurchaseData = ({ props }) => {
             case props.step === 4:
                 return (<PurchaseForm />);
             case props.step === 5:
-                return (<SuccesfullPurchase />);
+                return (<SuccessfullPurchase />);
             default: return ""
         }
     }
