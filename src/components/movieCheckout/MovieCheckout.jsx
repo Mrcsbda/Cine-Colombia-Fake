@@ -11,14 +11,13 @@ const MovieCheckout = () => {
   const [movie, setMovie] = useState("")
   const [trailer, setTrailer] = useState("")
   const { idMovie } = useParams()
-  const [step, setStep] = useState(4)
+  const [step, setStep] = useState(1)
   const propsMovieSchedule = {
     movie,
     trailer,
     setStep,
     step
   }
-
   const propsPurchaseData = {
     movie,
     setStep,
@@ -38,12 +37,24 @@ const MovieCheckout = () => {
     setTrailer(trailerInfo)
   }
 
+  const showComponets = () => {
+    switch (true) {
+      case step === 1:
+        return (<MovieSchedule props={propsMovieSchedule} />);
+      case step < 6:
+        return (<PurchaseData props={propsPurchaseData} />);
+      default: return ""
+    }
+  }
+
   return (
     <>
       {
-        movie && trailer && (
+        movie?.title && trailer?.key && (
           <section className='movie-checkout-container'>
-            {step === 1 ? <MovieSchedule props={propsMovieSchedule} /> : <PurchaseData props={propsPurchaseData} />}
+            {
+              showComponets()
+            }
           </section>
         )
       }
