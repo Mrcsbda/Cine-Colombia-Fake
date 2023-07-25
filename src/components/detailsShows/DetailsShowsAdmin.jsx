@@ -1,13 +1,16 @@
 import React, {useState} from "react";
 import arrowDown from "../../assets/arrow-down.svg";
-import calendar from "../../assets/calendar.svg"
-import points from "../../assets/three-point.svg"
-import plus from "../../assets/plus.svg"
-import "./detailsShows.scss"
+import calendar from "../../assets/calendar.svg";
+import points from "../../assets/three-point.svg";
+import plus from "../../assets/plus.svg";
+import deleteEl from "../../assets/delete.svg";
+import edit from "../../assets/edit-circle.svg";
+import "./detailsShows.scss";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 const DetailsShowsAdmin = () => {
+    const [showActions, setShowActions] = useState(false)
     const [showCalendar, setShowCalendar] = useState(false)
     const [value, onChange] = useState(new Date());
     const [showSalas, setShowSalas] = useState(false)
@@ -33,6 +36,7 @@ const DetailsShowsAdmin = () => {
             dayOfWeek: "Vie"
         }
     ]
+    const showTime = ['13:00', '16:00']
   return (
     <article className="main-admin--second-section">
         <div className="movie-long-info">
@@ -99,10 +103,24 @@ const DetailsShowsAdmin = () => {
                 </div>
                 <div className={showSalas ? "salas" : "salas inactive-details"}>
                     <div>
-                        <p>Sala 1</p>
+                        <div className="name-sala">
+                            <p className="name-sala-text">Sala 1</p>
+                            <div className="actions-sala">
+                                <img src={edit} alt="Icon for edit" />
+                                <img src={deleteEl} alt="Icon for delete" />
+                            </div>
+                        </div>
+                        
                         <div className="show-time">
-                            <span>13:00</span>
-                            <span>16:00</span>
+                            {showTime.map((time, index) => (
+                                <span key={index}>{time}
+                                    <div className="actions">
+                                        <img src={edit} alt="Icon for edit" />
+                                        <img src={deleteEl} alt="Icon for delete" />
+                                    </div>
+                                    
+                                </span>
+                            ))}
                         </div>
                         
                     </div>
