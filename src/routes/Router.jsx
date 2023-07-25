@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import React, { createContext, useEffect, useState } from 'react'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import Layout from '../components/layout/Layout';
 import Home from '../components/pages/home/Home';
 import Administrator from '../components/pages/administrator/Administrator';
@@ -9,13 +9,26 @@ import AdminDetail from '../components/pages/adminDetails/AdminDetail';
 import MainMovies from '../components/MainMovies/MainMovies';
 import MovieCheckout from '../components/movieCheckout/MovieCheckout';
 
-
+export const AppContext = createContext({})
 
 const Router = () => {
 
-    const [isLogin, setIsLogin] = useState(true)
+    const [isLogin, setIsLogin] = useState(false)
+
+    useEffect(() => {
+    const dataAdmin = JSON.parse(localStorage.getItem('admin')) || {}
+        if (dataAdmin?.adminName) {
+            setIsLogin(true)
+        }
+        else {
+            setIsLogin(false)
+        }
+    }, [isLogin])
+
+    
 
     return (
+        <AppContext.Provider value={{isLogin, setIsLogin}}>
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />} >
@@ -34,6 +47,7 @@ const Router = () => {
                 </Route>
             </Routes>
         </BrowserRouter>
+        </AppContext.Provider>
     )
 }
 
