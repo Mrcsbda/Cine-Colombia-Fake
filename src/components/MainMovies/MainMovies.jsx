@@ -12,11 +12,11 @@ const MainMovies = () => {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [moviesGenre, setMoviesGenre] = useState([]);
   const navigate = useNavigate()
-  const { isLogin } = useContext(AppContext)
+  const { isLogin, filteredMoviesBy, valueToFilterMovies } = useContext(AppContext)
 
   useEffect(() => {
     getData()
-  }, [])
+  }, [valueToFilterMovies])
 
   const getData = async () => {
     const dataMovies = await getMovies()
@@ -24,8 +24,24 @@ const MainMovies = () => {
     const moviesId = [...dataCinemaShows].map((show) => (show.movie))
     const filteredMovies = [...dataMovies].filter((movie) => moviesId.find(movieId => movie.id === movieId))
     const dataMoviesGenre = await getMoviesGenre()
-    setFilteredMovies(filteredMovies)
+
+    if (filteredMoviesBy) {
+      filterMoviesBy(filteredMovies)
+    } else {
+      setFilteredMovies(filteredMovies)
+    }
+
     setMoviesGenre(dataMoviesGenre)
+  }
+
+  const filterMoviesBy = (dataMovies) => {
+
+    switch (filteredMoviesBy) {
+      case "genre":
+        const filteredMoviesByGenre = dataMovies.filter(movie => movie.genre_ids.includes(valueToFilterMovies))
+        setFilteredMovies(filteredMoviesByGenre)
+        break;
+    }
   }
 
   const filteredGenre = (genres) => {

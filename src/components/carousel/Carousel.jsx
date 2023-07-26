@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import CardCarousel from '../cardCarousel/CardCarousel';
 import { AppContext } from '../../routes/Router';
 
-const Carousel = ({ filteredMovies , moviesGenre }) => {
+const Carousel = ({ filteredMovies, moviesGenre }) => {
   const [activeIndex, setActiveIndex] = useState(4);
   const navigate = useNavigate();
   const { isBuying } = useContext(AppContext)
@@ -47,7 +47,7 @@ const Carousel = ({ filteredMovies , moviesGenre }) => {
 
   return (
     <div className='carousel'>
-      {/* {filteredMovies.length > 0 && (
+      {filteredMovies.length > 0 && (
         <Swiper
           slidesPerView={5}
           spaceBetween={0}
@@ -76,7 +76,7 @@ const Carousel = ({ filteredMovies , moviesGenre }) => {
             </SwiperSlide>
           ))}
         </Swiper>
-      )} */}
+      )}
     </div>
   );
 };
