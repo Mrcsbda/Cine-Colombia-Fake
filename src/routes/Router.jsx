@@ -28,10 +28,13 @@ const Router = () => {
         }
     }, [isLogin])
 
-    
+    const handleLogout = () => {
+        localStorage.clear();
+        setIsLogin(!isLogin);
+      }
 
     return (
-        <AppContext.Provider value={{isLogin, setIsLogin, admin}}>
+        <AppContext.Provider value={{isLogin, setIsLogin, admin, handleLogout}}>
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />} >
