@@ -15,6 +15,8 @@ const Router = () => {
 
     const [isLogin, setIsLogin] = useState(false)
     const [isBuying, setIsBuying] = useState(false)
+    const [filteredMoviesBy, setFilteredMoviesBy] = useState(false)
+    const [valueToFilterMovies, setValueToFilterMovies] = useState(false)
 
     useEffect(() => {
         const dataAdmin = JSON.parse(localStorage.getItem('admin')) || {}
@@ -33,7 +35,11 @@ const Router = () => {
                 isLogin,
                 setIsLogin,
                 isBuying,
-                setIsBuying
+                setIsBuying,
+                filteredMoviesBy,
+                setFilteredMoviesBy,
+                valueToFilterMovies,
+                setValueToFilterMovies
             }
         }>
             <BrowserRouter>
