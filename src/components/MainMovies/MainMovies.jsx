@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import getMovies from '../../services/getMovies';
 import getMoviesGenre from '../../services/getGenreMovies';
-import getCinemaShows from '../../services/cinemaShowsServices';
 import { useNavigate } from 'react-router-dom';
-import "./mainMovies.scss"
 import { getMonth } from '../../utils/getMonth';
 import { AppContext } from '../../routes/Router';
+import getCinemaShows from '../../services/cinemaShowsServices';
+import "./mainMovies.scss"
+import { getCinemaAndCinemaShows } from '../../services/cinemasServices';
 
 
 const MainMovies = () => {
@@ -29,12 +30,19 @@ const MainMovies = () => {
     setMoviesGenre(dataMoviesGenre)
   }
 
-  const filterMoviesBy = (dataMovies) => {
-
+  const filterMoviesBy = async (dataMovies) => {
+    console.log(filteredMoviesBy)
+    console.log(valueToFilterMovies)
     switch (filteredMoviesBy) {
       case "genre":
         const filteredMoviesByGenre = dataMovies.filter(movie => movie.genre_ids.includes(valueToFilterMovies))
         setFilteredMovies(filteredMoviesByGenre)
+        break;
+      case "cinema":
+        const cinemasAndCinemaShows = await getCinemaAndCinemaShows()
+        const cinemaFiltered = cinemasAndCinemaShows.find(cinema => cinema.name === valueToFilterMovies)
+        const movies = dataMovies.filter(item => cinemaFiltered.cinema_shows.find(movie => item.id === movie.movie))
+        setFilteredMovies(movies)
         break;
       default: setFilteredMovies(dataMovies)
         break

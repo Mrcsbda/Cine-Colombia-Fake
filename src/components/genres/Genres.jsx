@@ -3,7 +3,7 @@ import "./genres.scss"
 import { AppContext } from '../../routes/Router'
 
 const Genres = ({ genres }) => {
-  const { setFilteredMoviesBy, setValueToFilterMovies  , filteredMoviesBy} = useContext(AppContext)
+  const { setFilteredMoviesBy, setValueToFilterMovies } = useContext(AppContext)
   const handleGenre = (id) => {
 
     if (id === 0) {
@@ -13,7 +13,7 @@ const Genres = ({ genres }) => {
       setFilteredMoviesBy("genre")
       setValueToFilterMovies(id)
     }
-    
+
   }
   return (
     <>
