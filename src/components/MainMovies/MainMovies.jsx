@@ -25,12 +25,7 @@ const MainMovies = () => {
     const filteredMovies = [...dataMovies].filter((movie) => moviesId.find(movieId => movie.id === movieId))
     const dataMoviesGenre = await getMoviesGenre()
 
-    if (filteredMoviesBy) {
-      filterMoviesBy(filteredMovies)
-    } else {
-      setFilteredMovies(filteredMovies)
-    }
-
+    filterMoviesBy(filteredMovies)
     setMoviesGenre(dataMoviesGenre)
   }
 
@@ -41,6 +36,8 @@ const MainMovies = () => {
         const filteredMoviesByGenre = dataMovies.filter(movie => movie.genre_ids.includes(valueToFilterMovies))
         setFilteredMovies(filteredMoviesByGenre)
         break;
+      default: setFilteredMovies(dataMovies)
+        break
     }
   }
 
