@@ -7,7 +7,6 @@ const NavbarChoice = () => {
   const { setFilteredMoviesBy, setValueToFilterMovies , setDate} = useContext(AppContext)
 
   const handleDate = (event) => {
-    console.log(event.target.value)
     setDate(event.target.value)
   }
 

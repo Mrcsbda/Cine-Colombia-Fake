@@ -16,7 +16,7 @@ const MovieCheckout = () => {
   const { idMovie } = useParams()
   const [step, setStep] = useState(1)
   const [cinema, setCinema] = useState("")
-  const { valueToFilterMovies , date } = useContext(AppContext)
+  const { valueToFilterMovies, date } = useContext(AppContext)
   const propsMovieSchedule = {
     movie,
     cinema,
@@ -35,20 +35,32 @@ const MovieCheckout = () => {
 
   useEffect(() => {
     getMovie()
-  }, [location, valueToFilterMovies])
+
+  }, [location, valueToFilterMovies, date])
 
   const getMovie = async () => {
     const movieInfo = await getMovieInfo(idMovie)
     const videosInfo = await getTrailer(idMovie)
     const cinemaAndCinemaShows = await getCinemaAndCinemaShows()
     const trailerInfo = videosInfo.find(video => video.type === 'Trailer')
-    ?? videosInfo.find(video => video.type === 'Teaser');
+      ?? videosInfo.find(video => video.type === 'Teaser');
     const cinemaInfo = cinemaAndCinemaShows.find(item => item.cinema_shows.find(movie => movie.movie == idMovie))
-    const infoCinemaShow = cinemaInfo.cinema_shows.find(item => item.movie === idMovie)
-    console.log(infoCinemaShow)
+    const infoCinemaShow = cinemaInfo.cinema_shows.find(item => item.movie == idMovie)
+    test(infoCinemaShow.schedules)
     cinemaInfo.name === valueToFilterMovies || !valueToFilterMovies ? setCinema(cinemaInfo.name) : setCinema(false)
     setMovie(movieInfo)
     setTrailer(trailerInfo)
+  }
+
+  const test = (schedules) => {
+    console.log(schedules)
+    if (typeof date === 'string') {
+      const [year, month, day] = date.split("-")
+      const dateInMiliseconds = new Date(year,(month-1), day).setHours(0,0,0,0)
+      const limitDateInMiliseconds = new Date(dateInMiliseconds).setHours(23,59,59,999999)
+      const cinemaShowSchedule = schedules.filter(item => item >= dateInMiliseconds && item <= limitDateInMiliseconds)
+      console.log(cinemaShowSchedule)
+    }
   }
 
   const showComponets = () => {

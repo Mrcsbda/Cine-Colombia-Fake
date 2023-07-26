@@ -52,14 +52,17 @@ const MovieSchedule = ({ props }) => {
             <h3>{props.cinema ? props.cinema : "No hay funciones para el cinema seleccionado"}</h3>
             {
               props.cinema && (
-                <p className='movie__schedule__items'>
-                  <span className='movie__schedule__item'>18:00</span>
-                  <span className='movie__schedule__item'>19:30</span>
-                  <span className='movie__schedule__item'>21:05</span>
-                </p>
+                <>
+                  <p className='movie__schedule__items'>
+                    <span className='movie__schedule__item'>18:00</span>
+                    <span className='movie__schedule__item'>19:30</span>
+                    <span className='movie__schedule__item'>21:05</span>
+                  </p>
+                  <button className='movie__schedule__button' onClick={handleClick}>Seleccionar Boletos</button>
+                </>
               )
             }
-            <button className='movie__schedule__button' onClick={handleClick}>Seleccionar Boletos</button>
+
           </div>
         ) : (
           <div className='movie__schedule'>
