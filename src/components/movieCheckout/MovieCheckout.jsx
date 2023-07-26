@@ -6,13 +6,14 @@ import getTrailer from '../../services/getTrailer'
 import PurchaseData from '../purchaseData/PurchaseData'
 import "./movieCheckout.scss"
 import DownloadTickets from '../downloadTickets/DownloadTickets'
+import { getCinemaAndCinemaShows } from '../../services/cinemasServices'
 
 const MovieCheckout = () => {
   const location = useLocation()
   const [movie, setMovie] = useState("")
   const [trailer, setTrailer] = useState("")
   const { idMovie } = useParams()
-  const [step, setStep] = useState(3)
+  const [step, setStep] = useState(1)
   const propsMovieSchedule = {
     movie,
     trailer,
@@ -35,6 +36,8 @@ const MovieCheckout = () => {
   const getMovie = async () => {
     const movieInfo = await getMovieInfo(idMovie)
     const videosInfo = await getTrailer(idMovie)
+    const cinemaAndCinemaShows = await getCinemaAndCinemaShows()
+    console.log(cinemaAndCinemaShows)
     const trailerInfo = videosInfo.find(video => video.type === 'Trailer')
       ?? videosInfo.find(video => video.type === 'Teaser');
     setMovie(movieInfo)

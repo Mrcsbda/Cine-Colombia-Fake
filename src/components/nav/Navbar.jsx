@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Genres from '../genres/Genres'
 import logoCine from "../../assets/logoCine.jpg"
 import adminProfile from "../../assets/profile.svg"
 import "./navbar.scss"
 import LoginForm from '../loginForm/LoginForm'
 import NavbarChoice from '../nav-choice/NavbarChoice'
+import { AppContext } from '../../routes/Router'
 
-const Navbar = ({ isCheckout , genres }) => {
+const Navbar = ({ genres }) => {
     const [showForm, setShowForm] = useState(false)
+    const { isCheckout } = useContext(AppContext)
 
     return (
         <nav className='header--navbar'>

@@ -17,6 +17,7 @@ const Router = () => {
     const [isBuying, setIsBuying] = useState(false)
     const [filteredMoviesBy, setFilteredMoviesBy] = useState(false)
     const [valueToFilterMovies, setValueToFilterMovies] = useState(false)
+    const [isCheckout, setIsCheckout] = useState(false)
 
     useEffect(() => {
         const dataAdmin = JSON.parse(localStorage.getItem('admin')) || {}
@@ -41,7 +42,9 @@ const Router = () => {
                 filteredMoviesBy,
                 setFilteredMoviesBy,
                 valueToFilterMovies,
-                setValueToFilterMovies
+                setValueToFilterMovies,
+                isCheckout,
+                setIsCheckout
             }
         }>
             <BrowserRouter>
