@@ -1,0 +1,64 @@
+@import "../../assets/styles/variables.scss";
+
+.purchase-form {
+    display: flex;
+    padding: 1rem 0;
+    flex-direction: column;
+    gap: 2rem;
+
+    &__title {
+        padding: 1rem 0;
+        text-align: center;
+    }
+
+    &__text {
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    &__label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        color: $dark-gray;
+        font-weight: 700;
+    }
+
+    &__input {
+        background-color: $light-gray;
+        border: none;
+        padding: 0.7rem 1rem;
+        outline: none;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    &__card-number, &__cvv {
+        border-radius: 5px 0 0 5px;
+    }
+
+    &__input-container,  &__inputs-container{
+        display: flex;
+    }
+
+    &__inputs-container {
+        gap: 0.5rem;
+        align-items: flex-end;
+    }
+
+    &__icons-container {
+        display: flex;
+        background-color: $light-gray;
+        border-radius: 0 5px 5px 0;
+        padding: 0 0.7rem 0 0;
+        gap: 0.3rem;
+    }
+
+    &__icons {
+        width: 1.5rem;
+    }
+
+    &__date-of-expiry {
+        width: 80%;
+    }
+}

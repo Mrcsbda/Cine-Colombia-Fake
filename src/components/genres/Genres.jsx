@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import "./genres.scss"
+import { AppContext } from '../../routes/Router'
 
-const Genres = ({genres}) => {
+const Genres = ({ genres }) => {
+  const { setFilteredMoviesBy, setValueToFilterMovies } = useContext(AppContext)
+  const handleGenre = (id) => {
+
+    if (id === 0) {
+      setFilteredMoviesBy(false)
+      setValueToFilterMovies(false)
+    } else {
+      setFilteredMoviesBy("genre")
+      setValueToFilterMovies(id)
+    }
+
+  }
   return (
     <>
-        {genres.map((genre, index) => (
-            <span className='navbar--genre' key={index}>{genre}</span>
-        ))}
+      {genres.map((genre, index) => (
+        <span className='navbar--genre' key={index} onClick={() => handleGenre(genre.id)}>{genre.name}</span>
+      ))}
     </>
   )
 }

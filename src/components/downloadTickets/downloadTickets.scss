@@ -1,0 +1,91 @@
+@import "../../assets/styles/variables.scss";
+
+.download-tickets {
+
+    &__container {
+        background-color: $light-blue;
+        padding: 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 10px;
+        gap: 1.5rem;
+        color: $light-gray;
+    }
+
+    &__title-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__date {
+        text-align: right;
+    }
+
+    &__hour {
+        font-weight: 700;
+    }
+
+    &__info-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    &__poster {
+        height: 350px;
+        width: 250px;
+        border-radius: 10px;
+    }
+
+    &__content-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__text {
+        margin-bottom: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    &__qr-container {
+        background-color: white;
+        display: flex;
+        width: max-content;
+        margin-top: 1rem;
+    }
+
+    &__qr {
+        width: 150px;
+    }
+}
+
+@media (min-width: 750px)  {
+    .download-tickets {
+        padding-top: 3rem;
+        &__container {
+            max-width: 500px;
+            padding: 3rem;
+        }
+
+        &__text {
+            display: inline;
+            text-align: left;
+        }
+
+        &__info-container {
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        &__content-container {
+            align-items: flex-start;
+        }
+    }
+}
