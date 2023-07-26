@@ -11,7 +11,7 @@ const NavbarChoice = () => {
   }
 
   const handleCinema = (event) => {
-    console.log(event.target.value)
+
     if (event.target.value === "Selecciona un cinema") {
       setFilteredMoviesBy(false)
       setValueToFilterMovies(false)

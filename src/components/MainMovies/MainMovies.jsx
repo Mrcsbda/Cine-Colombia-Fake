@@ -31,8 +31,8 @@ const MainMovies = () => {
   }
 
   const filterMoviesBy = async (dataMovies) => {
-    console.log(filteredMoviesBy)
-    console.log(valueToFilterMovies)
+    // console.log(filteredMoviesBy)
+    // console.log(valueToFilterMovies)
     switch (filteredMoviesBy) {
       case "genre":
         const filteredMoviesByGenre = dataMovies.filter(movie => movie.genre_ids.includes(valueToFilterMovies))

@@ -12,7 +12,7 @@ const MovieCheckout = () => {
   const [movie, setMovie] = useState("")
   const [trailer, setTrailer] = useState("")
   const { idMovie } = useParams()
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(3)
   const propsMovieSchedule = {
     movie,
     trailer,

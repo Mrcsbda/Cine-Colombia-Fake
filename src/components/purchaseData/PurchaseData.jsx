@@ -4,6 +4,7 @@ import TicketsQuantity from '../ticketsQuantity/TicketsQuantity'
 import "./purchaseData.scss"
 import PurchaseForm from '../purchaseForm/PurchaseForm'
 import SuccessfullPurchase from '../successfullPurchase/SuccessfullPurchase'
+import SeparateChairs from '../separateChairs/SeparateChairs'
 
 
 const PurchaseData = ({ props }) => {
@@ -13,6 +14,8 @@ const PurchaseData = ({ props }) => {
         switch (true) {
             case props.step === 2:
                 return (<TicketsQuantity classification={props.movie.adult} setTotalToPay={setTotalToPay} />);
+            case props.step === 3:
+                return (<SeparateChairs />);
             case props.step === 4:
                 return (<PurchaseForm />);
             case props.step === 5:
