@@ -41,15 +41,13 @@ const MovieCheckout = () => {
     const movieInfo = await getMovieInfo(idMovie)
     const videosInfo = await getTrailer(idMovie)
     const cinemaAndCinemaShows = await getCinemaAndCinemaShows()
-    const cinema = cinemaAndCinemaShows.find(item => item.cinema_shows.find(movie => movie.movie = idMovie))
     const trailerInfo = videosInfo.find(video => video.type === 'Trailer')
     ?? videosInfo.find(video => video.type === 'Teaser');
-
-    if(cinema.name === valueToFilterMovies || !valueToFilterMovies) {
-      setCinema(cinema.name)
-    } else {
-      setCinema(false)
-    }
+    const cinemaInfo = cinemaAndCinemaShows.find(item => item.cinema_shows.find(movie => movie.movie == idMovie))
+    const infoCinemaShow = cinemaInfo.cinema_shows.find(item => item.movie === idMovie)
+    console.log(cinemaAndCinemaShows)
+    console.log(cinemaInfo)
+    cinemaInfo.name === valueToFilterMovies || !valueToFilterMovies ? setCinema(cinemaInfo.name) : setCinema(false)
     setMovie(movieInfo)
     setTrailer(trailerInfo)
   }
