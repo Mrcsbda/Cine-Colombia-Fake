@@ -5,7 +5,7 @@ import { AppContext } from '../../routes/Router'
 const NavbarChoice = () => {
 
   const { setFilteredMoviesBy, setValueToFilterMovies } = useContext(AppContext)
-  const { isCheckout } = useContext(AppContext)
+
   const handleDate = (event) => {
     console.log(event.target.value)
   }
@@ -24,7 +24,7 @@ const NavbarChoice = () => {
 
   return (
     <>
-      <div className={isCheckout ? 'hidden' : 'navbar-choice' } >
+      <div className='navbar-choice' >
       <p>Cines cercanos</p>
       <select name="cines" id="cines" onChange={(event) => handleCinema(event)}>
         <option defaultValue="Los Molinos">Selecciona un cinema</option>

@@ -47,7 +47,7 @@ const MovieSchedule = ({ props }) => {
       <div className='movie__schedule'>
         <h2>Horarios disponibles: 14 Ago 2023</h2>
         <p className='movie__text'>Elige el horario que prefieras</p>
-        <h3>Molinos</h3>
+        <h3>{props.cinema ? props.cinema : "No hay funciones para el cinema seleccionado"}</h3>
         <p className='movie__schedule__items'>
           <span className='movie__schedule__item'>18:00</span>
           <span className='movie__schedule__item'>19:30</span>

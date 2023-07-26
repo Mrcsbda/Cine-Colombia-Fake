@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useLocation, useOutletContext, useParams } from 'react-router-dom'
 import MovieSchedule from '../movieSchedule/MovieSchedule'
 import getMovieInfo from '../../services/getMovieInfo'
@@ -7,6 +7,7 @@ import PurchaseData from '../purchaseData/PurchaseData'
 import "./movieCheckout.scss"
 import DownloadTickets from '../downloadTickets/DownloadTickets'
 import { getCinemaAndCinemaShows } from '../../services/cinemasServices'
+import { AppContext } from '../../routes/Router'
 
 const MovieCheckout = () => {
   const location = useLocation()
@@ -14,8 +15,11 @@ const MovieCheckout = () => {
   const [trailer, setTrailer] = useState("")
   const { idMovie } = useParams()
   const [step, setStep] = useState(1)
+  const [cinema, setCinema] = useState("")
+  const {valueToFilterMovies} = useContext(AppContext)
   const propsMovieSchedule = {
     movie,
+    cinema,
     trailer,
     setStep,
     step
@@ -31,15 +35,21 @@ const MovieCheckout = () => {
 
   useEffect(() => {
     getMovie()
-  }, [location])
+  }, [location, valueToFilterMovies])
 
   const getMovie = async () => {
     const movieInfo = await getMovieInfo(idMovie)
     const videosInfo = await getTrailer(idMovie)
     const cinemaAndCinemaShows = await getCinemaAndCinemaShows()
-    console.log(cinemaAndCinemaShows)
+    const cinema = cinemaAndCinemaShows.find(item => item.cinema_shows.find(movie => movie.movie = idMovie))
     const trailerInfo = videosInfo.find(video => video.type === 'Trailer')
-      ?? videosInfo.find(video => video.type === 'Teaser');
+    ?? videosInfo.find(video => video.type === 'Teaser');
+
+    if(cinema.name === valueToFilterMovies || !valueToFilterMovies) {
+      setCinema(cinema.name)
+    } else {
+      setCinema(false)
+    }
     setMovie(movieInfo)
     setTrailer(trailerInfo)
   }
