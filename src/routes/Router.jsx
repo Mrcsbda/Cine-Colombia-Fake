@@ -18,7 +18,7 @@ const Router = () => {
     const [filteredMoviesBy, setFilteredMoviesBy] = useState(false)
     const [valueToFilterMovies, setValueToFilterMovies] = useState(false)
     const [isCheckout, setIsCheckout] = useState(false)
-    const [date, setDate] = useState(true)
+    const [date, setDate] = useState(false)
     useEffect(() => {
         const dataAdmin = JSON.parse(localStorage.getItem('admin')) || {}
         if (dataAdmin?.adminName) {

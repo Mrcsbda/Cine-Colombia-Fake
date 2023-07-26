@@ -17,9 +17,12 @@ const MovieCheckout = () => {
   const [step, setStep] = useState(1)
   const [cinema, setCinema] = useState("")
   const { valueToFilterMovies, date } = useContext(AppContext)
+  const [schedule, setSchedule] = useState(false)
+
   const propsMovieSchedule = {
     movie,
     cinema,
+    schedule,
     trailer,
     setStep,
     step
@@ -53,12 +56,13 @@ const MovieCheckout = () => {
   }
 
   const test = (schedules) => {
-    console.log(schedules)
+ 
     if (typeof date === 'string') {
       const [year, month, day] = date.split("-")
       const dateInMiliseconds = new Date(year,(month-1), day).setHours(0,0,0,0)
       const limitDateInMiliseconds = new Date(dateInMiliseconds).setHours(23,59,59,999999)
       const cinemaShowSchedule = schedules.filter(item => item >= dateInMiliseconds && item <= limitDateInMiliseconds)
+      setSchedule(cinemaShowSchedule)
       console.log(cinemaShowSchedule)
     }
   }
