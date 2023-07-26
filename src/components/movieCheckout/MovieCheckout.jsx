@@ -16,7 +16,7 @@ const MovieCheckout = () => {
   const { idMovie } = useParams()
   const [step, setStep] = useState(1)
   const [cinema, setCinema] = useState("")
-  const {valueToFilterMovies} = useContext(AppContext)
+  const { valueToFilterMovies , date } = useContext(AppContext)
   const propsMovieSchedule = {
     movie,
     cinema,
@@ -45,8 +45,7 @@ const MovieCheckout = () => {
     ?? videosInfo.find(video => video.type === 'Teaser');
     const cinemaInfo = cinemaAndCinemaShows.find(item => item.cinema_shows.find(movie => movie.movie == idMovie))
     const infoCinemaShow = cinemaInfo.cinema_shows.find(item => item.movie === idMovie)
-    console.log(cinemaAndCinemaShows)
-    console.log(cinemaInfo)
+    console.log(infoCinemaShow)
     cinemaInfo.name === valueToFilterMovies || !valueToFilterMovies ? setCinema(cinemaInfo.name) : setCinema(false)
     setMovie(movieInfo)
     setTrailer(trailerInfo)

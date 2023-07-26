@@ -4,7 +4,7 @@ import { AppContext } from '../../routes/Router'
 
 const MovieSchedule = ({ props }) => {
 
-  const { setIsBuying } = useContext(AppContext)
+  const { setIsBuying, date } = useContext(AppContext)
 
   const handleClick = () => {
     setIsBuying(true)
@@ -44,21 +44,29 @@ const MovieSchedule = ({ props }) => {
         </div>
       </div>
       <hr className='movie__separation-line' />
-      <div className='movie__schedule'>
-        <h2>Horarios disponibles: 14 Ago 2023</h2>
-        <p className='movie__text'>Elige el horario que prefieras</p>
-        <h3>{props.cinema ? props.cinema : "No hay funciones para el cinema seleccionado"}</h3>
-        {
-          props.cinema && (
-            <p className='movie__schedule__items'>
-              <span className='movie__schedule__item'>18:00</span>
-              <span className='movie__schedule__item'>19:30</span>
-              <span className='movie__schedule__item'>21:05</span>
-            </p>
-          )
-        }
-        <button className='movie__schedule__button' onClick={handleClick}>Seleccionar Boletos</button>
-      </div>
+      {
+        date ? (
+          <div className='movie__schedule'>
+            <h2>Horarios disponibles: {date}</h2>
+            <p className='movie__text'>Elige el horario que prefieras</p>
+            <h3>{props.cinema ? props.cinema : "No hay funciones para el cinema seleccionado"}</h3>
+            {
+              props.cinema && (
+                <p className='movie__schedule__items'>
+                  <span className='movie__schedule__item'>18:00</span>
+                  <span className='movie__schedule__item'>19:30</span>
+                  <span className='movie__schedule__item'>21:05</span>
+                </p>
+              )
+            }
+            <button className='movie__schedule__button' onClick={handleClick}>Seleccionar Boletos</button>
+          </div>
+        ) : (
+          <div className='movie__schedule'>
+            <h2>Debes elegir una fecha</h2>
+          </div>
+        )
+      }
     </div>
   )
 }
