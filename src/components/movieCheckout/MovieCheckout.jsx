@@ -11,14 +11,13 @@ import { AppContext } from '../../routes/Router'
 
 const MovieCheckout = () => {
   const location = useLocation()
+  const { idMovie } = useParams()
   const [movie, setMovie] = useState("")
   const [trailer, setTrailer] = useState("")
-  const { idMovie } = useParams()
   const [step, setStep] = useState(1)
   const [cinema, setCinema] = useState("")
-  const { valueToFilterMovies, date } = useContext(AppContext)
   const [schedule, setSchedule] = useState(false)
-
+  const { valueToFilterMovies, date } = useContext(AppContext)
   const propsMovieSchedule = {
     movie,
     cinema,
@@ -49,14 +48,13 @@ const MovieCheckout = () => {
       ?? videosInfo.find(video => video.type === 'Teaser');
     const cinemaInfo = cinemaAndCinemaShows.find(item => item.cinema_shows.find(movie => movie.movie == idMovie))
     const infoCinemaShow = cinemaInfo.cinema_shows.find(item => item.movie == idMovie)
-    test(infoCinemaShow.schedules)
     cinemaInfo.name === valueToFilterMovies || !valueToFilterMovies ? setCinema(cinemaInfo.name) : setCinema(false)
+    getMovieSchedulesByDate(infoCinemaShow.schedules)
     setMovie(movieInfo)
     setTrailer(trailerInfo)
   }
 
-  const test = (schedules) => {
- 
+  const getMovieSchedulesByDate = (schedules) => {
     if (typeof date === 'string') {
       const [year, month, day] = date.split("-")
       const dateInMiliseconds = new Date(year,(month-1), day).setHours(0,0,0,0)

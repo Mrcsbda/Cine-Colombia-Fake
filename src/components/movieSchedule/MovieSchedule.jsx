@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import "./movieSchedule.scss"
 import { AppContext } from '../../routes/Router'
+import { getMonth } from 'date-fns'
 
 const MovieSchedule = ({ props }) => {
 
@@ -14,9 +15,12 @@ const MovieSchedule = ({ props }) => {
   const getDate = (date, type) => {
     switch (type) {
       case "day":
-        return ""
+        const fecha = new Date(date);
+        const opciones = { month: 'long', day: 'numeric', year: 'numeric' };
+        const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones);
+        return fechaFormateada
       case "hour":
-        return`${new Date(date).getHours() < 10
+        return `${new Date(date).getHours() < 10
           ? `0${new Date(date).getHours()}`
           : new Date(date).getHours()} : 0${new Date(date).getMinutes()}`
       default: return ""
