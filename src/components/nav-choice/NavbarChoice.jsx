@@ -4,10 +4,16 @@ import { AppContext } from '../../routes/Router'
 
 const NavbarChoice = () => {
 
-  const { setFilteredMoviesBy, setValueToFilterMovies , setDate} = useContext(AppContext)
+  const { setFilteredMoviesBy, setValueToFilterMovies , setDate } = useContext(AppContext)
 
   const handleDate = (event) => {
     setDate(event.target.value)
+
+    if (!event.target.value) {
+      setFilteredMoviesBy(false)
+    } else {
+      setFilteredMoviesBy("date")
+    }
   }
 
   const handleCinema = (event) => {

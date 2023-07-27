@@ -61,7 +61,6 @@ const MovieCheckout = () => {
       const limitDateInMiliseconds = new Date(dateInMiliseconds).setHours(23,59,59,999999)
       const cinemaShowSchedule = schedules.filter(item => item >= dateInMiliseconds && item <= limitDateInMiliseconds)
       setSchedule(cinemaShowSchedule)
-      console.log(cinemaShowSchedule)
     }
   }
 
