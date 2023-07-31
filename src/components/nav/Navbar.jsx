@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState } from 'react'
 import Genres from '../genres/Genres'
 import logoCine from "/images/logoCine.jpg"
 import settings from "/images/settings.svg"
@@ -11,13 +11,13 @@ import { AppContext } from '../../routes/Router'
 import { useNavigate } from 'react-router'
 import Swal from 'sweetalert2'
 
-const Navbar = ({isCheckout}) => {
+const Navbar = ({isCheckout, genres}) => {
     
     const navigate = useNavigate()
     const {admin, handleLogout} = useContext(AppContext)
     const [showForm, setShowForm] = useState(false)
     const [logOut, setLogOut] = useState(false)
-    const genres = ["Acción", "Terror", "Ciencia Ficción", "Comedia"]
+
 
     const clickLogout = () => {
         Swal.fire({
@@ -34,27 +34,27 @@ const Navbar = ({isCheckout}) => {
           }})
         
     }
-  return (
-    <nav className='header--navbar'>
-        <div className='navbar--logo'>
-            <img src={logoCine} alt="Logo Cine Colombia" />
-            <p>cine colombia</p>
-        </div>
-        <div  className={isCheckout ? 'hidden' : 'nav-genres-container' }>
-            <Genres genres={genres}/>
-        </div>
+    return (
+        <nav className='header--navbar'>
+            <div className='navbar--logo'>
+                <img src={logoCine} alt="Logo Cine Colombia" />
+                <p>cine colombia</p>
+            </div>
+            <div className={isCheckout ? 'hidden' : 'nav-genres-container'}>
+                <Genres genres={genres} />
+            </div>
         {!admin?.adminName ? 
         <>
-        <div className='navbar--user'>
-            <div className='nav--choice-container'>
-                <NavbarChoice/>
+            <div className='navbar--user'>
+                <div className='nav--choice-container'>
+                    <NavbarChoice />
+                </div>
+
+                <figure className='admin-enter' onClick={() => setShowForm(true)}>
+                    <img src={adminProfile} alt="Icon for admin profile" />
+                </figure>
             </div>
-            
-            <figure className='admin-enter' onClick={() => setShowForm(true)}>
-                <img src={adminProfile} alt="Icon for admin profile" />
-            </figure>
-        </div>
-        <LoginForm showForm={showForm} setShowForm={setShowForm}/>
+            <LoginForm showForm={showForm} setShowForm={setShowForm} />
         </> : 
         <div className='admin-info'>
             <img className='admin-pic' src={admin.image} alt={admin.adminName} />
@@ -71,8 +71,8 @@ const Navbar = ({isCheckout}) => {
             </figure>
         </div>
         }
-    </nav>
-  )
+        </nav>
+    )
 }
 
 export default Navbar

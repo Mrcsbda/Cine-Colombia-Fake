@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import './carousel.scss';
 import { useNavigate } from 'react-router-dom';
-
 import CardCarousel from '../cardCarousel/CardCarousel';
+import { AppContext } from '../../routes/Router';
 
-const Carousel = ({ props }) => {
+const Carousel = ({ filteredMovies, moviesGenre }) => {
   const [activeIndex, setActiveIndex] = useState(4);
   const navigate = useNavigate();
+  const { isBuying } = useContext(AppContext)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -46,13 +47,13 @@ const Carousel = ({ props }) => {
 
   return (
     <div className='carousel'>
-      {props.filteredMovies.length > 0 && (
+      {filteredMovies.length > 0 && (
         <Swiper
           slidesPerView={5}
           spaceBetween={0}
           loop={true}
           pagination={{ clickable: true }}
-     
+
           modules={[Pagination]}
           className="mySwiper"
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex + 1)}
@@ -62,8 +63,8 @@ const Carousel = ({ props }) => {
             <SwiperSlide
               key={slide}
               onClick={() => {
-                if (index === 2 && !props.isBuying) {
-                  viewDetailMovie(props.filteredMovies[slide - 1].id)
+                if (index === 2 && !isBuying) {
+                  viewDetailMovie(filteredMovies[slide - 1].id)
                 } else {
                   handleSlide(slide)
                 }
@@ -71,7 +72,7 @@ const Carousel = ({ props }) => {
               }
               className={index === 2 ? 'active-slide' : ''}
             >
-              <CardCarousel movie={props.filteredMovies[slide - 1]} listGenre={props.moviesGenre} />
+              <CardCarousel movie={filteredMovies[slide - 1]} listGenre={moviesGenre} />
             </SwiperSlide>
           ))}
         </Swiper>

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./detailsShows.scss";
 import ScheduleAdmin from "../scheduleAdmin/ScheduleAdmin";
 
-const DetailsShowsAdmin = ({movie}) => {
+const DetailsShowsAdmin = ({movie, cinema}) => {
     
   return (
     
@@ -24,7 +24,7 @@ const DetailsShowsAdmin = ({movie}) => {
             <span>Lenguaje</span>
             <p>{movie.original_language === "en" ? "Inglés" : "Español"}</p>
         </div>)}
-        <ScheduleAdmin/>
+        <ScheduleAdmin cinema={cinema}/>
     </article>
     
   );

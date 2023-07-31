@@ -11,7 +11,7 @@ const TicketsQuantity = ({ classification, setTotalToPay }) => {
   return (
     <div className='tickets-quantity'>
       <h2 className='tickets-quantity__title'>Selecciona tus boletos</h2>
-      <p>Puedes comprar 10 boletos maximos por transacción</p>
+      <p className='tickets-quantity__text'>Puedes comprar 10 boletos maximos por transacción</p>
       <div className='tickets-quantity__type-of-ticket'>
         <p className='tickets-quantity__subtitle'>ADULTO</p>
         <div className='tickets-quantity__info-ticket'>

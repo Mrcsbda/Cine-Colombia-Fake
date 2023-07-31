@@ -20,6 +20,7 @@
         display: flex;
         gap: 10px;
         flex-wrap: wrap;
+        justify-content: center;
     }
     .navbar--user {
         display: flex;
@@ -87,7 +88,7 @@
             display: none;
         }
     }
-    
+
 }
 
 @media (max-width: 850px) {

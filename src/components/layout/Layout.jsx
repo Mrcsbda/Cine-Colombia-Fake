@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Header from '../header/Header'
 import Footer from '../footer/Footer'
 import { Outlet, useLocation, useParams } from 'react-router-dom'
 import "./page.scss"
 import { useState } from 'react'
+import { AppContext } from '../../routes/Router'
 
 const Layout = () => {
     const location = useLocation()
     const {idMovie} = useParams()
-    const [isCheckout, setIsCheckout] = useState(false)
+    const { setIsCheckout } = useContext(AppContext)
 
     useEffect(() => {
         location.pathname === `/${idMovie}` || location.pathname === `/administrator/${idMovie}` ? setIsCheckout(true) : setIsCheckout(false)
@@ -16,7 +17,7 @@ const Layout = () => {
 
     return (
         <>
-            <Header isCheckout={isCheckout}/>
+            <Header />
             <Outlet />
             <Footer />
         </>

@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import getMovies from '../../services/getMovies';
 import getMoviesGenre from '../../services/getGenreMovies';
-import getCinemaShows from '../../services/cinemaShowsServices';
 import { useNavigate } from 'react-router-dom';
+import { getMonth } from '../../utils/getMonth';
+import { AppContext } from '../../routes/Router';
+import getCinemaShows from '../../services/cinemaShowsServices';
 import "./mainMovies.scss"
+import { getCinemaAndCinemaShows } from '../../services/cinemasServices';
 
 
-const MainMovies = ({ isLogin }) => {
+const MainMovies = () => {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [moviesGenre, setMoviesGenre] = useState([]);
   const navigate = useNavigate()
+  const { isLogin, filteredMoviesBy, valueToFilterMovies } = useContext(AppContext)
 
   useEffect(() => {
     getData()
-  }, [])
+  }, [valueToFilterMovies])
 
   const getData = async () => {
     const dataMovies = await getMovies()
@@ -21,8 +25,28 @@ const MainMovies = ({ isLogin }) => {
     const moviesId = [...dataCinemaShows].map((show) => (show.movie))
     const filteredMovies = [...dataMovies].filter((movie) => moviesId.find(movieId => movie.id === movieId))
     const dataMoviesGenre = await getMoviesGenre()
-    setFilteredMovies(filteredMovies)
+
+    filterMoviesBy(filteredMovies)
     setMoviesGenre(dataMoviesGenre)
+  }
+
+  const filterMoviesBy = async (dataMovies) => {
+    // console.log(filteredMoviesBy)
+    // console.log(valueToFilterMovies)
+    switch (filteredMoviesBy) {
+      case "genre":
+        const filteredMoviesByGenre = dataMovies.filter(movie => movie.genre_ids.includes(valueToFilterMovies))
+        setFilteredMovies(filteredMoviesByGenre)
+        break;
+      case "cinema":
+        const cinemasAndCinemaShows = await getCinemaAndCinemaShows()
+        const cinemaFiltered = cinemasAndCinemaShows.find(cinema => cinema.name === valueToFilterMovies)
+        const movies = dataMovies.filter(item => cinemaFiltered.cinema_shows.find(movie => item.id === movie.movie))
+        setFilteredMovies(movies)
+        break;
+      default: setFilteredMovies(dataMovies)
+        break
+    }
   }
 
   const filteredGenre = (genres) => {
@@ -37,30 +61,12 @@ const MainMovies = ({ isLogin }) => {
     return `${date[2]} ${month} ${date[0]}`
   }
 
-  const getMonth = (month) => {
-    switch (month) {
-      case "01": return "Ene"
-      case "02": return "Feb"
-      case "03": return "Mar"
-      case "04": return "Abr"
-      case "05": return "May"
-      case "06": return "Jun"
-      case "07": return "Jul"
-      case "08": return "Ago"
-      case "09": return "Sep"
-      case "10": return "Oct"
-      case "11": return "Nov"
-      case "12": return "Dic"
-      default: return "Unknown"
-    }
-  }
-
   const changeView = (id) => {
     navigate(`${id}`)
   }
 
   return (
-    <>
+    <div className='main-movies'>
       <p className='title'>en cartelera</p>
       <div className='cards-container'>
         {filteredMovies.map((movie) => (
@@ -81,7 +87,7 @@ const MainMovies = ({ isLogin }) => {
         )}
 
       </div>
-    </>
+    </div>
   )
 }
 

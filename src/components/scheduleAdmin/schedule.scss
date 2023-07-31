@@ -36,6 +36,7 @@
                 border-radius: 5px;
                 padding: 5px 15px;
                 text-align: center;
+                cursor: pointer;
                 span {
                     font-size: 26px;
                 }
@@ -43,6 +44,9 @@
                     text-transform: uppercase;
                     font-size: 14px;
                 }
+            }
+            .selected {
+                opacity: 1;
             }
             .calendar {
                 padding: 0 5px;

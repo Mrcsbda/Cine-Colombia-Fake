@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import arrowDown from "/images/arrow-down.svg";
 import calendar from "/images/calendar.svg";
 import points from "/images/three-point.svg";
@@ -8,43 +8,110 @@ import edit from "/images/edit-circle.svg";
 import "./schedule.scss"
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { AppContext } from '../../routes/Router';
+import { string } from 'prop-types';
 
-const ScheduleAdmin = () => {
-    const [showActions, setShowActions] = useState(false)
+const ScheduleAdmin = ({cinema}) => {
+    const [schedule, setSchedule] = useState(false)
     const [showCalendar, setShowCalendar] = useState(false)
-    const [value, onChange] = useState(new Date());
     const [showSalas, setShowSalas] = useState(false)
     const [showSalas2, setShowSalas2] = useState(false)
+    const [date, setDate] = useState('2023-08-14')
+    const [value, setValue] = useState(new Date())
+    const [selectedDateIndex, setSelectedDateIndex] = useState(0);
+    const {setFoundSchedule, foundSchedule} = useContext(AppContext)
+
+    const handleDateBoxClick = (index, dateInfo) => {
+        setDate(dateInfo);
+        setSelectedDateIndex(index);
+      };
+
+    const handleDate = (nextDate) => {
+        setValue(nextDate);
+        const formattedDate = formatDate(nextDate);
+        setDate(formattedDate);
+      };
+    
+      const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      };
+
+    useEffect(() => {
+        
+        if (foundSchedule) {
+            getMovieSchedulesByDate(foundSchedule)
+            console.log("Schedule", foundSchedule);
+        }
+        
+        console.log("Cine", cinema);
+    }, [foundSchedule, date])
+
+
+    const getMovieSchedulesByDate = (schedules) => {
+        if (typeof date === 'string') {
+          const [year, month, day] = date.split("-")
+          const dateInMiliseconds = new Date(year,(month-1), day).setHours(0,0,0,0)
+          const limitDateInMiliseconds = new Date(dateInMiliseconds).setHours(23,59,59,999999)
+          const cinemaShowSchedule = schedules.filter(item => item >= dateInMiliseconds && item <= limitDateInMiliseconds)
+          setSchedule(cinemaShowSchedule)
+          console.log(cinemaShowSchedule)
+        }
+      }
+
     const dates = [
         {
             day: 14,
-            dayOfWeek: "Lun"
+            dayOfWeek: "Lun",
+            dateInfo: "2023-08-14"
         },
         {
             day: 15,
-            dayOfWeek: "Mar"
+            dayOfWeek: "Mar",
+            dateInfo: "2023-08-15"
         },
         {
             day: 16,
-            dayOfWeek: "Mie"
+            dayOfWeek: "Mie",
+            dateInfo: "2023-08-16"
         },
         {
             day: 17,
-            dayOfWeek: "Jue"
+            dayOfWeek: "Jue",
+            dateInfo: "2023-08-17"
         },
         {
             day: 18,
-            dayOfWeek: "Vie"
+            dayOfWeek: "Vie",
+            dateInfo: "2023-08-18"
         }
     ]
-    const showTime = ['13:00', '16:00']
+
+    const getDate = (schedule, type) => {
+        switch (type) {
+          case "day":
+            const fecha = new Date(schedule);
+            const opciones = { month: 'long', day: 'numeric', year: 'numeric' };
+            const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones);
+            return fechaFormateada
+          case "hour":
+            return `${new Date(schedule).getHours() < 10
+              ? `0${new Date(schedule).getHours()}`
+              : new Date(schedule).getHours()} : 0${new Date(schedule).getMinutes()}`
+          default: return ""
+        }
+      }
+
   return (
     <div className="schedules-cinemas">
             <div className="schedule">
                 <p className="schedule--title">Agosto</p>
                 <div className="schedule--dates">
                     {dates.map((date, index) => (
-                        <div key={index} className="date-box">
+                        <div key={index} className={`date-box ${selectedDateIndex === index ? 'selected' : ''}`}
+                        onClick={() => handleDateBoxClick(index, date.dateInfo)}>
                             <span>{date.day}</span>
                             <p>{date.dayOfWeek}</p>
                         </div>
@@ -58,7 +125,7 @@ const ScheduleAdmin = () => {
                     
                 </div>
                 <div className={showCalendar? "opening-calendar" : "opening-calendar inactive-calendar"}>
-                    <Calendar onChange={onChange} value={value} activeStartDate={new Date(2023, 7, 14)} minDate={new Date(2023, 7, 14)}/>
+                    <Calendar onChange={handleDate} value={value} activeStartDate={new Date(2023, 7, 14)} minDate={new Date(2023, 7, 14)}/>
                 </div>
             </div>
             <div className="shows-container">
@@ -77,7 +144,9 @@ const ScheduleAdmin = () => {
                         </span>
                     </div>
                 </div>
-                <div className={showSalas ? "salas" : "salas inactive-details"}>
+                { cinema &&
+                    cinema === "Los Molinos" ? 
+                    <div className={showSalas ? "salas" : "salas inactive-details"}>
                     <div>
                         <div className="name-sala">
                             <p className="name-sala-text">Sala 1</p>
@@ -88,8 +157,9 @@ const ScheduleAdmin = () => {
                         </div>
                         
                         <div className="show-time">
-                            {showTime.map((time, index) => (
-                                <span key={index}>{time}
+                            { schedule &&
+                            schedule.map((time, index) => (
+                                <span key={index}>{getDate(time, "hour")}
                                     <div className="actions">
                                         <img src={edit} alt="Icon for edit" />
                                         <img src={deleteEl} alt="Icon for delete" />
@@ -103,18 +173,56 @@ const ScheduleAdmin = () => {
                     <button>Nueva función
                         <img src={plus} alt="Icon for add" />
                     </button>
-                </div>
+                </div>  :
+                <div className={showSalas ? "salas" : "salas inactive-details"}>
+                <button>Nueva función
+                    <img src={plus} alt="Icon for add" />
+                </button>
+            </div>
+                }
+                
                 <div className="show show-cinema">
                     <p>Santa Fe</p>
                     <span onClick={() => setShowSalas2(!showSalas2)}>
                         <img src={arrowDown} alt="Icon for arrow" />
                     </span>
                 </div>
-                <div className={showSalas2 ? "salas" : "salas inactive-details"}>
+                { cinema &&
+                    cinema === "Santa Fe" ? 
+                    <div className={showSalas2 ? "salas" : "salas inactive-details"}>
+                    <div>
+                        <div className="name-sala">
+                            <p className="name-sala-text">Sala 1</p>
+                            <div className="actions-sala">
+                                <img src={edit} alt="Icon for edit" />
+                                <img src={deleteEl} alt="Icon for delete" />
+                            </div>
+                        </div>
+                        
+                        <div className="show-time">
+                            { schedule &&
+                            schedule.map((time, index) => (
+                                <span key={index}>{getDate(time, "hour")}
+                                    <div className="actions">
+                                        <img src={edit} alt="Icon for edit" />
+                                        <img src={deleteEl} alt="Icon for delete" />
+                                    </div>
+                                    
+                                </span>
+                            ))}
+                        </div>
+                        
+                    </div>
                     <button>Nueva función
                         <img src={plus} alt="Icon for add" />
                     </button>
-                </div>
+                </div>  :
+                <div className={showSalas2 ? "salas" : "salas inactive-details"}>
+                <button>Nueva función
+                    <img src={plus} alt="Icon for add" />
+                </button>
+            </div>
+                }
             </div>
         </div>
   )

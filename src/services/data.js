@@ -9,6 +9,7 @@ export const endpoints = {
     urlTickets: `${URL_API_JSON}tickets`,
     urlHistory: `${URL_API_JSON}history`,
     urlAdmins: `${URL_API_JSON}admins`,
+    urlCinemaAndCinemaShows: `${URL_API_JSON}cinemas?_embed=cinema_shows`
 }
 
 export const endpointTrailer = (id) => {
