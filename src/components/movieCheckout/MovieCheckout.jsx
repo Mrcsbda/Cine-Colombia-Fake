@@ -8,6 +8,7 @@ import "./movieCheckout.scss"
 import DownloadTickets from '../downloadTickets/DownloadTickets'
 import { getCinemaAndCinemaShows } from '../../services/cinemasServices'
 import { AppContext } from '../../routes/Router'
+import { Checkout } from '../../models/checkoutBuilder'
 
 const MovieCheckout = () => {
   const location = useLocation()
@@ -17,7 +18,7 @@ const MovieCheckout = () => {
   const [step, setStep] = useState(1)
   const [cinema, setCinema] = useState("")
   const [schedule, setSchedule] = useState(false)
-  const { valueToFilterMovies, date } = useContext(AppContext)
+  const { valueToFilterMovies, date} = useContext(AppContext)
   const propsMovieSchedule = {
     movie,
     cinema,
@@ -37,7 +38,6 @@ const MovieCheckout = () => {
 
   useEffect(() => {
     getMovie()
-
   }, [location, valueToFilterMovies, date])
 
   const getMovie = async () => {

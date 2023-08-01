@@ -4,7 +4,7 @@ import { AppContext } from '../../routes/Router'
 
 const NavbarChoice = () => {
 
-  const { setFilteredMoviesBy, setValueToFilterMovies , setDate } = useContext(AppContext)
+  const { setFilteredMoviesBy, setValueToFilterMovies , setDate , checkoutBuilderState , setCheckBuilderState  } = useContext(AppContext)
 
   const handleDate = (event) => {
     setDate(event.target.value)
@@ -21,9 +21,11 @@ const NavbarChoice = () => {
     if (event.target.value === "Selecciona un cinema") {
       setFilteredMoviesBy(false)
       setValueToFilterMovies(false)
+
     } else {
       setFilteredMoviesBy("cinema")
       setValueToFilterMovies(event.target.value)
+      setCheckBuilderState(checkoutBuilderState.setMultiplex(event.target.value))
     }
 
   }

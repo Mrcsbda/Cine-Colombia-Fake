@@ -8,6 +8,7 @@ import PrivateRouter from './PrivateRouter';
 import AdminDetail from '../components/pages/adminDetails/AdminDetail';
 import MainMovies from '../components/MainMovies/MainMovies';
 import MovieCheckout from '../components/movieCheckout/MovieCheckout';
+import { Checkout } from '../models/checkoutBuilder';
 
 export const AppContext = createContext({})
 
@@ -19,6 +20,8 @@ const Router = () => {
     const [valueToFilterMovies, setValueToFilterMovies] = useState(false)
     const [isCheckout, setIsCheckout] = useState(false)
     const [date, setDate] = useState(false)
+    const [checkoutBuilderState, setCheckBuilderState] = useState(new Checkout())
+
     useEffect(() => {
         const dataAdmin = JSON.parse(localStorage.getItem('admin')) || {}
         if (dataAdmin?.adminName) {
@@ -46,7 +49,9 @@ const Router = () => {
                 isCheckout,
                 setIsCheckout,
                 date,
-                setDate
+                setDate,
+                setCheckBuilderState,
+                checkoutBuilderState
             }
         }>
             <BrowserRouter>
