@@ -5,7 +5,7 @@ import { getMonth } from 'date-fns'
 
 const MovieSchedule = ({ props }) => {
 
-  const { setIsBuying, date } = useContext(AppContext)
+  const { setIsBuying, date, setCheckBuilderState, checkoutBuilderState } = useContext(AppContext)
 
   const handleClick = () => {
     setIsBuying(true)
@@ -25,6 +25,10 @@ const MovieSchedule = ({ props }) => {
           : new Date(schedule).getHours()} : 0${new Date(schedule).getMinutes()}`
       default: return ""
     }
+  }
+
+  const selectSchedule = (schedule) => {
+    setCheckBuilderState(checkoutBuilderState.setSchedule(schedule))
   }
 
   return (
@@ -68,14 +72,20 @@ const MovieSchedule = ({ props }) => {
               props.schedule.length >= 1 && (
                 <>
                   <p className='movie__text'>Elige el horario que prefieras</p>
-                  <h3>{props.cinema ? props.cinema : "No hay funciones para el cinema seleccionado"}</h3>
+                  <h3>{props.cinema  ? props.cinema : (props.cinema ? props.cinema : "No hay funciones para el cinema seleccionado") }</h3>
                   {
-                    props.cinema && (
+                    props.cinema !== "Selecciona un cinema" && props.cinema && (
                       <>
                         <p className='movie__schedule__items'>
                           {
                             props.schedule.map((schedule, index) => (
-                              <span className='movie__schedule__item' key={index + 1}>{getDate(schedule, "hour")}</span>
+                              <span
+                                className='movie__schedule__item'
+                                key={index + 1}
+                                onClick={() => selectSchedule(schedule)}
+                              >
+                                {getDate(schedule, "hour")}
+                              </span>
                             ))
                           }
                         </p>
