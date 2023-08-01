@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./movieSchedule.scss"
 import { AppContext } from '../../routes/Router'
+import { printDate } from '../../utils/getDate'
 
 const MovieSchedule = ({ props }) => {
 
@@ -8,22 +9,9 @@ const MovieSchedule = ({ props }) => {
   const [scheduleSelected, setScheduleSelected] = useState("")
 
   const handleClick = () => {
-    setIsBuying(true)
-    props.setStep(props.step + 1)
-  }
-
-  const getDate = (schedule, type) => {
-    switch (type) {
-      case "day":
-        const fecha = new Date(schedule);
-        const opciones = { month: 'long', day: 'numeric', year: 'numeric' };
-        const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones);
-        return fechaFormateada
-      case "hour":
-        return `${new Date(schedule).getHours() < 10
-          ? `0${new Date(schedule).getHours()}`
-          : new Date(schedule).getHours()} : 0${new Date(schedule).getMinutes()}`
-      default: return ""
+    if (scheduleSelected) {
+      setIsBuying(true)
+      props.setStep(props.step + 1)
     }
   }
 
@@ -68,12 +56,12 @@ const MovieSchedule = ({ props }) => {
       {
         date ? (
           <div className='movie__schedule'>
-            <h2>Horarios disponibles: {props.schedule.length ? getDate(props.schedule[0], "day") : "No hay funciones para esa fecha"}</h2>
+            <h2>Horarios disponibles: {props.schedule.length ? printDate(props.schedule[0], "day") : "No hay funciones para esa fecha"}</h2>
             {
               props.schedule.length >= 1 && (
                 <>
                   <p className='movie__text'>Elige el horario que prefieras</p>
-                  <h3>{props.cinema  ? props.cinema : (props.cinema ? props.cinema : "No hay funciones para el cinema seleccionado") }</h3>
+                  <h3>{props.cinema ? props.cinema : (props.cinema ? props.cinema : "No hay funciones para el cinema seleccionado")}</h3>
                   {
                     props.cinema !== "Selecciona un cinema" && props.cinema && (
                       <>
@@ -83,18 +71,18 @@ const MovieSchedule = ({ props }) => {
                               <span
                                 className={`movie__schedule__item ${schedule === scheduleSelected
                                   ? "schedule-selected"
-                                  : "" }`}
+                                  : ""}`}
                                 key={index + 1}
                                 onClick={() => selectSchedule(schedule)}
                               >
-                                {getDate(schedule, "hour")}
+                                {printDate(schedule, "hour")}
                               </span>
                             ))
                           }
                         </p>
                         <button
-                        className={`movie__schedule__button ${scheduleSelected ? "available" : ""}`}
-                        onClick={handleClick}
+                          className={`movie__schedule__button ${scheduleSelected ? "available" : ""}`}
+                          onClick={handleClick}
                         >Seleccionar Boletos</button>
                       </>
                     )

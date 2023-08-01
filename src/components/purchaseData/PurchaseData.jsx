@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { numberToMoney } from '../../utils/numberToMoney'
 import TicketsQuantity from '../ticketsQuantity/TicketsQuantity'
 import "./purchaseData.scss"
 import PurchaseForm from '../purchaseForm/PurchaseForm'
 import SuccessfullPurchase from '../successfullPurchase/SuccessfullPurchase'
 import SeparateChairs from '../separateChairs/SeparateChairs'
+import { AppContext } from '../../routes/Router'
+import { printDate } from '../../utils/getDate'
 
 
 const PurchaseData = ({ props }) => {
     const [totalToPay, setTotalToPay] = useState(0)
+    const { checkoutBuilderState } = useContext(AppContext)
 
     const showComponets = () => {
         switch (true) {
@@ -35,9 +38,9 @@ const PurchaseData = ({ props }) => {
                         alt={props.movie.title} />
                     <div className='purchase-data__info'>
                         <p><strong>Pelicula:</strong> {props.movie.title}</p>
-                        <p><strong>Complejo:</strong> Los Molinos</p>
-                        <p><strong>Fecha:</strong> 14 de Agosto del 2023</p>
-                        <p><strong>Función:</strong> 7:30 PM</p>
+                        <p><strong>Complejo:</strong> {checkoutBuilderState.multiplex}</p>
+                        <p><strong>Fecha:</strong> {printDate(checkoutBuilderState.schedule, "day")}</p>
+                        <p><strong>Función:</strong> {printDate(checkoutBuilderState.schedule, "hour")}</p>
                         {props.step > 2 && (
                             <>
                                 <p><strong>Boletos:</strong></p>
