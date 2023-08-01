@@ -1,15 +1,16 @@
 export class Checkout {
     constructor() {
-        this.checkoutProps = {}
+        this.schedule = undefined;
+        this.multiplex = undefined;
     }
 
     setSchedule(schedule) {
-        this.checkoutProps.schedule = schedule;
+        this.schedule = schedule;
         return this;
     }
 
     setMultiplex(multiplex) {
-        this.checkoutProps.multiplex = multiplex;
+        this.multiplex = multiplex;
         return this;
     }
 }

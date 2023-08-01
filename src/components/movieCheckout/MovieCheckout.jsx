@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useLocation, useOutletContext, useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import MovieSchedule from '../movieSchedule/MovieSchedule'
 import getMovieInfo from '../../services/getMovieInfo'
 import getTrailer from '../../services/getTrailer'
@@ -8,7 +8,6 @@ import "./movieCheckout.scss"
 import DownloadTickets from '../downloadTickets/DownloadTickets'
 import { getCinemaAndCinemaShows } from '../../services/cinemasServices'
 import { AppContext } from '../../routes/Router'
-import { Checkout } from '../../models/checkoutBuilder'
 
 const MovieCheckout = () => {
   const location = useLocation()
@@ -33,12 +32,14 @@ const MovieCheckout = () => {
     step
   }
   const propsDownloadTickets = {
-    movie,
+    movie
   }
+
+  console.log(checkoutBuilderState)
 
   useEffect(() => {
     getMovie()
-    console.log(checkoutBuilderState)
+
   }, [location, valueToFilterMovies, date])
 
   const getMovie = async () => {

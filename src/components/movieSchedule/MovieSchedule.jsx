@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./movieSchedule.scss"
 import { AppContext } from '../../routes/Router'
-import { getMonth } from 'date-fns'
 
 const MovieSchedule = ({ props }) => {
 
   const { setIsBuying, date, setCheckBuilderState, checkoutBuilderState } = useContext(AppContext)
+  const [scheduleSelected, setScheduleSelected] = useState("")
 
   const handleClick = () => {
     setIsBuying(true)
@@ -29,6 +29,7 @@ const MovieSchedule = ({ props }) => {
 
   const selectSchedule = (schedule) => {
     setCheckBuilderState(checkoutBuilderState.setSchedule(schedule))
+    setScheduleSelected(schedule)
   }
 
   return (
@@ -80,7 +81,9 @@ const MovieSchedule = ({ props }) => {
                           {
                             props.schedule.map((schedule, index) => (
                               <span
-                                className='movie__schedule__item'
+                                className={`movie__schedule__item ${schedule === scheduleSelected
+                                  ? "schedule-selected"
+                                  : "" }`}
                                 key={index + 1}
                                 onClick={() => selectSchedule(schedule)}
                               >
@@ -89,7 +92,10 @@ const MovieSchedule = ({ props }) => {
                             ))
                           }
                         </p>
-                        <button className='movie__schedule__button' onClick={handleClick}>Seleccionar Boletos</button>
+                        <button
+                        className={`movie__schedule__button ${scheduleSelected ? "available" : ""}`}
+                        onClick={handleClick}
+                        >Seleccionar Boletos</button>
                       </>
                     )
                   }

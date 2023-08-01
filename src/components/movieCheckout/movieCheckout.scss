@@ -1,4 +1,11 @@
+@import "../../assets/styles/variables.scss";
+
 .movie-checkout-container {
     display: flex;
     justify-content: center;
+}
+
+.available {
+    background-color: $principal-blue;
+    color: white;
 }
