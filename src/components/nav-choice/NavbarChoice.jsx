@@ -25,8 +25,7 @@ const NavbarChoice = () => {
     } else {
       setFilteredMoviesBy("cinema")
       setValueToFilterMovies(event.target.value)
-      const updatedBuilder = checkoutBuilderState.setMultiplex(event.target.value);
-      setCheckBuilderState({ ...updatedBuilder });
+      setCheckBuilderState(checkoutBuilderState.setMultiplex(event.target.value));
     }
 
   }
