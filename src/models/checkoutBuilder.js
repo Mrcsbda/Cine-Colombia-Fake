@@ -12,11 +12,15 @@ export class Checkout {
 
     setSchedule(schedule) {
         this.schedule = schedule;
-        return this;
+        return this; // Retornar 'this' para permitir encadenamiento de métodos
     }
 
     setMultiplex(multiplex) {
         this.multiplex = multiplex;
+        return this;
+    }
+
+    build() {
         return this;
     }
 }

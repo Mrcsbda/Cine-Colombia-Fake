@@ -6,18 +6,17 @@ import { printDate } from '../../utils/getDate'
 const MovieSchedule = ({ props }) => {
 
   const { setIsBuying, date, setCheckBuilderState, checkoutBuilderState } = useContext(AppContext)
-  const [scheduleSelected, setScheduleSelected] = useState("")
 
   const handleClick = () => {
-    if (scheduleSelected) {
+    if (checkoutBuilderState.schedule) {
       setIsBuying(true)
       props.setStep(props.step + 1)
     }
   }
 
   const selectSchedule = (schedule) => {
-    setCheckBuilderState(checkoutBuilderState.setSchedule(schedule))
-    setScheduleSelected(schedule)
+    const updatedBuilder = checkoutBuilderState.setSchedule(schedule);
+    setCheckBuilderState({ ...updatedBuilder });
   }
 
   return (
@@ -69,7 +68,7 @@ const MovieSchedule = ({ props }) => {
                           {
                             props.schedule.map((schedule, index) => (
                               <span
-                                className={`movie__schedule__item ${schedule === scheduleSelected
+                                className={`movie__schedule__item ${schedule === checkoutBuilderState.schedule
                                   ? "schedule-selected"
                                   : ""}`}
                                 key={index + 1}
@@ -81,7 +80,7 @@ const MovieSchedule = ({ props }) => {
                           }
                         </p>
                         <button
-                          className={`movie__schedule__button ${scheduleSelected ? "available" : ""}`}
+                          className={`movie__schedule__button ${checkoutBuilderState.schedule ? "available" : ""}`}
                           onClick={handleClick}
                         >Seleccionar Boletos</button>
                       </>
