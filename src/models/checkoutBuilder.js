@@ -29,21 +29,27 @@ export class Checkout {
     setTotalToPay(type, increment) {
         if (increment) {
             switch (type) {
-                case "kids" || "thirdAge":
+                case "kids":
                     this.totalToPay = this.totalToPay + 12900;
                     return this;
                 case "adult":
                     this.totalToPay = this.totalToPay + 14900;
                     return this;
+                case "thirdAge":
+                    this.totalToPay = this.totalToPay + 12900;
+                    return this;
                 default: return this;
             }
         } else {
             switch (type) {
-                case "kids" || "thirdAge":
+                case "kids":
                     this.totalToPay = this.totalToPay - 12900;
                     return this;
                 case "adult":
                     this.totalToPay = this.totalToPay - 14900;
+                    return this;
+                case "thirdAge":
+                    this.totalToPay = this.totalToPay + 12900;
                     return this;
                 default: return this;
             }
@@ -57,7 +63,7 @@ export class Checkout {
                     this.totalTickets.kids = this.totalTickets.kids + 1;
                     return this;
                 case "adult":
-                    this.totalTickets.adult = this.totalTickets.adults + 1;
+                    this.totalTickets.adults = this.totalTickets.adults + 1;
                     return this;
                 case "thirdAge":
                     this.totalTickets.thirdAge = this.totalTickets.thirdAge + 1;
@@ -70,7 +76,7 @@ export class Checkout {
                     this.totalTickets.kids = this.totalTickets.kids - 1;
                     return this;
                 case "adult":
-                    this.totalTickets.adult = this.totalTickets.adult - 1;
+                    this.totalTickets.adults = this.totalTickets.adults - 1;
                     return this;
                 case "thirdAge":
                     this.totalTickets.thirdAge = this.totalTickets.thirdAge - 1;
