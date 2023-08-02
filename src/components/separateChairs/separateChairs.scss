@@ -1,0 +1,40 @@
+.chairs {
+    &__select-chairs-container {}
+
+    &__select-chairs-row {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: space-between;
+    }
+
+    &__select-chairs-columns {
+        display: flex;
+        gap: 0.5rem;
+
+    }
+
+    &__chair-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+
+        p {
+            position: absolute;
+            color: white;
+            text-align: center;
+            width: 100%;
+            top: 12%;
+        }
+    }
+
+    &__chair-icon {
+        width: 3rem;
+        height: 3rem;
+    }
+}
+
+.hidden-chair {
+    visibility: hidden;
+    width: 0.5rem;
+    height: 0.5rem;
+}
