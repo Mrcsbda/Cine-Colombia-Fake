@@ -13,11 +13,11 @@ const MainMovies = () => {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [moviesGenre, setMoviesGenre] = useState([]);
   const navigate = useNavigate()
-  const { isLogin, filteredMoviesBy, valueToFilterMovies } = useContext(AppContext)
+  const { date, isLogin, filteredMoviesBy, valueToFilterMovies } = useContext(AppContext)
 
   useEffect(() => {
     getData()
-  }, [valueToFilterMovies])
+  }, [valueToFilterMovies, date])
 
   const getData = async () => {
     const dataMovies = await getMovies()
@@ -31,8 +31,6 @@ const MainMovies = () => {
   }
 
   const filterMoviesBy = async (dataMovies) => {
-    // console.log(filteredMoviesBy)
-    // console.log(valueToFilterMovies)
     switch (filteredMoviesBy) {
       case "genre":
         const filteredMoviesByGenre = dataMovies.filter(movie => movie.genre_ids.includes(valueToFilterMovies))
@@ -41,8 +39,19 @@ const MainMovies = () => {
       case "cinema":
         const cinemasAndCinemaShows = await getCinemaAndCinemaShows()
         const cinemaFiltered = cinemasAndCinemaShows.find(cinema => cinema.name === valueToFilterMovies)
-        const movies = dataMovies.filter(item => cinemaFiltered.cinema_shows.find(movie => item.id === movie.movie))
-        setFilteredMovies(movies)
+        const filteredMoviesByCinema = dataMovies.filter(item => cinemaFiltered.cinema_shows.find(movie => item.id === movie.movie))
+        setFilteredMovies(filteredMoviesByCinema)
+        break;
+      case "date":
+        const cinemaShows = await getCinemaShows()
+        const [year, month, day] = date.split("-")
+        const dateInMiliseconds = new Date(year, (month - 1), day).setHours(0, 0, 0, 0)
+        const limitDateInMiliseconds = new Date(dateInMiliseconds).setHours(23, 59, 59, 999999)
+        const filteredCinemaShows = cinemaShows
+          .filter(cinemaShow => cinemaShow.schedules
+            .find(schedule => schedule >= dateInMiliseconds && schedule <= limitDateInMiliseconds))
+        const filteredMoviesBySchedule = dataMovies.filter(item => filteredCinemaShows.find(cinemaShow => cinemaShow.movie === item.id) )
+        setFilteredMovies(filteredMoviesBySchedule)
         break;
       default: setFilteredMovies(dataMovies)
         break
@@ -54,7 +63,7 @@ const MainMovies = () => {
     return filteredGenres
   }
 
-  const date = (releaseDate) => {
+  const getDate = (releaseDate) => {
     const date = releaseDate.split("-")
     const month = getMonth(date[1])
 
@@ -82,7 +91,7 @@ const MainMovies = () => {
             <div className='card-info'>
               <h2>{movie.title}</h2>
               <p>Titulo en ingles: {movie.original_title}</p>
-              <p>Estreno: {date(movie.release_date)}</p>
+              <p>Estreno: {getDate(movie.release_date)}</p>
               <p>Genero: {filteredGenre(movie.genre_ids).map(genre => (<span key={genre.id}>{genre.name} </span>))}</p>
               <span className='age-restriction'>{movie.adult ? "Para mayores de 18 años" : "Para todo el público"}</span>
             </div>

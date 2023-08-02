@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
+import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import Layout from '../components/layout/Layout';
 import Home from '../components/pages/home/Home';
 import Administrator from '../components/pages/administrator/Administrator';
@@ -8,6 +8,7 @@ import PrivateRouter from './PrivateRouter';
 import AdminDetail from '../components/pages/adminDetails/AdminDetail';
 import MainMovies from '../components/MainMovies/MainMovies';
 import MovieCheckout from '../components/movieCheckout/MovieCheckout';
+import { Checkout } from '../models/checkoutBuilder';
 
 export const AppContext = createContext({})
 
@@ -19,6 +20,8 @@ const Router = () => {
     const [valueToFilterMovies, setValueToFilterMovies] = useState(false)
     const [isCheckout, setIsCheckout] = useState(false)
     const [date, setDate] = useState(false)
+    const [checkoutBuilderState, setCheckBuilderState] = useState(new Checkout())
+
     useEffect(() => {
         const dataAdmin = JSON.parse(localStorage.getItem('admin')) || {}
         if (dataAdmin?.adminName) {
@@ -28,9 +31,6 @@ const Router = () => {
             setIsLogin(false)
         }
     }, [isLogin])
-
-
-
 
     return (
         <AppContext.Provider value={
@@ -46,7 +46,9 @@ const Router = () => {
                 isCheckout,
                 setIsCheckout,
                 date,
-                setDate
+                setDate,
+                setCheckBuilderState,
+                checkoutBuilderState
             }
         }>
             <BrowserRouter>
