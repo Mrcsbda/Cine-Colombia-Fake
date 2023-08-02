@@ -64,7 +64,7 @@ const PurchaseData = ({ movie, step, setStep }) => {
                                         && `${checkoutBuilderState.totalTickets.thirdAge} 3era edad`
                                     }
                                 </p>
-                                <p><strong>Número de sala:</strong></p>
+                                <p><strong>Número de sala:</strong> {checkoutBuilderState.hall}</p>
                                 <p><strong>Asientos:</strong></p>
                             </>)
                         }

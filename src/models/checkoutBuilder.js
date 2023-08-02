@@ -1,6 +1,7 @@
 export class Checkout {
     constructor() {
         this.cinemaShowId = undefined;
+        this.hall = undefined;
         this.schedule = undefined;
         this.multiplex = undefined;
         this.totalToPay = 0;
@@ -13,6 +14,11 @@ export class Checkout {
 
     setCinemaShowId(cinemaShowId) {
         this.cinemaShowId = cinemaShowId;
+        return this;
+    }
+
+    setHall(hall) {
+        this.hall = hall;
         return this;
     }
 

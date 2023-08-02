@@ -45,7 +45,7 @@ const MovieCheckout = () => {
       : (!valueToFilterMovies
         ? setCinema("Selecciona un cinema")
         : setCinema(false))
-        setCheckoutBuilderState(checkoutBuilderState.setCinemaShowId(infoCinemaShow.id));
+    setCheckoutBuilderState(checkoutBuilderState.setCinemaShowId(infoCinemaShow.id).setHall(infoCinemaShow.hall));
     getMovieSchedulesByDate(infoCinemaShow.schedules)
     setMovie(movieInfo)
     setTrailer(trailerInfo)
