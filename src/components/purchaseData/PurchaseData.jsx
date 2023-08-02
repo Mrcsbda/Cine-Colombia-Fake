@@ -10,13 +10,12 @@ import { printDate } from '../../utils/getDate'
 
 
 const PurchaseData = ({ props }) => {
-    const [totalToPay, setTotalToPay] = useState(0)
     const { checkoutBuilderState } = useContext(AppContext)
 
     const showComponets = () => {
         switch (true) {
             case props.step === 2:
-                return (<TicketsQuantity classification={props.movie.adult} setTotalToPay={setTotalToPay} />);
+                return (<TicketsQuantity classification={props.movie.adult} />);
             case props.step === 3:
                 return (<SeparateChairs />);
             case props.step === 4:
@@ -55,7 +54,7 @@ const PurchaseData = ({ props }) => {
                         <><p>Se realizara un cargo por servicio por cada boleto dentro de la orden</p>
                             <div className='purchase-data__total-to-pay-container'>
                                 <p><strong>Total(IVA INCLUIDO)</strong></p>
-                                <p className='purchase-data__total-to-pay'><strong>{numberToMoney(totalToPay)}</strong></p>
+                                <p className='purchase-data__total-to-pay'><strong>{numberToMoney(checkoutBuilderState.totalToPay)}</strong></p>
                             </div>
                         </>)
                 }

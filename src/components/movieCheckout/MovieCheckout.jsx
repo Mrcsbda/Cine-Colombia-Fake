@@ -17,7 +17,7 @@ const MovieCheckout = () => {
   const [step, setStep] = useState(1)
   const [cinema, setCinema] = useState("")
   const [schedule, setSchedule] = useState(false)
-  const { valueToFilterMovies, date, setCheckBuilderState, checkoutBuilderState } = useContext(AppContext)
+  const { valueToFilterMovies, date, setCheckoutBuilderState, checkoutBuilderState } = useContext(AppContext)
   const propsMovieSchedule = {
     movie,
     cinema,
@@ -55,7 +55,7 @@ const MovieCheckout = () => {
       : (!valueToFilterMovies
         ? setCinema("Selecciona un cinema")
         : setCinema(false))
-    setCheckBuilderState(checkoutBuilderState.setCinemaShowId(infoCinemaShow.id));
+        setCheckoutBuilderState(checkoutBuilderState.setCinemaShowId(infoCinemaShow.id));
     getMovieSchedulesByDate(infoCinemaShow.schedules)
     setMovie(movieInfo)
     setTrailer(trailerInfo)
