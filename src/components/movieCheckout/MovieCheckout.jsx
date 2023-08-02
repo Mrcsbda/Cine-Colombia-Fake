@@ -26,16 +26,6 @@ const MovieCheckout = () => {
     setStep,
     step
   }
-  const propsPurchaseData = {
-    movie,
-    setStep,
-    step
-  }
-  const propsDownloadTickets = {
-    movie
-  }
-
-  console.log(checkoutBuilderState)
 
   useEffect(() => {
     getMovie()
@@ -76,9 +66,9 @@ const MovieCheckout = () => {
       case step === 1:
         return (<MovieSchedule props={propsMovieSchedule} />);
       case step < 6:
-        return (<PurchaseData props={propsPurchaseData} />);
+        return (<PurchaseData movie={movie} step={step} setStep={setStep} />);
       case step === 6:
-        return (<DownloadTickets props={propsDownloadTickets} />);
+        return (<DownloadTickets movie={movie} />);
       default: return ""
     }
   }

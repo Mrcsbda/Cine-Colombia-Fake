@@ -21,6 +21,7 @@ const Router = () => {
     const [isCheckout, setIsCheckout] = useState(false)
     const [date, setDate] = useState(false)
     const [checkoutBuilderState, setCheckoutBuilderState] = useState(new Checkout())
+    const [available, setAvailable] = useState(false)
 
     useEffect(() => {
         const dataAdmin = JSON.parse(localStorage.getItem('admin')) || {}
@@ -48,7 +49,9 @@ const Router = () => {
                 date,
                 setDate,
                 setCheckoutBuilderState,
-                checkoutBuilderState
+                checkoutBuilderState,
+                available,
+                setAvailable
             }
         }>
             <BrowserRouter>

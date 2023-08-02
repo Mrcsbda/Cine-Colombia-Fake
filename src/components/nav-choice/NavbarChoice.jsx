@@ -4,7 +4,13 @@ import { AppContext } from '../../routes/Router'
 
 const NavbarChoice = () => {
 
-  const { setFilteredMoviesBy, setValueToFilterMovies, setDate, checkoutBuilderState, setCheckoutBuilderState } = useContext(AppContext)
+  const {
+    setFilteredMoviesBy,
+    setValueToFilterMovies,
+    setDate,
+    checkoutBuilderState,
+    setCheckoutBuilderState,
+    isBuying } = useContext(AppContext)
 
   const handleDate = (event) => {
     setDate(event.target.value)
@@ -32,7 +38,7 @@ const NavbarChoice = () => {
 
   return (
     <>
-      <div className='navbar-choice' >
+      <div className={isBuying ? 'hidden' : 'navbar-choice'} >
         <p>Cines cercanos</p>
         <select name="cines" id="cines" onChange={(event) => handleCinema(event)}>
           <option defaultValue="Los Molinos">Selecciona un cinema</option>
@@ -40,7 +46,7 @@ const NavbarChoice = () => {
           <option value="Santa Fe">Santa Fe</option>
         </select>
       </div >
-      <div className='navbar-choice'>
+      <div className={isBuying ? 'hidden' : 'navbar-choice'}>
         <p>Fecha</p>
         <input
           type="date"

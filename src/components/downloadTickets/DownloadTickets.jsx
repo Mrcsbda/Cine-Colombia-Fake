@@ -1,7 +1,7 @@
 import React from 'react'
 import "./downloadTickets.scss"
 
-const DownloadTickets = ({ props }) => {
+const DownloadTickets = ({ movie }) => {
     return (
         <div className='download-tickets'>
             <div className='download-tickets__container'>
@@ -15,10 +15,10 @@ const DownloadTickets = ({ props }) => {
                 <div className='download-tickets__info-container'>
                     <img
                         className='download-tickets__poster'
-                        src={`https://image.tmdb.org/t/p/original${props.movie.poster_path}`}
-                        alt={props.movie.title} />
+                        src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                        alt={movie.title} />
                     <div className='download-tickets__content-container'>
-                        <p className='download-tickets__text'><strong>Pelicula:</strong> {props.movie.title}</p>
+                        <p className='download-tickets__text'><strong>Pelicula:</strong> {movie.title}</p>
                         <p className='download-tickets__text'><strong>Complejo:</strong> Los Molinos</p>
                         <p className='download-tickets__text'><strong>Asientos:</strong></p>
                         <p className='download-tickets__text'><strong>Número de sala:</strong></p>

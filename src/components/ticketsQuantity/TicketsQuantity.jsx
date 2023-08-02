@@ -5,16 +5,15 @@ import { AppContext } from '../../routes/Router'
 
 const TicketsQuantity = ({ classification }) => {
   const [totalTickets, setTotalTickets] = useState(0)
-  const { checkoutBuilderState, setCheckoutBuilderState } = useContext(AppContext)
+  const { checkoutBuilderState, setCheckoutBuilderState, setAvailable } = useContext(AppContext)
   console.log(checkoutBuilderState)
 
   const handlePlus = (type) => {
-    console.log(totalTickets)
     if (totalTickets !== 10) {
+      setAvailable(true)
       setTotalTickets(totalTickets + 1)
       const updatedBuilder = checkoutBuilderState.setTotalToPay(type, true).setTotalTickets(type, true);
       setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
-
     }
   }
 
@@ -23,6 +22,7 @@ const TicketsQuantity = ({ classification }) => {
       setTotalTickets(totalTickets - 1)
       const updatedBuilder = checkoutBuilderState.setTotalToPay(type, false).setTotalTickets(type, false);
       setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
+      totalTickets === 1 && setAvailable(false)
     }
   }
 
