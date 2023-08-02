@@ -58,7 +58,7 @@ const Navbar = ({isCheckout, genres}) => {
         </> : 
         <div className='admin-info'>
             <img className='admin-pic' src={admin.image} alt={admin.adminName} />
-            <div>
+            <div className='admin-name'>
                 <h3>{admin.adminName}</h3>
                 <p>View profile</p>
             </div>

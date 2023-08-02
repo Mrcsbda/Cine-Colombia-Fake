@@ -102,3 +102,20 @@
         }
     }
 }
+
+@media (max-width: 550px) {
+    .header--navbar {
+        gap: 10%;
+    }
+}
+
+@media (max-width: 450px) {
+    .header--navbar {
+        .admin-info {
+            gap: 0;
+            .admin-name {
+                display: none;
+            }
+        }
+    }
+}

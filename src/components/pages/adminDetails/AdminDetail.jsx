@@ -12,6 +12,7 @@ const AdminDetail = () => {
   const [movie, setMovie] = useState("")
   const [trailer, setTrailer] = useState("")
   const [cinema, setCinema] = useState("")
+  const [infoShow, setInfoShow] = useState('')
   const { idMovie } = useParams()
   const location = useLocation()
   const { valueToFilterMovies, setFoundSchedule } = useContext(AppContext)
@@ -22,7 +23,8 @@ const AdminDetail = () => {
     const cinemaAndCinemaShows = await getCinemaAndCinemaShows()
     const cinemaInfo = cinemaAndCinemaShows.find(item => item.cinema_shows.find(movie => movie.movie == idMovie))
     const infoCinemaShow = cinemaInfo.cinema_shows.find(item => item.movie == idMovie)
-    console.log(infoCinemaShow.schedules);
+    setInfoShow(infoCinemaShow)
+    console.log("cinemaInfo", infoCinemaShow);
     setFoundSchedule(infoCinemaShow.schedules)
     cinemaInfo.name === valueToFilterMovies || !valueToFilterMovies ? setCinema(cinemaInfo.name) : setCinema(false)
     const videosInfo = await getTrailer(idMovie)
@@ -40,7 +42,7 @@ const AdminDetail = () => {
   return (
     <section className='movie-details'>
       <MovieDetailsAdmin movie={movie} trailer={trailer}/>
-      <DetailsShowsAdmin movie={movie} cinema={cinema}/>
+      <DetailsShowsAdmin movie={movie} cinema={cinema} infoShow={infoShow}/>
     </section>
   )
 }

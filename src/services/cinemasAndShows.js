@@ -10,9 +10,9 @@ export const deleteElement = (url, id) => {
     }
 }
 
-export const editElement = (url, id, newEl) => {
+export const editElement = (url, newEl) => {
     try {
-        const response = axios.patch(`${url}/${id}`, newEl)
+        const response = axios.patch(url, newEl)
         return response
     } catch (error) {
         console.log(error);

@@ -157,3 +157,46 @@
         }
     }
 }
+
+@media (max-width: 1260px) {
+    .schedules-cinemas .schedule .opening-calendar {
+        right: -5rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .schedules-cinemas {
+        width: 100%;
+        .schedule {
+            align-self: flex-start;
+        }
+    }
+}
+
+@media (max-width: 550px) {
+    .schedules-cinemas {
+        padding: 2rem 1rem;
+        .schedule {
+            .schedule--dates {
+                gap: 3px;
+                .date-box {
+                    span {
+                        font-size: 20px;
+                    }
+                    p {
+                        font-size: 12px;
+                    }
+                }
+            }
+            .opening-calendar {
+                right: 0;
+            }
+        }
+    }
+}
+
+@media (max-width: 420px) {
+    .schedules-cinemas .schedule .schedule--dates .points {
+        display: none;
+    }
+}

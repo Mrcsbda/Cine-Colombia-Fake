@@ -10,8 +10,12 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { AppContext } from '../../routes/Router';
 import { string } from 'prop-types';
+import Swal from 'sweetalert2';
+import { useParams } from 'react-router';
+import { endpoints } from '../../services/data';
+import { deleteElement, editElement } from '../../services/cinemasAndShows';
 
-const ScheduleAdmin = ({cinema}) => {
+const ScheduleAdmin = ({cinema, infoShow}) => {
     const [schedule, setSchedule] = useState(false)
     const [showCalendar, setShowCalendar] = useState(false)
     const [showSalas, setShowSalas] = useState(false)
@@ -20,6 +24,50 @@ const ScheduleAdmin = ({cinema}) => {
     const [value, setValue] = useState(new Date())
     const [selectedDateIndex, setSelectedDateIndex] = useState(0);
     const {setFoundSchedule, foundSchedule} = useContext(AppContext)
+    const { idMovie } = useParams()
+
+    const handleDeleteShow = () => {
+        Swal.fire({
+            title: 'Eliminar una función',
+            text: '¿Estás segure de que quieres eliminar la función?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+          if (result.isConfirmed) {
+            // const url = `${endpoints.urlCinemaShows}/?movie=${idMovie}&&cinemaId=${infoShow.cinemaId}&&hall=${infoShow.hall}`
+            const url = `${endpoints.urlCinemaShows}`
+            const idToDelete = infoShow.id
+            deleteElement(url, idToDelete)
+            Swal.fire('Función eliminada', '', 'success')
+            setFoundSchedule([])
+          }})}
+
+
+    const handleDeleteSchedule = (time) => {
+        Swal.fire({
+            title: 'Eliminar una función',
+            text: '¿Estás segure de que quieres eliminar la función?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+          if (result.isConfirmed) {
+            const newSchedule = foundSchedule.filter((timeStamp) => timeStamp !== time)
+            const url = `${endpoints.urlCinemaShows}/?movie=${idMovie}`
+            const newShow = {
+            id: infoShow.id,
+            cinemaId: infoShow.cinemaId,
+            hall: infoShow.hall,
+            schedules: newSchedule,
+            movie: idMovie
+            }
+            editElement(url, newShow)
+            Swal.fire('Función eliminada', '', 'success')
+            setFoundSchedule((foundSchedule) => foundSchedule.filter((schedule) => schedule !== time))
+          }})}
 
     const handleDateBoxClick = (index, dateInfo) => {
         setDate(dateInfo);
@@ -149,10 +197,10 @@ const ScheduleAdmin = ({cinema}) => {
                     <div className={showSalas ? "salas" : "salas inactive-details"}>
                     <div>
                         <div className="name-sala">
-                            <p className="name-sala-text">Sala 1</p>
+                            <p className="name-sala-text">Sala {infoShow.hall}</p>
                             <div className="actions-sala">
                                 <img src={edit} alt="Icon for edit" />
-                                <img src={deleteEl} alt="Icon for delete" />
+                                <img src={deleteEl} alt="Icon for delete" onClick={handleDeleteShow}/>
                             </div>
                         </div>
                         
@@ -162,7 +210,7 @@ const ScheduleAdmin = ({cinema}) => {
                                 <span key={index}>{getDate(time, "hour")}
                                     <div className="actions">
                                         <img src={edit} alt="Icon for edit" />
-                                        <img src={deleteEl} alt="Icon for delete" />
+                                        <img src={deleteEl} alt="Icon for delete" onClick={() => handleDeleteSchedule(time)}/>
                                     </div>
                                     
                                 </span>
@@ -175,6 +223,7 @@ const ScheduleAdmin = ({cinema}) => {
                     </button>
                 </div>  :
                 <div className={showSalas ? "salas" : "salas inactive-details"}>
+                    <h3>No hay funciones para este cinema</h3>
                 <button>Nueva función
                     <img src={plus} alt="Icon for add" />
                 </button>
@@ -192,10 +241,10 @@ const ScheduleAdmin = ({cinema}) => {
                     <div className={showSalas2 ? "salas" : "salas inactive-details"}>
                     <div>
                         <div className="name-sala">
-                            <p className="name-sala-text">Sala 1</p>
+                            <p className="name-sala-text">Sala {infoShow.hall}</p>
                             <div className="actions-sala">
                                 <img src={edit} alt="Icon for edit" />
-                                <img src={deleteEl} alt="Icon for delete" />
+                                <img src={deleteEl} alt="Icon for delete" onClick={handleDeleteShow}/>
                             </div>
                         </div>
                         
@@ -205,7 +254,7 @@ const ScheduleAdmin = ({cinema}) => {
                                 <span key={index}>{getDate(time, "hour")}
                                     <div className="actions">
                                         <img src={edit} alt="Icon for edit" />
-                                        <img src={deleteEl} alt="Icon for delete" />
+                                        <img src={deleteEl} alt="Icon for delete" onClick={() => handleDeleteSchedule(time)}/>
                                     </div>
                                     
                                 </span>
@@ -218,6 +267,7 @@ const ScheduleAdmin = ({cinema}) => {
                     </button>
                 </div>  :
                 <div className={showSalas2 ? "salas" : "salas inactive-details"}>
+                    <h3>No hay funciones para este cinema</h3>
                 <button>Nueva función
                     <img src={plus} alt="Icon for add" />
                 </button>
