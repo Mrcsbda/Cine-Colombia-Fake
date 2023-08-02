@@ -2,7 +2,8 @@
 
 .movie {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    gap: 1rem;
 
     &__title {
         text-align: center;

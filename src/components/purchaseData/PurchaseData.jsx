@@ -34,7 +34,7 @@ const PurchaseData = ({ movie, step, setStep }) => {
     }
 
     return (
-        <div className={`purchase-data ${step === 5 && "step-5"}`}>
+        <div className={`purchase-data ${step === 3 && "step-3"} ${step === 5 && "step-5"}`}>
             <div className='purchase-data__summary'>
                 <h2 className='purchase-data__title'>Resumen de Compra</h2>
                 <div className='purchase-data__content-container'>
