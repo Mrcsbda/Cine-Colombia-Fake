@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from 'react'
 import "./purchaseForm.scss"
 import { AppContext } from '../../routes/Router'
+import InputMask from "react-input-mask";
 
 const PurchaseForm = ({ handleChange, dataPurchaseForm }) => {
 
-  const { setAvailable}  = useContext(AppContext)
+  const { setAvailable }  = useContext(AppContext)
 
   useEffect(() => {
     if(
@@ -19,6 +20,8 @@ const PurchaseForm = ({ handleChange, dataPurchaseForm }) => {
       setAvailable(false)
     }
   }, [dataPurchaseForm])
+
+
 
   return (
     <div>
@@ -50,13 +53,12 @@ const PurchaseForm = ({ handleChange, dataPurchaseForm }) => {
         <label className='purchase-form__label'>
           Número de la tarjeta
           <div className='purchase-form__input-container'>
-            <input
+            <InputMask
               name="numberCard"
               className='purchase-form__input purchase-form__card-number'
-              type="text"
               value={dataPurchaseForm.numberCard}
               onChange={(event) => handleChange(event)}
-              placeholder='1234 1234 1234 1234'
+              mask='9999 9999 9999 9999'
             />
             <figure className='purchase-form__icons-container'>
               <img className='purchase-form__icons' src="/images/visa-logo.svg" alt="visa logo" />
@@ -68,25 +70,25 @@ const PurchaseForm = ({ handleChange, dataPurchaseForm }) => {
         <div className='purchase-form__inputs-container' >
           <label className='purchase-form__label purchase-form__date-of-expiry'>
             Fecha de caducidad
-            <input
+            <InputMask
               name="dateExpiry"
               className='purchase-form__input'
-              type="text"
               value={dataPurchaseForm.dateExpiry}
               onChange={(event) => handleChange(event)}
-              placeholder='MM/YY'
+              mask='99/99'
             />
           </label>
           <label className='purchase-form__label'>
             CVV
             <div className='purchase-form__input-container'>
-              <input
+              <InputMask
                 name="cvv"
                 className='purchase-form__input purchase-form__cvv'
                 type="text"
                 value={dataPurchaseForm.cvv}
                 onChange={(event) => handleChange(event)}
                 placeholder='Digita CVV'
+                mask='999'
               />
               <figure className='purchase-form__icons-container'>
                 <img className='purchase-form__icons' src="/images/exclamation.svg" alt="" />
