@@ -17,7 +17,7 @@ const TicketsQuantity = ({ classification }) => {
   }
 
   const handleMinus = (type) => {
-    if (totalTickets !== 0) {
+    if (checkoutBuilderState.totalTickets[type] !== 0) {
       setTotalTickets(totalTickets - 1)
       const updatedBuilder = checkoutBuilderState.setTotalToPay(type, false).setTotalTickets(type, false);
       setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
@@ -34,9 +34,9 @@ const TicketsQuantity = ({ classification }) => {
         <div className='tickets-quantity__info-ticket'>
           <p>{numberToMoney(14900)}</p>
           <div className='tickets-quantity__quantity-container'>
-            <button className='tickets-quantity__button-change-quantity' onClick={() => handleMinus("adult")}>-</button>
+            <button className='tickets-quantity__button-change-quantity' onClick={() => handleMinus("adults")}>-</button>
             <p className='tickets-quantity__quantity'>{checkoutBuilderState.totalTickets.adults}</p>
-            <button className='tickets-quantity__button-change-quantity' onClick={() => handlePlus("adult")}>+</button>
+            <button className='tickets-quantity__button-change-quantity' onClick={() => handlePlus("adults")}>+</button>
           </div>
         </div>
       </div>

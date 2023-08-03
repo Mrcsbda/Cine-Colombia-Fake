@@ -39,7 +39,7 @@ export class Checkout {
                 case "kids":
                     this.totalToPay = this.totalToPay + 12900;
                     return this;
-                case "adult":
+                case "adults":
                     this.totalToPay = this.totalToPay + 14900;
                     return this;
                 case "thirdAge":
@@ -52,11 +52,11 @@ export class Checkout {
                 case "kids":
                     this.totalToPay = this.totalToPay - 12900;
                     return this;
-                case "adult":
+                case "adults":
                     this.totalToPay = this.totalToPay - 14900;
                     return this;
                 case "thirdAge":
-                    this.totalToPay = this.totalToPay + 12900;
+                    this.totalToPay = this.totalToPay - 12900;
                     return this;
                 case "reset":
                     this.totalToPay = 0;
@@ -72,7 +72,7 @@ export class Checkout {
                 case "kids":
                     this.totalTickets.kids = this.totalTickets.kids + 1;
                     return this;
-                case "adult":
+                case "adults":
                     this.totalTickets.adults = this.totalTickets.adults + 1;
                     return this;
                 case "thirdAge":
@@ -85,7 +85,7 @@ export class Checkout {
                 case "kids":
                     this.totalTickets.kids = this.totalTickets.kids - 1;
                     return this;
-                case "adult":
+                case "adults":
                     this.totalTickets.adults = this.totalTickets.adults - 1;
                     return this;
                 case "thirdAge":

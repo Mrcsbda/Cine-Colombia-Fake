@@ -46,7 +46,7 @@ const PurchaseData = ({ movie, step, setStep }) => {
                         <p><strong>Pelicula:</strong> {movie.title}</p>
                         <p><strong>Complejo:</strong> {checkoutBuilderState.multiplex === 1
                             ? "Los Molinos"
-                                : "Santa Fe"}</p>
+                            : "Santa Fe"}</p>
                         <p><strong>Fecha:</strong> {printDate(checkoutBuilderState.schedule, "day")}</p>
                         <p><strong>Función:</strong> {printDate(checkoutBuilderState.schedule, "hour")}</p>
                         {step > 2 && (
@@ -67,7 +67,11 @@ const PurchaseData = ({ movie, step, setStep }) => {
                                     }
                                 </p>
                                 <p><strong>Número de sala:</strong> {checkoutBuilderState.hall}</p>
-                                <p><strong>Asientos:</strong></p>
+                                <p><strong>Asientos:</strong>{
+                                    checkoutBuilderState.places.length
+                                        ? checkoutBuilderState.places.map((item, index) => (<span key={index + 1} > {item} </span>))
+                                        : ""
+                                }</p>
                             </>)
                         }
                     </div>
