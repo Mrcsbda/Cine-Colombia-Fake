@@ -11,7 +11,7 @@ import { AppContext } from '../../routes/Router';
 const Carousel = ({ filteredMovies, moviesGenre }) => {
   const [activeIndex, setActiveIndex] = useState(4);
   const navigate = useNavigate();
-  const { isBuying } = useContext(AppContext)
+  const { isBuying, setCheckoutBuilderState, checkoutBuilderState } = useContext(AppContext)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,6 +40,8 @@ const Carousel = ({ filteredMovies, moviesGenre }) => {
   };
 
   const viewDetailMovie = (id) => {
+    const updatedBuilder = checkoutBuilderState.setSchedule(undefined)
+    setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
     navigate(`${id}`)
   }
 

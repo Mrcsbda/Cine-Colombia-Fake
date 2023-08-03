@@ -13,8 +13,10 @@ const NavbarChoice = () => {
     isBuying } = useContext(AppContext)
 
   const handleDate = (event) => {
+    
+    const updatedBuilder = checkoutBuilderState.setSchedule(undefined)
+    setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
     setDate(event.target.value)
-
     if (!event.target.value) {
       setFilteredMoviesBy(false)
     } else {
@@ -24,6 +26,8 @@ const NavbarChoice = () => {
 
   const handleCinema = (event) => {
 
+    const updatedBuilder = checkoutBuilderState.setSchedule(undefined)
+    setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
     if (event.target.value === "0") {
       setFilteredMoviesBy(false)
       setValueToFilterMovies(false)
