@@ -77,11 +77,18 @@ const MovieCheckout = () => {
     <>
       {
         movie?.title && trailer?.key && (
-          <section className='movie-checkout-container'>
-            {
-              showComponets()
-            }
-          </section>
+          <>
+
+            <section className='movie-checkout-container'>
+              <div className='movie-checkout-container__return-btn'>
+                <img className='movie-checkout-container__return-btn--icon' src="images/back-arrow.svg" alt="arrow icon" />
+                <p className='movie-checkout-container__return-btn--text'>Volver</p>
+              </div>
+              {
+                showComponets()
+              }
+            </section>
+          </>
         )
       }
     </>
