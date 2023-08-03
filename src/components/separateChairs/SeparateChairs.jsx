@@ -60,14 +60,20 @@ const SeparateChairs = () => {
   const selectPlace = (letter, number, isAvailable) => {
     const place = `${letter}${number}`
     const selected = checkoutBuilderState.places.find(item => item === place)
+    const totalTickets = checkoutBuilderState.totalTickets.kids +
+      checkoutBuilderState.totalTickets.adults +
+      checkoutBuilderState.totalTickets.thirdAge;
+
 
     if (isAvailable) {
-      if (selected) {
-        const updatedBuilder = checkoutBuilderState.setPlaces(place, false)
-        setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
-      } else {
-        const updatedBuilder = checkoutBuilderState.setPlaces(place, true)
-        setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
+      if (totalTickets > checkoutBuilderState.places.length) {
+        if (selected) {
+          const updatedBuilder = checkoutBuilderState.setPlaces(place, false)
+          setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
+        } else {
+          const updatedBuilder = checkoutBuilderState.setPlaces(place, true)
+          setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
+        }
       }
     }
     console.log(checkoutBuilderState.places)
