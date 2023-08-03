@@ -16,7 +16,7 @@ const MovieCheckout = () => {
   const { idMovie } = useParams()
   const [movie, setMovie] = useState("")
   const [trailer, setTrailer] = useState("")
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(4)
   const [cinema, setCinema] = useState("")
   const [schedule, setSchedule] = useState(false)
   const {
@@ -47,7 +47,9 @@ const MovieCheckout = () => {
     movie,
     step,
     setStep,
-    dataPurchaseForm
+    dataPurchaseForm,
+    handleChange,
+    resetForm
   }
 
 

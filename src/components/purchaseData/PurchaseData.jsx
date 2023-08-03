@@ -8,19 +8,18 @@ import SeparateChairs from '../separateChairs/SeparateChairs'
 import { AppContext } from '../../routes/Router'
 import { printDate } from '../../utils/getDate'
 
-
-const PurchaseData = ({ props : { movie, step, setStep , dataPurchaseForm }}) => {
+const PurchaseData = ({ props: { movie, step, setStep, dataPurchaseForm, handleChange, resetForm } }) => {
     const { checkoutBuilderState, available, setAvailable } = useContext(AppContext)
 
 
     const goToNextStep = () => {
-        if(step === 5) {
-
+        if (step === 4) {
+            console.log(dataPurchaseForm)
         }
-        if (available) {
-            setStep(step + 1)
-            setAvailable(false)
-        }
+        // if (available) {
+        //     setStep(step + 1)
+        //     setAvailable(false)
+        // }
 
     }
 
@@ -31,7 +30,7 @@ const PurchaseData = ({ props : { movie, step, setStep , dataPurchaseForm }}) =>
             case step === 3:
                 return (<SeparateChairs />);
             case step === 4:
-                return (<PurchaseForm /> );
+                return (<PurchaseForm handleChange={handleChange} dataPurchaseForm={dataPurchaseForm}/>);
             case step === 5:
                 return (<SuccessfullPurchase />);
             default: return ""
