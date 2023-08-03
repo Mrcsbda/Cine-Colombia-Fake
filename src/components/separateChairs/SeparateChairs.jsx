@@ -6,7 +6,7 @@ import { AppContext } from '../../routes/Router'
 const SeparateChairs = () => {
 
   const [chairs, setChairs] = useState([])
-  const { checkoutBuilderState } = useContext(AppContext)
+  const { checkoutBuilderState, setCheckoutBuilderState } = useContext(AppContext)
 
   useEffect(() => {
     printChairs()
@@ -16,7 +16,6 @@ const SeparateChairs = () => {
     const boughtTickets = await getTickets()
     const boughtTicketsByCinemaShow = boughtTickets.find(tickets =>
       tickets.cinemaShowId === checkoutBuilderState.cinemaShowId && tickets.schedule === checkoutBuilderState.schedule)
-    console.log(boughtTicketsByCinemaShow)
     const array = [...chairs]
     for (let i = 0; i <= 8; i++) {
       array.push({ chair: letterOfRow(i), places: [] })
@@ -31,11 +30,11 @@ const SeparateChairs = () => {
     setChairs(array)
   }
 
-  const validateIsAvailable = (row, column, boughtPlaces) => {
+  const validateIsAvailable = (letter, number, boughtPlaces) => {
     let validation = true;
     for (let i = 0; i < boughtPlaces.length; i++) {
       const placesSeparated = boughtPlaces[i].split("")
-      if (placesSeparated[0] == row && placesSeparated[1] == column) {
+      if (placesSeparated[0] == letter && placesSeparated[1] == number) {
         validation = false;
         break;
       }
@@ -56,6 +55,15 @@ const SeparateChairs = () => {
       case 8: return "I"
       default: return ""
     }
+  }
+
+  const selectPlace = (letter, number) => {
+
+    const place = `${letter}${number}`
+    const updatedBuilder = checkoutBuilderState.setPlaces(place, true)
+    setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
+
+    console.log(checkoutBuilderState.places)
   }
 
   return (
@@ -86,7 +94,8 @@ const SeparateChairs = () => {
               <div className='chairs__select-chairs-row--elements'>
                 {
                   row.places.map(place => (
-                    <div className='chairs__chair-container' key={place.number}>
+                    <div className='chairs__chair-container' key={place.number}
+                      onClick={() => selectPlace(row.chair, place.number <= 8 ? place.number + 1 : place.number - 1)}>
                       {
                         place.number === 7 || place.number === 8 ? (
                           <>

@@ -10,6 +10,7 @@ export class Checkout {
             adults: 0,
             thirdAge: 0
         }
+        this.places = [];
     }
 
     setCinemaShowId(cinemaShowId) {
@@ -99,6 +100,17 @@ export class Checkout {
                     return this;
                 default: return this;
             }
+        }
+    }
+
+    setPlaces(place, add) {
+        if (add) {
+
+            this.places.push(place)
+            this.places = Array.from(new Set(this.places))
+            return this;
+        } else {
+
         }
     }
 }

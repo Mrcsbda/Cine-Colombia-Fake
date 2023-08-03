@@ -6,7 +6,6 @@ import { AppContext } from '../../routes/Router'
 const TicketsQuantity = ({ classification }) => {
   const [totalTickets, setTotalTickets] = useState(0)
   const { checkoutBuilderState, setCheckoutBuilderState, setAvailable } = useContext(AppContext)
-  console.log(checkoutBuilderState)
 
   const handlePlus = (type) => {
     if (totalTickets !== 10) {
