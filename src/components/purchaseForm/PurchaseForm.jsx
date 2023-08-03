@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./purchaseForm.scss"
 
 const PurchaseForm = () => {
+
+  useEffect(()=> {
+  },[])
   return (
     <div>
       <h2 className='purchase-form__title'>Información Personal</h2>
@@ -9,14 +12,14 @@ const PurchaseForm = () => {
       <form className='purchase-form'>
         <label className='purchase-form__label'>
           Correo Electronico
-          <input className='purchase-form__input' type="email" />
+          <input className='purchase-form__input' type="email"/>
         </label>
         <label className='purchase-form__label'>
           Nombre de la tarjeta
           <input className='purchase-form__input' type="text" />
         </label>
         <label className='purchase-form__label'>
-          Nombre de la tarjeta
+          Número de la tarjeta
           <div className='purchase-form__input-container'>
             <input className='purchase-form__input purchase-form__card-number' type="text" />
             <figure className='purchase-form__icons-container'>

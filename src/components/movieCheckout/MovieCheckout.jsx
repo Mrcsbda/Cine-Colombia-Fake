@@ -8,6 +8,7 @@ import "./movieCheckout.scss"
 import DownloadTickets from '../downloadTickets/DownloadTickets'
 import { getCinemaAndCinemaShows } from '../../services/cinemasServices'
 import { AppContext } from '../../routes/Router'
+import useForm from '../../hooks/UseForm'
 
 const MovieCheckout = () => {
   const location = useLocation()
@@ -27,6 +28,13 @@ const MovieCheckout = () => {
     setIsBuying,
     setIsCheckout
   } = useContext(AppContext)
+  const [dataPurchaseForm, handleChange, resetForm] = useForm({
+    email: "",
+    nameCard: "",
+    numberCard: "",
+    dateExpiry: "",
+    cvv: ""
+  })
   const propsMovieSchedule = {
     movie,
     cinema,
@@ -35,6 +43,13 @@ const MovieCheckout = () => {
     setStep,
     step
   }
+  const propsPurchaseData = {
+    movie,
+    step,
+    setStep,
+    dataPurchaseForm
+  }
+
 
   useEffect(() => {
     getMovie()
@@ -74,7 +89,7 @@ const MovieCheckout = () => {
       case step === 1:
         return (<MovieSchedule props={propsMovieSchedule} />);
       case step < 6:
-        return (<PurchaseData movie={movie} step={step} setStep={setStep} />);
+        return (<PurchaseData props={propsPurchaseData} />);
       case step === 6:
         return (<DownloadTickets movie={movie} />);
       default: return ""

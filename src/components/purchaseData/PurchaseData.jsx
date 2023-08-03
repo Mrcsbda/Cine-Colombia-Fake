@@ -9,14 +9,19 @@ import { AppContext } from '../../routes/Router'
 import { printDate } from '../../utils/getDate'
 
 
-const PurchaseData = ({ movie, step, setStep }) => {
+const PurchaseData = ({ props : { movie, step, setStep , dataPurchaseForm }}) => {
     const { checkoutBuilderState, available, setAvailable } = useContext(AppContext)
 
+
     const goToNextStep = () => {
+        if(step === 5) {
+
+        }
         if (available) {
             setStep(step + 1)
             setAvailable(false)
         }
+
     }
 
     const showComponets = () => {
@@ -26,12 +31,13 @@ const PurchaseData = ({ movie, step, setStep }) => {
             case step === 3:
                 return (<SeparateChairs />);
             case step === 4:
-                return (<PurchaseForm />);
+                return (<PurchaseForm /> );
             case step === 5:
                 return (<SuccessfullPurchase />);
             default: return ""
         }
     }
+
 
     return (
         <div className={`purchase-data ${step === 3 && "step-3"} ${step === 5 && "step-5"}`}>
