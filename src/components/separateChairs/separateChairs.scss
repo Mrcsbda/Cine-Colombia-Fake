@@ -1,40 +1,208 @@
+@import "../../assets/styles/variables.scss";
+
 .chairs {
-    &__select-chairs-container {}
+    margin-bottom: 1rem;
+    &__title {
+        margin-bottom: 0.5rem;
+        padding: 0 0.4rem;
+    }
+
+    &__text {
+        margin-bottom: 1rem;
+        padding: 0 0.4rem;
+    }
+
+    &__info-chairs-container {
+        display: flex;
+        gap: 0.7rem;
+        padding: 0 0.4rem
+    }
+
+    &__info-chair {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        margin-bottom: 1.5rem;
+    }
+
+    &__info-chair-icon {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    &__info-chair-text {
+        font-size: 14px;
+    }
+
+    &__separated-line {
+        border: 1px solid $inactive-gray;
+        border-bottom: none;
+        margin-bottom: 1.5rem;
+    }
+
+    &__select-chairs-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
 
     &__select-chairs-row {
         display: flex;
         gap: 0.5rem;
-        justify-content: space-between;
+        justify-content: flex-start;
+        margin-bottom: 0.5rem;
+        align-items: center;
+        font-size: 0.8rem;
+
+        &--elements {
+            display: flex;
+            gap: 0.2rem;
+
+        }
     }
 
-    &__select-chairs-columns {
-        display: flex;
-        gap: 0.5rem;
-
+    &__letter-row {
+        width: 16px;
     }
+
 
     &__chair-container {
         position: relative;
         display: flex;
         justify-content: center;
+        cursor: pointer;
+    }
 
-        p {
-            position: absolute;
-            color: white;
-            text-align: center;
-            width: 100%;
-            top: 12%;
-        }
+    &__chair-number {
+        position: absolute;
+        color: white;
+        text-align: center;
+        width: 100%;
+        top: 7%;
+        font-size: 2vw;
     }
 
     &__chair-icon {
-        width: 3rem;
-        height: 3rem;
+        width: 5vw;
+        height: 5vw;
     }
 }
 
 .hidden-chair {
     visibility: hidden;
-    width: 0.5rem;
-    height: 0.5rem;
+    width: 1vw;
+    height: 1vw;
+}
+
+@media screen and (min-width: 768px) {
+    .chairs {
+        width: 100%;
+        margin-bottom: 2rem;
+
+        &__info-chairs-container {
+            gap: 1.5rem;
+        }
+
+        &__info-chair-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        &__info-chair-text {
+            font-size: 16px;
+        }
+
+        &__separated-line {
+            margin-bottom: 2rem;
+        }
+
+        &__select-chairs-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-start;
+            margin-bottom: 0.5rem;
+            align-items: center;
+            font-size: 0.8rem;
+
+            &--elements {
+                display: flex;
+                gap: 0.2rem;
+
+            }
+        }
+
+        &__letter-row {
+            width: 16px;
+            font-size: 18px;
+        }
+
+        &__chair-number {
+            top: 6%;
+            font-size: 1rem;
+        }
+
+        &__chair-icon {
+            width: 4.5vw;
+            height: 4.5vw;
+        }
+    }
+
+    .hidden-chair {
+        width: 2.5vw;
+        height: 2.5vw;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .chairs {
+
+        &__chair-number {
+            top: 7%;
+            font-size: 0.7rem;
+        }
+
+        &__chair-icon {
+            width: 1.9rem;
+            height: 1.9rem;
+        }
+    }
+
+    .hidden-chair {
+        width: 0.5rem;
+        height: 0.5rem;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .chairs {
+        width: 50%;
+        &__chair-number {
+            top: 7%;
+            font-size: 0.9rem;
+        }
+
+        &__chair-icon {
+            width: 2.3rem;
+            height: 2.3rem;
+        }
+    }
+
+    .hidden-chair {
+        width: 0.8rem;
+        height: 0.8rem;
+    }
+}
+
+
+.selected-chair {
+    filter: invert(72%) sepia(89%) saturate(652%) hue-rotate(333deg) brightness(105%) contrast(98%);
+}
+
+.occupied-chair {
+    filter: invert(44%) sepia(23%) saturate(1540%) hue-rotate(313deg) brightness(101%) contrast(108%);
+}
+
+.avaible-chair {
+    filter: invert(30%) sepia(92%) saturate(1045%) hue-rotate(187deg) brightness(104%) contrast(85%);
 }

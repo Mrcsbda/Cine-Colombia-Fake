@@ -58,7 +58,7 @@ const PurchaseData = ({ movie, step, setStep }) => {
                                     {
                                         checkoutBuilderState.totalTickets.kids !== 0
                                         && `${checkoutBuilderState.totalTickets.kids} Niños`
-                                    } &nbsp;
+                                    }
                                     {
                                         checkoutBuilderState.totalTickets.thirdAge !== 0
                                         && `${checkoutBuilderState.totalTickets.thirdAge} 3era edad`

@@ -4,6 +4,7 @@
 
     display: flex;
     flex-direction: column-reverse;
+
     gap: 1rem;
 
     &__summary {
@@ -128,6 +129,7 @@
 
         &__summary {
             width: 47%;
+            max-width: 500px;
         }
     }
 }
@@ -137,7 +139,7 @@
         width: 70vw;
 
         &__summary {
-            width: 47%;
+            max-width: auto;
         }
     }
 }
@@ -145,10 +147,6 @@
 @media (min-width: 1700px) {
     .purchase-data {
         width: 60vw;
-
-        &__summary {
-            width: 47%;
-        }
     }
 }
 
@@ -165,7 +163,7 @@
         display: flex;
         flex-direction: row-reverse;
         gap: 4rem;
-        justify-content: space-between;
+        justify-content: center;
         width: 90vw;
     }
 }

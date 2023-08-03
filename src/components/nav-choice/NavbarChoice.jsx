@@ -27,7 +27,7 @@ const NavbarChoice = () => {
     if (event.target.value === "Selecciona un cinema") {
       setFilteredMoviesBy(false)
       setValueToFilterMovies(false)
-
+      setCheckoutBuilderState(checkoutBuilderState.setMultiplex(undefined));
     } else {
       setFilteredMoviesBy("cinema")
       setValueToFilterMovies(event.target.value)
