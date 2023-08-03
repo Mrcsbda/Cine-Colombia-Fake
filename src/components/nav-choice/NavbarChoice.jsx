@@ -13,7 +13,7 @@ const NavbarChoice = () => {
     isBuying } = useContext(AppContext)
 
   const handleDate = (event) => {
-    
+
     const updatedBuilder = checkoutBuilderState.setSchedule(undefined)
     setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
     setDate(event.target.value)
@@ -28,7 +28,7 @@ const NavbarChoice = () => {
 
     const updatedBuilder = checkoutBuilderState.setSchedule(undefined)
     setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
-    if (event.target.value === "0") {
+    if (event.target.value === "Selecciona un cinema") {
       setFilteredMoviesBy(false)
       setValueToFilterMovies(false)
       setCheckoutBuilderState(checkoutBuilderState.setMultiplex(undefined));
@@ -45,7 +45,7 @@ const NavbarChoice = () => {
       <div className={isBuying ? 'hidden' : 'navbar-choice'} >
         <p>Cines cercanos</p>
         <select name="cines" id="cines" onChange={(event) => handleCinema(event)}>
-          <option defaultValue="0">Selecciona un cinema</option>
+          <option defaultValue="Selecciona un cinema">Selecciona un cinema</option>
           <option value="1">Los Molinos</option>
           <option value="2">Santa Fe</option>
         </select>
