@@ -24,14 +24,14 @@ const NavbarChoice = () => {
 
   const handleCinema = (event) => {
 
-    if (event.target.value === "Selecciona un cinema") {
+    if (event.target.value === "0") {
       setFilteredMoviesBy(false)
       setValueToFilterMovies(false)
       setCheckoutBuilderState(checkoutBuilderState.setMultiplex(undefined));
     } else {
       setFilteredMoviesBy("cinema")
       setValueToFilterMovies(event.target.value)
-      setCheckoutBuilderState(checkoutBuilderState.setMultiplex(event.target.value));
+      setCheckoutBuilderState(checkoutBuilderState.setMultiplex(Number(event.target.value)));
     }
 
   }
@@ -41,9 +41,9 @@ const NavbarChoice = () => {
       <div className={isBuying ? 'hidden' : 'navbar-choice'} >
         <p>Cines cercanos</p>
         <select name="cines" id="cines" onChange={(event) => handleCinema(event)}>
-          <option defaultValue="Los Molinos">Selecciona un cinema</option>
-          <option value="Los Molinos">Los Molinos</option>
-          <option value="Santa Fe">Santa Fe</option>
+          <option defaultValue="0">Selecciona un cinema</option>
+          <option value="1">Los Molinos</option>
+          <option value="2">Santa Fe</option>
         </select>
       </div >
       <div className={isBuying ? 'hidden' : 'navbar-choice'}>

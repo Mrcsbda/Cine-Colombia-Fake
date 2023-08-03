@@ -44,7 +44,9 @@ const PurchaseData = ({ movie, step, setStep }) => {
                         alt={movie.title} />
                     <div className='purchase-data__info'>
                         <p><strong>Pelicula:</strong> {movie.title}</p>
-                        <p><strong>Complejo:</strong> {checkoutBuilderState.multiplex}</p>
+                        <p><strong>Complejo:</strong> {checkoutBuilderState.multiplex === 1
+                            ? "Los Molinos"
+                                : "Santa Fe"}</p>
                         <p><strong>Fecha:</strong> {printDate(checkoutBuilderState.schedule, "day")}</p>
                         <p><strong>Función:</strong> {printDate(checkoutBuilderState.schedule, "hour")}</p>
                         {step > 2 && (
