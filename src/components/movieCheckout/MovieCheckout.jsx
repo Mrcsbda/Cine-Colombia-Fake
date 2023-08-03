@@ -15,7 +15,7 @@ const MovieCheckout = () => {
   const { idMovie } = useParams()
   const [movie, setMovie] = useState("")
   const [trailer, setTrailer] = useState("")
-  const [step, setStep] = useState(3)
+  const [step, setStep] = useState(1)
   const [cinema, setCinema] = useState("")
   const [schedule, setSchedule] = useState(false)
   const {

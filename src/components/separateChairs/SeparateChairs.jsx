@@ -57,13 +57,37 @@ const SeparateChairs = () => {
     }
   }
 
-  const selectPlace = (letter, number) => {
-
+  const selectPlace = (letter, number, isAvailable) => {
     const place = `${letter}${number}`
-    const updatedBuilder = checkoutBuilderState.setPlaces(place, true)
-    setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
+    const selected = checkoutBuilderState.places.find(item => item === place)
 
+    if (isAvailable) {
+      if (selected) {
+        const updatedBuilder = checkoutBuilderState.setPlaces(place, false)
+        setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
+      } else {
+        const updatedBuilder = checkoutBuilderState.setPlaces(place, true)
+        setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
+      }
+    }
     console.log(checkoutBuilderState.places)
+  }
+
+  const colorChairs = (isAvailable, letter, number) => {
+    const place = `${letter}${number}`
+    const selected = checkoutBuilderState.places.find(item => item === place)
+
+    if (!isAvailable) {
+      return "occupied-chair"
+    } else if (selected) {
+      return "selected-chair"
+    } else {
+      return "avaible-chair"
+    }
+  }
+
+  const plusOrMinusChairNumber = (number) => {
+    return number <= 8 ? number + 1 : number - 1
   }
 
   return (
@@ -95,7 +119,7 @@ const SeparateChairs = () => {
                 {
                   row.places.map(place => (
                     <div className='chairs__chair-container' key={place.number}
-                      onClick={() => selectPlace(row.chair, place.number <= 8 ? place.number + 1 : place.number - 1)}>
+                      onClick={() => selectPlace(row.chair, plusOrMinusChairNumber(place.number), place.isAvailable)}>
                       {
                         place.number === 7 || place.number === 8 ? (
                           <>
@@ -105,8 +129,9 @@ const SeparateChairs = () => {
                           <>
                             <img src="images/chair.svg"
                               alt="icon chair"
-                              className={`chairs__chair-icon ${place.isAvailable ? "avaible-chair" : "occupied-chair"}`} />
-                            <p className='chairs__chair-number'>{place.number <= 8 ? place.number + 1 : place.number - 1}</p>
+                              className={`chairs__chair-icon
+                              ${colorChairs(place.isAvailable, row.chair, plusOrMinusChairNumber(place.number))}`} />
+                            <p className='chairs__chair-number'>{plusOrMinusChairNumber(place.number)}</p>
                           </>
                         )
                       }
