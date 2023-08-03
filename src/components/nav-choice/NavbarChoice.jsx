@@ -30,7 +30,7 @@ const NavbarChoice = () => {
       setCheckoutBuilderState(checkoutBuilderState.setMultiplex(undefined));
     } else {
       setFilteredMoviesBy("cinema")
-      setValueToFilterMovies(event.target.value)
+      setValueToFilterMovies(event.target.value === "1" ? "Los Molinos" : "Santa Fe")
       setCheckoutBuilderState(checkoutBuilderState.setMultiplex(Number(event.target.value)));
     }
 

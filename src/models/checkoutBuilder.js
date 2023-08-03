@@ -57,6 +57,9 @@ export class Checkout {
                 case "thirdAge":
                     this.totalToPay = this.totalToPay + 12900;
                     return this;
+                case "reset":
+                    this.totalToPay = 0;
+                    return this;
                 default: return this;
             }
         }
@@ -86,6 +89,13 @@ export class Checkout {
                     return this;
                 case "thirdAge":
                     this.totalTickets.thirdAge = this.totalTickets.thirdAge - 1;
+                    return this;
+                case "reset":
+                    this.totalTickets = {
+                        kids: 0,
+                        adults: 0,
+                        thirdAge: 0
+                    }
                     return this;
                 default: return this;
             }
