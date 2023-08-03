@@ -6,7 +6,7 @@ import { AppContext } from '../../routes/Router'
 const SeparateChairs = () => {
 
   const [chairs, setChairs] = useState([])
-  const { checkoutBuilderState, setCheckoutBuilderState } = useContext(AppContext)
+  const { checkoutBuilderState, setCheckoutBuilderState , setAvailable } = useContext(AppContext)
 
   useEffect(() => {
     printChairs()
@@ -72,12 +72,19 @@ const SeparateChairs = () => {
           setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
         }
       }
-      
+
       if (selected) {
         const updatedBuilder = checkoutBuilderState.setPlaces(place, false)
         setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
       }
     }
+
+    if(totalTickets === checkoutBuilderState.places.length) {
+      setAvailable(true)
+    } else {
+      setAvailable(false)
+    }
+
     console.log(checkoutBuilderState.places)
   }
 
