@@ -8,9 +8,10 @@ import SeparateChairs from '../separateChairs/SeparateChairs'
 import { AppContext } from '../../routes/Router'
 import { printDate } from '../../utils/getDate'
 import { editTickets, getTickets, saveTickets } from '../../services/ticketsServices'
+import { savePurchase } from '../../services/historyServices'
 
 const PurchaseData = ({ props: { movie, step, setStep, dataPurchaseForm, handleChange, resetForm } }) => {
-    const { checkoutBuilderState, available, setAvailable } = useContext(AppContext)
+    const { checkoutBuilderState, setCheckoutBuilderState, available, setAvailable } = useContext(AppContext)
 
 
     const goToNextStep = async () => {
@@ -19,6 +20,20 @@ const PurchaseData = ({ props: { movie, step, setStep, dataPurchaseForm, handleC
                 const boughtTickets = await getTickets()
                 const boughtTicketsByCinemaShow = boughtTickets.find(tickets =>
                     tickets.cinemaShowId === checkoutBuilderState.cinemaShowId && tickets.schedule === checkoutBuilderState.schedule)
+
+                const newPurchaseInfo = {
+                    name: dataPurchaseForm.nameCard,
+                    email: dataPurchaseForm.email,
+                    cinemaShowId: checkoutBuilderState.cinemaShowId,
+                    schedule: checkoutBuilderState.schedule,
+                    boughtTickets: checkoutBuilderState.totalTickets.kids + checkoutBuilderState.totalTickets.adults + checkoutBuilderState.totalTickets.thirdAge,
+                    places: checkoutBuilderState.places,
+                    transactionId: Math.floor(Math.random() * 1000 + 1),
+                    transactionDate: new Date().getTime()
+                }
+
+                const savePurchaseInBack = await savePurchase(newPurchaseInfo)
+
                 if (boughtTicketsByCinemaShow) {
                     const places = boughtTicketsByCinemaShow.places
                     const concatPlaces = places.concat(checkoutBuilderState.places)
@@ -29,27 +44,28 @@ const PurchaseData = ({ props: { movie, step, setStep, dataPurchaseForm, handleC
                             + checkoutBuilderState.totalTickets.thirdAge,
                         places: concatPlaces
                     }
-                    const savePurchase = await editTickets(boughtTicketsByCinemaShow.id, newPurchase)
-                    if (savePurchase) {
+                    const editPurchaseTickets = await editTickets(boughtTicketsByCinemaShow.id, newPurchase)
+                    if (editPurchaseTickets) {
                         setStep(step + 1)
                         resetForm()
                     }
                 } else {
                     const newPurchase = {
-                        cinemaId:checkoutBuilderState.multiplex,
+                        cinemaId: checkoutBuilderState.multiplex,
                         cinemaShowId: checkoutBuilderState.cinemaShowId,
                         boughtTickets: checkoutBuilderState.totalTickets.kids + checkoutBuilderState.totalTickets.adults + checkoutBuilderState.totalTickets.thirdAge,
                         schedule: checkoutBuilderState.schedule,
                         places: checkoutBuilderState.places
                     }
 
-                    const savePurchase = await saveTickets(newPurchase)
-                    if (savePurchase) {
+                    const savePurchaseTickets = await saveTickets(newPurchase)
+                    if (savePurchaseTickets) {
                         setStep(step + 1)
                         resetForm()
                     }
                 }
 
+                setCheckoutBuilderState(checkoutBuilderState.setTransactionDate(new Date().getTime()));
 
             } else {
                 setStep(step + 1)

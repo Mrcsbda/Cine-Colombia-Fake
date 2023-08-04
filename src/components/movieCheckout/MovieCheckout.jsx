@@ -145,6 +145,7 @@ const MovieCheckout = () => {
           .setTotalTickets("reset", false)
           .setTotalToPay("reset", false)
           .setPlaces([], "reset")
+          .setTransactionDate(undefined)
         setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilderStep6));
         break;
     }

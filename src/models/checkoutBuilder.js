@@ -11,6 +11,7 @@ export class Checkout {
             thirdAge: 0
         }
         this.places = [];
+        this.transactionDate = undefined
     }
 
     setCinemaShowId(cinemaShowId) {
@@ -119,5 +120,10 @@ export class Checkout {
                 return this
             default: return this;
         }
+    }
+
+    setTransactionDate(date) {
+        this.transactionDate = date;
+        return this;
     }
 }
