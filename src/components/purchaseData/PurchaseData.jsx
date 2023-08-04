@@ -13,14 +13,15 @@ const PurchaseData = ({ props: { movie, step, setStep, dataPurchaseForm, handleC
 
 
     const goToNextStep = () => {
-        if (step === 4) {
-            console.log(dataPurchaseForm)
+        if (available) {
+            if (step === 4) {
+                console.log(dataPurchaseForm)
+                setStep(step + 1)
+            } else {
+                setStep(step + 1)
+                setAvailable(false)
+            }
         }
-        // if (available) {
-        //     setStep(step + 1)
-        //     setAvailable(false)
-        // }
-
     }
 
     const showComponets = () => {
@@ -30,7 +31,7 @@ const PurchaseData = ({ props: { movie, step, setStep, dataPurchaseForm, handleC
             case step === 3:
                 return (<SeparateChairs />);
             case step === 4:
-                return (<PurchaseForm handleChange={handleChange} dataPurchaseForm={dataPurchaseForm}/>);
+                return (<PurchaseForm handleChange={handleChange} dataPurchaseForm={dataPurchaseForm} />);
             case step === 5:
                 return (<SuccessfullPurchase />);
             default: return ""

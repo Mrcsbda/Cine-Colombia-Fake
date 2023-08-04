@@ -11,9 +11,10 @@ const PurchaseForm = ({ handleChange, dataPurchaseForm }) => {
     if(
       dataPurchaseForm.email &&
       dataPurchaseForm.nameCard &&
-      dataPurchaseForm.numberCard &&
-      dataPurchaseForm.dateExpiry &&
-      dataPurchaseForm.cvv
+      !dataPurchaseForm.numberCard.includes("_") &&
+      !dataPurchaseForm.dateExpiry.includes("_") &&
+      !dataPurchaseForm.cvv.includes("_")
+
       ) {
       setAvailable(true)
     } else {

@@ -130,10 +130,14 @@ const MovieCheckout = () => {
           <>
 
             <section className='movie-checkout-container'>
-              <div className='movie-checkout-container__return-btn' onClick={returnPage}>
-                <img className='movie-checkout-container__return-btn--icon' src="images/back-arrow.svg" alt="arrow icon" />
-                <p className='movie-checkout-container__return-btn--text'>Volver</p>
-              </div>
+              {
+                step !== 5 && (
+                  <div className='movie-checkout-container__return-btn' onClick={returnPage}>
+                    <img className='movie-checkout-container__return-btn--icon' src="images/back-arrow.svg" alt="arrow icon" />
+                    <p className='movie-checkout-container__return-btn--text'>Volver</p>
+                  </div>
+                )
+              }
               {
                 showComponets()
               }
