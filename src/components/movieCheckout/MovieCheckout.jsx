@@ -66,7 +66,7 @@ const MovieCheckout = () => {
       ?? videosInfo.find(video => video.type === 'Teaser');
     const cinemaInfo = cinemaAndCinemaShows.find(item => item.cinema_shows.find(movie => movie.movie == idMovie))
     const infoCinemaShow = cinemaInfo.cinema_shows.find(item => item.movie == idMovie)
-    cinemaInfo.name === valueToFilterMovies
+    cinemaInfo.id === Number(valueToFilterMovies)
       ? setCinema(cinemaInfo.name)
       : (!valueToFilterMovies
         ? setCinema("Selecciona un cinema")

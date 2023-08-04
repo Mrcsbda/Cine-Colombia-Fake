@@ -60,7 +60,7 @@ const MovieSchedule = ({ props: { movie, cinema, schedule, trailer, setStep, ste
               schedule.length >= 1 && (
                 <>
                   <p className='movie__text'>Elige el horario que prefieras</p>
-                  <h3>{cinema ? cinema : (cinema ? cinema : "No hay funciones para el cinema seleccionado")}</h3>
+                  <h3>{cinema ? cinema : "No hay funciones para el cinema seleccionado"}</h3>
                   {
                     cinema !== "Selecciona un cinema" && cinema && (
                       <>
