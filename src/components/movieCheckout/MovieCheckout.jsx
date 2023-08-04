@@ -16,7 +16,7 @@ const MovieCheckout = () => {
   const { idMovie } = useParams()
   const [movie, setMovie] = useState("")
   const [trailer, setTrailer] = useState("")
-  const [step, setStep] = useState(4)
+  const [step, setStep] = useState(1)
   const [cinema, setCinema] = useState("")
   const [schedule, setSchedule] = useState(false)
   const {
@@ -118,6 +118,11 @@ const MovieCheckout = () => {
           .setTotalTickets("reset", false)
           .setTotalToPay("reset", false)
         setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilderStep2));
+        break;
+      case 3:
+        setStep(step - 1)
+        const updatedBuilderStep3 = checkoutBuilderState.setPlaces([], "reset")
+        setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilderStep3));
         break;
     }
     console.log(checkoutBuilderState)

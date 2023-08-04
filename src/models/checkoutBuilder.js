@@ -104,14 +104,20 @@ export class Checkout {
     }
 
     setPlaces(place, add) {
-        if (add) {
-            this.places.push(place)
-            this.places = Array.from(new Set(this.places))
-            return this;
-        } else {
-            const index = this.places.findIndex(item => item === place)
-            this.places.splice(index, 1)
-            return this
+
+        switch (add) {
+            case "add":
+                this.places.push(place)
+                this.places = Array.from(new Set(this.places))
+                return this;
+            case "delete":
+                const index = this.places.findIndex(item => item === place)
+                this.places.splice(index, 1)
+                return this
+            case "reset":
+                this.places = place;
+                return this
+            default: return this;
         }
     }
 }

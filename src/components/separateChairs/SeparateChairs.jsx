@@ -68,13 +68,13 @@ const SeparateChairs = () => {
     if (isAvailable) {
       if (totalTickets > checkoutBuilderState.places.length) {
         if (!selected) {
-          const updatedBuilder = checkoutBuilderState.setPlaces(place, true)
+          const updatedBuilder = checkoutBuilderState.setPlaces(place, "add")
           setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
         }
       }
 
       if (selected) {
-        const updatedBuilder = checkoutBuilderState.setPlaces(place, false)
+        const updatedBuilder = checkoutBuilderState.setPlaces(place, "delete")
         setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
       }
     }
@@ -84,8 +84,6 @@ const SeparateChairs = () => {
     } else {
       setAvailable(false)
     }
-
-    console.log(checkoutBuilderState.places)
   }
 
   const colorChairs = (isAvailable, letter, number) => {
