@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import "./downloadTickets.scss"
+import { AppContext } from '../../routes/Router'
 
 const DownloadTickets = ({ movie }) => {
+
+    const { checkoutBuilderState } = useContext(AppContext)
     return (
         <div className='download-tickets'>
             <div className='download-tickets__container'>
@@ -20,8 +23,9 @@ const DownloadTickets = ({ movie }) => {
                     <div className='download-tickets__content-container'>
                         <p className='download-tickets__text'><strong>Pelicula:</strong> {movie.title}</p>
                         <p className='download-tickets__text'><strong>Complejo:</strong> Los Molinos</p>
-                        <p className='download-tickets__text'><strong>Asientos:</strong></p>
-                        <p className='download-tickets__text'><strong>Número de sala:</strong></p>
+                        <p className='download-tickets__text'><strong>Asientos:
+                        </strong>{checkoutBuilderState.places.map((item, index) => (<span key={index + 1} > {item} </span>))}</p>
+                        <p className='download-tickets__text'><strong>Número de sala:</strong>&nbsp;{checkoutBuilderState.hall}</p>
                         <figure className='download-tickets__qr-container'>
                             <img
                                 className='download-tickets__qr'

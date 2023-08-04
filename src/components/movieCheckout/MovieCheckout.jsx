@@ -26,7 +26,8 @@ const MovieCheckout = () => {
     checkoutBuilderState,
     setFilteredMoviesBy,
     setIsBuying,
-    setIsCheckout
+    setIsCheckout,
+    setAvailable
   } = useContext(AppContext)
   const [dataPurchaseForm, handleChange, resetForm] = useForm({
     email: "",
@@ -121,8 +122,30 @@ const MovieCheckout = () => {
         break;
       case 3:
         setStep(step - 1)
+        setAvailable(true)
         const updatedBuilderStep3 = checkoutBuilderState.setPlaces([], "reset")
         setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilderStep3));
+        break;
+      case 4:
+        setStep(step - 1)
+        setAvailable(true)
+        resetForm()
+        break;
+      case 6:
+        setStep(1)
+        navigate("/")
+        setFilteredMoviesBy(false)
+        setIsCheckout(false)
+        setIsBuying(false)
+        const updatedBuilderStep6 = checkoutBuilderState
+          .setSchedule(undefined)
+          .setMultiplex(undefined)
+          .setCinemaShowId(undefined)
+          .setHall(undefined)
+          .setTotalTickets("reset", false)
+          .setTotalToPay("reset", false)
+          .setPlaces([], "reset")
+        setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilderStep6));
         break;
     }
     console.log(checkoutBuilderState)
@@ -139,7 +162,7 @@ const MovieCheckout = () => {
                 step !== 5 && (
                   <div className='movie-checkout-container__return-btn' onClick={returnPage}>
                     <img className='movie-checkout-container__return-btn--icon' src="images/back-arrow.svg" alt="arrow icon" />
-                    <p className='movie-checkout-container__return-btn--text'>Volver</p>
+                    <p className='movie-checkout-container__return-btn--text'>{step !== 6 ? "Volver" : "Volver al inicio"}</p>
                   </div>
                 )
               }

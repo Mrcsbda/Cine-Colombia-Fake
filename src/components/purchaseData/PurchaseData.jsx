@@ -15,8 +15,8 @@ const PurchaseData = ({ props: { movie, step, setStep, dataPurchaseForm, handleC
     const goToNextStep = () => {
         if (available) {
             if (step === 4) {
-                console.log(dataPurchaseForm)
                 setStep(step + 1)
+                resetForm()
             } else {
                 setStep(step + 1)
                 setAvailable(false)
@@ -66,7 +66,7 @@ const PurchaseData = ({ props: { movie, step, setStep, dataPurchaseForm, handleC
                                     {
                                         checkoutBuilderState.totalTickets.kids !== 0
                                         && `${checkoutBuilderState.totalTickets.kids} Niños`
-                                    }
+                                    } &nbsp;
                                     {
                                         checkoutBuilderState.totalTickets.thirdAge !== 0
                                         && `${checkoutBuilderState.totalTickets.thirdAge} 3era edad`

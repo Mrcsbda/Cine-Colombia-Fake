@@ -5,17 +5,20 @@ import InputMask from "react-input-mask";
 
 const PurchaseForm = ({ handleChange, dataPurchaseForm }) => {
 
-  const { setAvailable }  = useContext(AppContext)
+  const { setAvailable } = useContext(AppContext)
 
   useEffect(() => {
-    if(
+    if (
       dataPurchaseForm.email &&
       dataPurchaseForm.nameCard &&
+      dataPurchaseForm.numberCard &&
+      dataPurchaseForm.dateExpiry &&
+      dataPurchaseForm.cvv &&
       !dataPurchaseForm.numberCard.includes("_") &&
       !dataPurchaseForm.dateExpiry.includes("_") &&
       !dataPurchaseForm.cvv.includes("_")
 
-      ) {
+    ) {
       setAvailable(true)
     } else {
       setAvailable(false)
