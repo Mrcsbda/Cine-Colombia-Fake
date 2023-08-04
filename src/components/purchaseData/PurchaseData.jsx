@@ -7,6 +7,7 @@ import SuccessfullPurchase from '../successfullPurchase/SuccessfullPurchase'
 import SeparateChairs from '../separateChairs/SeparateChairs'
 import { AppContext } from '../../routes/Router'
 import { printDate } from '../../utils/getDate'
+import { editTickets, getTickets, saveTickets } from '../../services/ticketsServices'
 
 const PurchaseData = ({ props: { movie, step, setStep, dataPurchaseForm, handleChange, resetForm } }) => {
     const { checkoutBuilderState, available, setAvailable } = useContext(AppContext)
@@ -16,8 +17,39 @@ const PurchaseData = ({ props: { movie, step, setStep, dataPurchaseForm, handleC
         if (available) {
             if (step === 4) {
                 const boughtTickets = await getTickets()
-                setStep(step + 1)
-                resetForm()
+                const boughtTicketsByCinemaShow = boughtTickets.find(tickets =>
+                    tickets.cinemaShowId === checkoutBuilderState.cinemaShowId && tickets.schedule === checkoutBuilderState.schedule)
+                if (boughtTicketsByCinemaShow) {
+                    const places = boughtTicketsByCinemaShow.places
+                    const concatPlaces = places.concat(checkoutBuilderState.places)
+                    const newPurchase = {
+                        boughtTickets: boughtTicketsByCinemaShow.boughtTickets
+                            + checkoutBuilderState.totalTickets.kids
+                            + checkoutBuilderState.totalTickets.adults
+                            + checkoutBuilderState.totalTickets.thirdAge,
+                        places: concatPlaces
+                    }
+                    const savePurchase = await editTickets(boughtTicketsByCinemaShow.id, newPurchase)
+                    if (savePurchase) {
+                        setStep(step + 1)
+                        resetForm()
+                    }
+                } else {
+                    const newPurchase = {
+                        cinemaId:checkoutBuilderState.multiplex,
+                        cinemaShowId: checkoutBuilderState.cinemaShowId,
+                        boughtTickets: checkoutBuilderState.totalTickets.kids + checkoutBuilderState.totalTickets.adults + checkoutBuilderState.totalTickets.thirdAge,
+                        schedule: checkoutBuilderState.schedule,
+                        places: checkoutBuilderState.places
+                    }
+
+                    const savePurchase = await saveTickets(newPurchase)
+                    if (savePurchase) {
+                        setStep(step + 1)
+                        resetForm()
+                    }
+                }
+
 
             } else {
                 setStep(step + 1)

@@ -15,7 +15,7 @@ export const editTickets = async (id, properties) => {
         const { data } = await axios.patch(`${endpoints.urlTickets}/${id}`, { ...properties })
         return data
     } catch (error) {
-        console.log(error)
+        return null
     }
 }
 
@@ -24,6 +24,6 @@ export const saveTickets = async (tickets) => {
         const { data } = await axios.post(endpoints.urlTickets, { ...tickets })
         return data
     } catch (error) {
-        console.log(error)
+       return null
     }
 }
