@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useLocation, useOutletContext, useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import MovieSchedule from '../movieSchedule/MovieSchedule'
 import getMovieInfo from '../../services/getMovieInfo'
 import getTrailer from '../../services/getTrailer'
@@ -17,7 +17,7 @@ const MovieCheckout = () => {
   const [step, setStep] = useState(1)
   const [cinema, setCinema] = useState("")
   const [schedule, setSchedule] = useState(false)
-  const { valueToFilterMovies, date } = useContext(AppContext)
+  const { valueToFilterMovies, date, setCheckBuilderState, checkoutBuilderState } = useContext(AppContext)
   const propsMovieSchedule = {
     movie,
     cinema,
@@ -32,8 +32,10 @@ const MovieCheckout = () => {
     step
   }
   const propsDownloadTickets = {
-    movie,
+    movie
   }
+
+  console.log(checkoutBuilderState)
 
   useEffect(() => {
     getMovie()
@@ -48,7 +50,12 @@ const MovieCheckout = () => {
       ?? videosInfo.find(video => video.type === 'Teaser');
     const cinemaInfo = cinemaAndCinemaShows.find(item => item.cinema_shows.find(movie => movie.movie == idMovie))
     const infoCinemaShow = cinemaInfo.cinema_shows.find(item => item.movie == idMovie)
-    cinemaInfo.name === valueToFilterMovies || !valueToFilterMovies ? setCinema(cinemaInfo.name) : setCinema(false)
+    cinemaInfo.name === valueToFilterMovies
+      ? setCinema(cinemaInfo.name)
+      : (!valueToFilterMovies
+        ? setCinema("Selecciona un cinema")
+        : setCinema(false))
+    setCheckBuilderState(checkoutBuilderState.setCinemaShowId(infoCinemaShow.id));
     getMovieSchedulesByDate(infoCinemaShow.schedules)
     setMovie(movieInfo)
     setTrailer(trailerInfo)
@@ -57,11 +64,10 @@ const MovieCheckout = () => {
   const getMovieSchedulesByDate = (schedules) => {
     if (typeof date === 'string') {
       const [year, month, day] = date.split("-")
-      const dateInMiliseconds = new Date(year,(month-1), day).setHours(0,0,0,0)
-      const limitDateInMiliseconds = new Date(dateInMiliseconds).setHours(23,59,59,999999)
+      const dateInMiliseconds = new Date(year, (month - 1), day).setHours(0, 0, 0, 0)
+      const limitDateInMiliseconds = new Date(dateInMiliseconds).setHours(23, 59, 59, 999999)
       const cinemaShowSchedule = schedules.filter(item => item >= dateInMiliseconds && item <= limitDateInMiliseconds)
       setSchedule(cinemaShowSchedule)
-      console.log(cinemaShowSchedule)
     }
   }
 

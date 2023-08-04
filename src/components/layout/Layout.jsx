@@ -2,8 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import Header from '../header/Header'
 import Footer from '../footer/Footer'
 import { Outlet, useLocation, useParams } from 'react-router-dom'
-import "./page.scss"
-import { useState } from 'react'
+import "./layout.scss"
 import { AppContext } from '../../routes/Router'
 
 const Layout = () => {

@@ -16,14 +16,13 @@ import { endpoints } from '../../services/data';
 import { deleteElement, editElement } from '../../services/cinemasAndShows';
 
 const ScheduleAdmin = ({cinema, infoShow}) => {
-    const [schedule, setSchedule] = useState(false)
     const [showCalendar, setShowCalendar] = useState(false)
     const [showSalas, setShowSalas] = useState(false)
     const [showSalas2, setShowSalas2] = useState(false)
     const [date, setDate] = useState('2023-08-14')
     const [value, setValue] = useState(new Date())
     const [selectedDateIndex, setSelectedDateIndex] = useState(0);
-    const {setFoundSchedule, foundSchedule} = useContext(AppContext)
+    const {setFoundSchedule, foundSchedule, setNewMultiplex, setNewShow, schedule, setSchedule} = useContext(AppContext)
     const { idMovie } = useParams()
 
     const handleDeleteShow = () => {
@@ -180,7 +179,7 @@ const ScheduleAdmin = ({cinema, infoShow}) => {
                 <div className="show">
                     <div className="show-title">
                         <p>Funciones por multiplex</p>
-                        <button>
+                        <button onClick={() => setNewMultiplex(true)}>
                             Nuevo Multiplex
                             <img src={plus} alt="Icon for add" />
                         </button>
@@ -218,13 +217,13 @@ const ScheduleAdmin = ({cinema, infoShow}) => {
                         </div>
                         
                     </div>
-                    <button>Nueva función
+                    <button onClick={() => setNewShow(true)}>Nueva función
                         <img src={plus} alt="Icon for add" />
                     </button>
                 </div>  :
                 <div className={showSalas ? "salas" : "salas inactive-details"}>
                     <h3>No hay funciones para este cinema</h3>
-                <button>Nueva función
+                <button onClick={() => setNewShow(true)}>Nueva función
                     <img src={plus} alt="Icon for add" />
                 </button>
             </div>
@@ -262,13 +261,13 @@ const ScheduleAdmin = ({cinema, infoShow}) => {
                         </div>
                         
                     </div>
-                    <button>Nueva función
+                    <button onClick={() => setNewShow(true)}>Nueva función
                         <img src={plus} alt="Icon for add" />
                     </button>
                 </div>  :
                 <div className={showSalas2 ? "salas" : "salas inactive-details"}>
                     <h3>No hay funciones para este cinema</h3>
-                <button>Nueva función
+                <button onClick={() => setNewShow(true)}>Nueva función
                     <img src={plus} alt="Icon for add" />
                 </button>
             </div>

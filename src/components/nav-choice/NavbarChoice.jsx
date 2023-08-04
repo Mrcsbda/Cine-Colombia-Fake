@@ -4,10 +4,16 @@ import { AppContext } from '../../routes/Router'
 
 const NavbarChoice = () => {
 
-  const { setFilteredMoviesBy, setValueToFilterMovies , setDate} = useContext(AppContext)
+  const { setFilteredMoviesBy, setValueToFilterMovies, setDate, checkoutBuilderState, setCheckBuilderState } = useContext(AppContext)
 
   const handleDate = (event) => {
     setDate(event.target.value)
+
+    if (!event.target.value) {
+      setFilteredMoviesBy(false)
+    } else {
+      setFilteredMoviesBy("date")
+    }
   }
 
   const handleCinema = (event) => {
@@ -15,9 +21,11 @@ const NavbarChoice = () => {
     if (event.target.value === "Selecciona un cinema") {
       setFilteredMoviesBy(false)
       setValueToFilterMovies(false)
+
     } else {
       setFilteredMoviesBy("cinema")
       setValueToFilterMovies(event.target.value)
+      setCheckBuilderState(checkoutBuilderState.setMultiplex(event.target.value));
     }
 
   }
@@ -25,13 +33,13 @@ const NavbarChoice = () => {
   return (
     <>
       <div className='navbar-choice' >
-      <p>Cines cercanos</p>
-      <select name="cines" id="cines" onChange={(event) => handleCinema(event)}>
-        <option defaultValue="Los Molinos">Selecciona un cinema</option>
-        <option value="Los Molinos">Los Molinos</option>
-        <option value="Santa Fe">Santa Fe</option>
-      </select>
-    </div >
+        <p>Cines cercanos</p>
+        <select name="cines" id="cines" onChange={(event) => handleCinema(event)}>
+          <option defaultValue="Los Molinos">Selecciona un cinema</option>
+          <option value="Los Molinos">Los Molinos</option>
+          <option value="Santa Fe">Santa Fe</option>
+        </select>
+      </div >
       <div className='navbar-choice'>
         <p>Fecha</p>
         <input

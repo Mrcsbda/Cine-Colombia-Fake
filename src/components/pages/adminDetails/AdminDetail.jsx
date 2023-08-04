@@ -7,6 +7,7 @@ import getTrailer from '../../../services/getTrailer'
 import { useLocation, useParams } from 'react-router'
 import { getCinemaAndCinemaShows } from '../../../services/cinemasServices'
 import { AppContext } from '../../../routes/Router'
+import CreateNewForm from '../../createNewForm/CreateNewForm'
 
 const AdminDetail = () => {
   const [movie, setMovie] = useState("")
@@ -15,7 +16,7 @@ const AdminDetail = () => {
   const [infoShow, setInfoShow] = useState('')
   const { idMovie } = useParams()
   const location = useLocation()
-  const { valueToFilterMovies, setFoundSchedule } = useContext(AppContext)
+  const { valueToFilterMovies, setFoundSchedule, newMultiplex, newShow } = useContext(AppContext)
   
   const getOneMovie = async () => {
     const movieInfo = await getMovieInfo(idMovie)
@@ -37,10 +38,30 @@ const AdminDetail = () => {
     getOneMovie()
   }, [location])
 
+const propsMultiplex = {
+  toCreate: "nuevo Multiplex",
+  label1: "Nombre del Multiplex",
+  label2: "Salas",
+  example1: "Los Molinos",
+  example2: "1"
+}
 
+const propsShow = {
+  toCreate: "nueva función",
+  label1: "Numero de la sala",
+  label2: "Tiempo",
+  example1: "1",
+  example2: "13:00"
+}
 
   return (
     <section className='movie-details'>
+      {
+        newMultiplex && <CreateNewForm props={propsMultiplex} infoShow={infoShow}/>
+      }
+      {
+        newShow && <CreateNewForm props={propsShow} infoShow={infoShow}/>
+      }
       <MovieDetailsAdmin movie={movie} trailer={trailer}/>
       <DetailsShowsAdmin movie={movie} cinema={cinema} infoShow={infoShow}/>
     </section>

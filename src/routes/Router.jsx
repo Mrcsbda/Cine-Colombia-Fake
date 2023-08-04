@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
+import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import Layout from '../components/layout/Layout';
 import Home from '../components/pages/home/Home';
 import Administrator from '../components/pages/administrator/Administrator';
@@ -8,6 +8,7 @@ import PrivateRouter from './PrivateRouter';
 import AdminDetail from '../components/pages/adminDetails/AdminDetail';
 import MainMovies from '../components/MainMovies/MainMovies';
 import MovieCheckout from '../components/movieCheckout/MovieCheckout';
+import { Checkout } from '../models/checkoutBuilder';
 
 export const AppContext = createContext({})
 
@@ -21,6 +22,11 @@ const Router = () => {
     const [isCheckout, setIsCheckout] = useState(false)
     const [date, setDate] = useState(false)
     const [foundSchedule, setFoundSchedule] = useState('')
+    const [checkoutBuilderState, setCheckBuilderState] = useState(new Checkout())
+    const [newMultiplex, setNewMultiplex] = useState(false)
+    const [newShow, setNewShow] = useState(false)
+    const [schedule, setSchedule] = useState(false)
+
     useEffect(() => {
         const dataAdmin = JSON.parse(localStorage.getItem('admin')) || {}
         if (dataAdmin?.adminName) {
@@ -56,7 +62,15 @@ const Router = () => {
                 date,
                 setDate,
                 foundSchedule,
-                setFoundSchedule
+                setFoundSchedule,
+                setCheckBuilderState,
+                checkoutBuilderState,
+                newMultiplex, 
+                setNewMultiplex,
+                newShow, 
+                setNewShow,
+                schedule, 
+                setSchedule
             }
         }>
             <BrowserRouter>

@@ -26,6 +26,6 @@ export const postElement = (url, newEl) => {
         return response
     } catch (error) {
         console.log(error);
-        return error
+        return null
     }
 }

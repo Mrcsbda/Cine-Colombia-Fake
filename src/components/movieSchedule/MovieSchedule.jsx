@@ -1,30 +1,22 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./movieSchedule.scss"
 import { AppContext } from '../../routes/Router'
-import { getMonth } from 'date-fns'
+import { printDate } from '../../utils/getDate'
 
 const MovieSchedule = ({ props }) => {
 
-  const { setIsBuying, date } = useContext(AppContext)
+  const { setIsBuying, date, setCheckBuilderState, checkoutBuilderState } = useContext(AppContext)
 
   const handleClick = () => {
-    setIsBuying(true)
-    props.setStep(props.step + 1)
+    if (checkoutBuilderState.schedule) {
+      setIsBuying(true)
+      props.setStep(props.step + 1)
+    }
   }
 
-  const getDate = (schedule, type) => {
-    switch (type) {
-      case "day":
-        const fecha = new Date(schedule);
-        const opciones = { month: 'long', day: 'numeric', year: 'numeric' };
-        const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones);
-        return fechaFormateada
-      case "hour":
-        return `${new Date(schedule).getHours() < 10
-          ? `0${new Date(schedule).getHours()}`
-          : new Date(schedule).getHours()} : 0${new Date(schedule).getMinutes()}`
-      default: return ""
-    }
+  const selectSchedule = (schedule) => {
+    const updatedBuilder = checkoutBuilderState.setSchedule(schedule);
+    setCheckBuilderState({ ...updatedBuilder });
   }
 
   return (
@@ -63,23 +55,34 @@ const MovieSchedule = ({ props }) => {
       {
         date ? (
           <div className='movie__schedule'>
-            <h2>Horarios disponibles: {props.schedule.length ? getDate(props.schedule[0], "day") : "No hay funciones para esa fecha"}</h2>
+            <h2>Horarios disponibles: {props.schedule.length ? printDate(props.schedule[0], "day") : "No hay funciones para esa fecha"}</h2>
             {
               props.schedule.length >= 1 && (
                 <>
                   <p className='movie__text'>Elige el horario que prefieras</p>
-                  <h3>{props.cinema ? props.cinema : "No hay funciones para el cinema seleccionado"}</h3>
+                  <h3>{props.cinema ? props.cinema : (props.cinema ? props.cinema : "No hay funciones para el cinema seleccionado")}</h3>
                   {
-                    props.cinema && (
+                    props.cinema !== "Selecciona un cinema" && props.cinema && (
                       <>
                         <p className='movie__schedule__items'>
                           {
                             props.schedule.map((schedule, index) => (
-                              <span className='movie__schedule__item' key={index + 1}>{getDate(schedule, "hour")}</span>
+                              <span
+                                className={`movie__schedule__item ${schedule === checkoutBuilderState.schedule
+                                  ? "schedule-selected"
+                                  : ""}`}
+                                key={index + 1}
+                                onClick={() => selectSchedule(schedule)}
+                              >
+                                {printDate(schedule, "hour")}
+                              </span>
                             ))
                           }
                         </p>
-                        <button className='movie__schedule__button' onClick={handleClick}>Seleccionar Boletos</button>
+                        <button
+                          className={`movie__schedule__button ${checkoutBuilderState.schedule ? "available" : ""}`}
+                          onClick={handleClick}
+                        >Seleccionar Boletos</button>
                       </>
                     )
                   }
