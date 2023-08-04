@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import "./downloadTickets.scss"
 import { AppContext } from '../../routes/Router'
+import { printDate } from '../../utils/getDate'
 
 const DownloadTickets = ({ movie }) => {
 
@@ -11,8 +12,8 @@ const DownloadTickets = ({ movie }) => {
                 <div className='download-tickets__title-container'>
                     <h2 className='download-tickets__title'>Boletos</h2>
                     <div className='download-tickets__date-container'>
-                        <p className='download-tickets__date'>14 Ago</p>
-                        <p className='download-tickets__hour'>7:30 PM</p>
+                        <p className='download-tickets__date'>{printDate(checkoutBuilderState.schedule, "day")}</p>
+                        <p className='download-tickets__hour'>{printDate(checkoutBuilderState.schedule, "hour")}</p>
                     </div>
                 </div>
                 <div className='download-tickets__info-container'>

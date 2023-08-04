@@ -20,16 +20,18 @@ const PurchaseData = ({ props: { movie, step, setStep, dataPurchaseForm, handleC
                 const boughtTickets = await getTickets()
                 const boughtTicketsByCinemaShow = boughtTickets.find(tickets =>
                     tickets.cinemaShowId === checkoutBuilderState.cinemaShowId && tickets.schedule === checkoutBuilderState.schedule)
-
+                const datePurchase = new Date().getTime();
+                
                 const newPurchaseInfo = {
                     name: dataPurchaseForm.nameCard,
                     email: dataPurchaseForm.email,
+                    lastNumbersCard: dataPurchaseForm.numberCard.toString().slice(-4),
                     cinemaShowId: checkoutBuilderState.cinemaShowId,
                     schedule: checkoutBuilderState.schedule,
                     boughtTickets: checkoutBuilderState.totalTickets.kids + checkoutBuilderState.totalTickets.adults + checkoutBuilderState.totalTickets.thirdAge,
                     places: checkoutBuilderState.places,
                     transactionId: Math.floor(Math.random() * 1000 + 1),
-                    transactionDate: new Date().getTime()
+                    transactionDate: datePurchase
                 }
 
                 const savePurchaseInBack = await savePurchase(newPurchaseInfo)
@@ -65,7 +67,7 @@ const PurchaseData = ({ props: { movie, step, setStep, dataPurchaseForm, handleC
                     }
                 }
 
-                setCheckoutBuilderState(checkoutBuilderState.setTransactionDate(new Date().getTime()));
+                setCheckoutBuilderState(checkoutBuilderState.setTransactionDate(datePurchase));
 
             } else {
                 setStep(step + 1)
