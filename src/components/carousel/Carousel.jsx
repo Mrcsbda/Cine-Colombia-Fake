@@ -45,7 +45,7 @@ const Carousel = ({ filteredMovies, moviesGenre }) => {
     navigate(`${id}`)
   }
 
-  const slides = Array.from({ length: 10 }, (_, i) => calculateAdjacentIndex(activeIndex, i - 2));
+  const slides = Array.from({ length: filteredMovies.length }, (_, i) => calculateAdjacentIndex(activeIndex, i - 2));
 
   return (
     <div className='carousel'>
