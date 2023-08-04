@@ -1,8 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./nav-choice.scss"
 import { AppContext } from '../../routes/Router'
+import { getCinemas } from '../../services/cinemasServices'
 
 const NavbarChoice = () => {
+
+  const [multiplex, setMultiplex] = useState({})
+
+  useEffect(() => {
+    getDate()
+  }, [])
+
+  const getDate = async () => {
+    const infoCinemas = await getCinemas()
+    setMultiplex(infoCinemas)
+    console.log(infoCinemas)
+  }
 
   const {
     setFilteredMoviesBy,
@@ -46,8 +59,13 @@ const NavbarChoice = () => {
         <p>Cines cercanos</p>
         <select name="cines" id="cines" onChange={(event) => handleCinema(event)}>
           <option defaultValue="Selecciona un cinema">Selecciona un cinema</option>
-          <option value="1">Los Molinos</option>
-          <option value="2">Santa Fe</option>
+          {
+            multiplex.length && (
+              multiplex.map(item => (
+                <option value={item.id} key={item.id}>{item.name}</option>
+              ))
+            )
+          }
         </select>
       </div >
       <div className={isBuying ? 'hidden' : 'navbar-choice'}>
@@ -56,8 +74,8 @@ const NavbarChoice = () => {
           type="date"
           name=""
           defaultValue="0000-00-00"
-          min="2023-08-14"
-          max="2023-08-18"
+          min="2023-08-1"
+          max="2023-08-31"
           onChange={(event) => handleDate(event)} />
       </div>
     </>
