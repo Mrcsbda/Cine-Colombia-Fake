@@ -12,11 +12,13 @@ const PurchaseData = ({ props: { movie, step, setStep, dataPurchaseForm, handleC
     const { checkoutBuilderState, available, setAvailable } = useContext(AppContext)
 
 
-    const goToNextStep = () => {
+    const goToNextStep = async () => {
         if (available) {
             if (step === 4) {
+                const boughtTickets = await getTickets()
                 setStep(step + 1)
                 resetForm()
+
             } else {
                 setStep(step + 1)
                 setAvailable(false)

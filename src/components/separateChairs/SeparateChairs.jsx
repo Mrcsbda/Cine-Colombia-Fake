@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./separateChairs.scss"
-import getTickets from '../../services/ticketsServices'
 import { AppContext } from '../../routes/Router'
+import { getTickets } from '../../services/ticketsServices'
 
 const SeparateChairs = () => {
-
+  
   const [chairs, setChairs] = useState([])
   const { checkoutBuilderState, setCheckoutBuilderState , setAvailable } = useContext(AppContext)
 
