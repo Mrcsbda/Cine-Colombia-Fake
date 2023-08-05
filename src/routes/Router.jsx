@@ -20,7 +20,8 @@ const Router = () => {
     const [valueToFilterMovies, setValueToFilterMovies] = useState(false)
     const [isCheckout, setIsCheckout] = useState(false)
     const [date, setDate] = useState(false)
-    const [checkoutBuilderState, setCheckBuilderState] = useState(new Checkout())
+    const [checkoutBuilderState, setCheckoutBuilderState] = useState(new Checkout())
+    const [available, setAvailable] = useState(false)
 
     useEffect(() => {
         const dataAdmin = JSON.parse(localStorage.getItem('admin')) || {}
@@ -47,8 +48,10 @@ const Router = () => {
                 setIsCheckout,
                 date,
                 setDate,
-                setCheckBuilderState,
-                checkoutBuilderState
+                setCheckoutBuilderState,
+                checkoutBuilderState,
+                available,
+                setAvailable
             }
         }>
             <BrowserRouter>

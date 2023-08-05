@@ -1,14 +1,35 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./nav-choice.scss"
 import { AppContext } from '../../routes/Router'
+import { getCinemas } from '../../services/cinemasServices'
 
 const NavbarChoice = () => {
 
-  const { setFilteredMoviesBy, setValueToFilterMovies, setDate, checkoutBuilderState, setCheckBuilderState } = useContext(AppContext)
+  const [multiplex, setMultiplex] = useState({})
+
+  useEffect(() => {
+    getDate()
+  }, [])
+
+  const getDate = async () => {
+    const infoCinemas = await getCinemas()
+    setMultiplex(infoCinemas)
+    console.log(infoCinemas)
+  }
+
+  const {
+    setFilteredMoviesBy,
+    setValueToFilterMovies,
+    setDate,
+    checkoutBuilderState,
+    setCheckoutBuilderState,
+    isBuying } = useContext(AppContext)
 
   const handleDate = (event) => {
-    setDate(event.target.value)
 
+    const updatedBuilder = checkoutBuilderState.setSchedule(undefined)
+    setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
+    setDate(event.target.value)
     if (!event.target.value) {
       setFilteredMoviesBy(false)
     } else {
@@ -18,36 +39,43 @@ const NavbarChoice = () => {
 
   const handleCinema = (event) => {
 
+    const updatedBuilder = checkoutBuilderState.setSchedule(undefined)
+    setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
     if (event.target.value === "Selecciona un cinema") {
       setFilteredMoviesBy(false)
       setValueToFilterMovies(false)
-
+      setCheckoutBuilderState(checkoutBuilderState.setMultiplex(undefined));
     } else {
       setFilteredMoviesBy("cinema")
       setValueToFilterMovies(event.target.value)
-      setCheckBuilderState(checkoutBuilderState.setMultiplex(event.target.value));
+      setCheckoutBuilderState(checkoutBuilderState.setMultiplex(Number(event.target.value)));
     }
 
   }
 
   return (
     <>
-      <div className='navbar-choice' >
+      <div className={isBuying ? 'hidden' : 'navbar-choice'} >
         <p>Cines cercanos</p>
         <select name="cines" id="cines" onChange={(event) => handleCinema(event)}>
-          <option defaultValue="Los Molinos">Selecciona un cinema</option>
-          <option value="Los Molinos">Los Molinos</option>
-          <option value="Santa Fe">Santa Fe</option>
+          <option defaultValue="Selecciona un cinema">Selecciona un cinema</option>
+          {
+            multiplex.length && (
+              multiplex.map(item => (
+                <option value={item.id} key={item.id}>{item.name}</option>
+              ))
+            )
+          }
         </select>
       </div >
-      <div className='navbar-choice'>
+      <div className={isBuying ? 'hidden' : 'navbar-choice'}>
         <p>Fecha</p>
         <input
           type="date"
           name=""
           defaultValue="0000-00-00"
-          min="2023-08-14"
-          max="2023-08-18"
+          min="2023-08-1"
+          max="2023-08-31"
           onChange={(event) => handleDate(event)} />
       </div>
     </>

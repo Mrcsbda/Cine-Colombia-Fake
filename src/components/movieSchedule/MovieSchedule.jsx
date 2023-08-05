@@ -3,36 +3,36 @@ import "./movieSchedule.scss"
 import { AppContext } from '../../routes/Router'
 import { printDate } from '../../utils/getDate'
 
-const MovieSchedule = ({ props }) => {
+const MovieSchedule = ({ props: { movie, cinema, schedule, trailer, setStep, step } }) => {
 
-  const { setIsBuying, date, setCheckBuilderState, checkoutBuilderState } = useContext(AppContext)
+  const { setIsBuying, date, setCheckoutBuilderState, checkoutBuilderState } = useContext(AppContext)
 
   const handleClick = () => {
     if (checkoutBuilderState.schedule) {
       setIsBuying(true)
-      props.setStep(props.step + 1)
+      setStep(step + 1)
     }
   }
 
   const selectSchedule = (schedule) => {
     const updatedBuilder = checkoutBuilderState.setSchedule(schedule);
-    setCheckBuilderState({ ...updatedBuilder });
+    setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
   }
 
   return (
     <div className='movie'>
       <div className='movie__details'>
         <div className='movie__details__content'>
-          <img className='movie__details__poster' src={`https://image.tmdb.org/t/p/original${props.movie.poster_path}`} alt={props.movie.title} />
+          <img className='movie__details__poster' src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
           <div className='movie__details__container'>
-            <h2 className='movie__title'>{props.movie.title}</h2>
-            <p className='movie__text'>{props.movie.original_title}</p>
+            <h2 className='movie__title'>{movie.title}</h2>
+            <p className='movie__text'>{movie.original_title}</p>
             <div className='movie__details__info-container'>
-              <p className='movie__details__classification'>{props.movie.adult ? "NC-17" : "G"}</p>
-              <p className='movie__details__runtime'>{props.movie.runtime} min</p>
+              <p className='movie__details__classification'>{movie.adult ? "NC-17" : "G"}</p>
+              <p className='movie__details__runtime'>{movie.runtime} min</p>
               <p className='movie__details__genres'>
                 {
-                  props.movie.genres.map(genre => (<span key={genre.id}> {genre.name} </span>))
+                  movie.genres.map(genre => (<span key={genre.id}> {genre.name} </span>))
                 }
               </p>
             </div>
@@ -43,30 +43,30 @@ const MovieSchedule = ({ props }) => {
           <iframe
 
             className='movie__details__trailer'
-            src={`https://www.youtube.com/embed/${props.trailer.key}`}
+            src={`https://www.youtube.com/embed/${trailer.key}`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen></iframe>
           <h3 className='movie__subtitle'>Sinopsis</h3>
-          <p className='movie__details__overview'>{props.movie.overview}</p>
+          <p className='movie__details__overview'>{movie.overview}</p>
         </div>
       </div>
       <hr className='movie__separation-line' />
       {
         date ? (
           <div className='movie__schedule'>
-            <h2>Horarios disponibles: {props.schedule.length ? printDate(props.schedule[0], "day") : "No hay funciones para esa fecha"}</h2>
+            <h2>Horarios disponibles: {schedule.length ? printDate(schedule[0], "day") : "No hay funciones para esa fecha"}</h2>
             {
-              props.schedule.length >= 1 && (
+              schedule.length >= 1 && (
                 <>
                   <p className='movie__text'>Elige el horario que prefieras</p>
-                  <h3>{props.cinema ? props.cinema : (props.cinema ? props.cinema : "No hay funciones para el cinema seleccionado")}</h3>
+                  <h3>{cinema ? cinema : "No hay funciones para el cinema seleccionado"}</h3>
                   {
-                    props.cinema !== "Selecciona un cinema" && props.cinema && (
+                    cinema !== "Selecciona un cinema" && cinema && (
                       <>
                         <p className='movie__schedule__items'>
                           {
-                            props.schedule.map((schedule, index) => (
+                            schedule.map((schedule, index) => (
                               <span
                                 className={`movie__schedule__item ${schedule === checkoutBuilderState.schedule
                                   ? "schedule-selected"

@@ -13,7 +13,7 @@ const MainMovies = () => {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [moviesGenre, setMoviesGenre] = useState([]);
   const navigate = useNavigate()
-  const { date, isLogin, filteredMoviesBy, valueToFilterMovies } = useContext(AppContext)
+  const { date, isLogin, filteredMoviesBy, valueToFilterMovies, checkoutBuilderState, setCheckoutBuilderState, } = useContext(AppContext)
 
   useEffect(() => {
     getData()
@@ -50,7 +50,7 @@ const MainMovies = () => {
         const filteredCinemaShows = cinemaShows
           .filter(cinemaShow => cinemaShow.schedules
             .find(schedule => schedule >= dateInMiliseconds && schedule <= limitDateInMiliseconds))
-        const filteredMoviesBySchedule = dataMovies.filter(item => filteredCinemaShows.find(cinemaShow => cinemaShow.movie === item.id) )
+        const filteredMoviesBySchedule = dataMovies.filter(item => filteredCinemaShows.find(cinemaShow => cinemaShow.movie === item.id))
         setFilteredMovies(filteredMoviesBySchedule)
         break;
       default: setFilteredMovies(dataMovies)
@@ -72,6 +72,8 @@ const MainMovies = () => {
 
   const changeView = (id) => {
     if (!isLogin) {
+      const updatedBuilder = checkoutBuilderState.setSchedule(undefined)
+      setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
       navigate(`${id}`)
     }
     else {

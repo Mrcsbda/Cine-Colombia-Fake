@@ -1,7 +1,32 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import "./purchaseForm.scss"
+import { AppContext } from '../../routes/Router'
+import InputMask from "react-input-mask";
 
-const PurchaseForm = () => {
+const PurchaseForm = ({ handleChange, dataPurchaseForm }) => {
+
+  const { setAvailable } = useContext(AppContext)
+
+  useEffect(() => {
+    if (
+      dataPurchaseForm.email &&
+      dataPurchaseForm.nameCard &&
+      dataPurchaseForm.numberCard &&
+      dataPurchaseForm.dateExpiry &&
+      dataPurchaseForm.cvv &&
+      !dataPurchaseForm.numberCard.includes("_") &&
+      !dataPurchaseForm.dateExpiry.includes("_") &&
+      !dataPurchaseForm.cvv.includes("_")
+
+    ) {
+      setAvailable(true)
+    } else {
+      setAvailable(false)
+    }
+  }, [dataPurchaseForm])
+
+
+
   return (
     <div>
       <h2 className='purchase-form__title'>Información Personal</h2>
@@ -9,16 +34,36 @@ const PurchaseForm = () => {
       <form className='purchase-form'>
         <label className='purchase-form__label'>
           Correo Electronico
-          <input className='purchase-form__input' type="email" />
+          <input
+            name="email"
+            className='purchase-form__input'
+            type="email"
+            value={dataPurchaseForm.email}
+            onChange={(event) => handleChange(event)}
+            placeholder='Ingrese su correo electronico'
+          />
         </label>
         <label className='purchase-form__label'>
           Nombre de la tarjeta
-          <input className='purchase-form__input' type="text" />
+          <input
+            name="nameCard"
+            className='purchase-form__input'
+            type="text"
+            value={dataPurchaseForm.nameCard}
+            onChange={(event) => handleChange(event)}
+            placeholder='Ingrese el nombre de la tarjeta'
+          />
         </label>
         <label className='purchase-form__label'>
-          Nombre de la tarjeta
+          Número de la tarjeta
           <div className='purchase-form__input-container'>
-            <input className='purchase-form__input purchase-form__card-number' type="text" />
+            <InputMask
+              name="numberCard"
+              className='purchase-form__input purchase-form__card-number'
+              value={dataPurchaseForm.numberCard}
+              onChange={(event) => handleChange(event)}
+              mask='9999 9999 9999 9999'
+            />
             <figure className='purchase-form__icons-container'>
               <img className='purchase-form__icons' src="/images/visa-logo.svg" alt="visa logo" />
               <img className='purchase-form__icons' src="/images/mastercard-logo.svg" alt="mastercard logo" />
@@ -29,12 +74,26 @@ const PurchaseForm = () => {
         <div className='purchase-form__inputs-container' >
           <label className='purchase-form__label purchase-form__date-of-expiry'>
             Fecha de caducidad
-            <input className='purchase-form__input' type="text" />
+            <InputMask
+              name="dateExpiry"
+              className='purchase-form__input'
+              value={dataPurchaseForm.dateExpiry}
+              onChange={(event) => handleChange(event)}
+              mask='99/99'
+            />
           </label>
           <label className='purchase-form__label'>
             CVV
             <div className='purchase-form__input-container'>
-              <input className='purchase-form__input purchase-form__cvv' type="text" />
+              <InputMask
+                name="cvv"
+                className='purchase-form__input purchase-form__cvv'
+                type="text"
+                value={dataPurchaseForm.cvv}
+                onChange={(event) => handleChange(event)}
+                placeholder='Digita CVV'
+                mask='999'
+              />
               <figure className='purchase-form__icons-container'>
                 <img className='purchase-form__icons' src="/images/exclamation.svg" alt="" />
               </figure>
