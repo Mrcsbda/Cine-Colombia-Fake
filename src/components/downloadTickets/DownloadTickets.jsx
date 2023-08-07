@@ -1,11 +1,23 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./downloadTickets.scss"
 import { AppContext } from '../../routes/Router'
 import { printDate } from '../../utils/getDate'
+import { getCinemas } from '../../services/cinemasServices'
 
 const DownloadTickets = ({ movie }) => {
 
     const { checkoutBuilderState } = useContext(AppContext)
+    const [multiplex, setMultiplex] = useState("")
+
+    useEffect(() => {
+        getDate()
+    }, [])
+
+    const getDate = async () => {
+        const infoCinemas = await getCinemas()
+        const filterMultiplex = infoCinemas.find(item => item.id === checkoutBuilderState.multiplex)
+        setMultiplex(filterMultiplex.name)
+    }
     return (
         <div className='download-tickets'>
             <div className='download-tickets__container'>
@@ -23,7 +35,7 @@ const DownloadTickets = ({ movie }) => {
                         alt={movie.title} />
                     <div className='download-tickets__content-container'>
                         <p className='download-tickets__text'><strong>Pelicula:</strong> {movie.title}</p>
-                        <p className='download-tickets__text'><strong>Complejo:</strong> Los Molinos</p>
+                        <p className='download-tickets__text'><strong>Complejo:</strong> {multiplex}</p>
                         <p className='download-tickets__text'><strong>Asientos:
                         </strong>{checkoutBuilderState.places.map((item, index) => (<span key={index + 1} > {item} </span>))}</p>
                         <p className='download-tickets__text'><strong>Número de sala:</strong>&nbsp;{checkoutBuilderState.hall}</p>
