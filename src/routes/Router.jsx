@@ -24,7 +24,7 @@ const Router = () => {
     const [foundSchedule, setFoundSchedule] = useState('')
     const [checkoutBuilderState, setCheckBuilderState] = useState(new Checkout())
     const [newMultiplex, setNewMultiplex] = useState(false)
-    const [newShow, setNewShow] = useState(false)
+    const [newShow, setNewShow] = useState(null)
     const [schedule, setSchedule] = useState(false)
 
     useEffect(() => {

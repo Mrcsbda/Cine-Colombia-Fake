@@ -21,12 +21,15 @@ const AdminDetail = () => {
   const getOneMovie = async () => {
     const movieInfo = await getMovieInfo(idMovie)
     console.log(movieInfo);
+    //Información de todos los cines con sus funciones.
     const cinemaAndCinemaShows = await getCinemaAndCinemaShows()
+    //Queremos traernos todos los cines con cinema_shows donde se proyecte la película seleccionada
+    const cinemaShows = cinemaAndCinemaShows.filter(item=> item.cinema_shows.find(element => element.movie == idMovie))
+    console.log(cinemaShows);
+    
     const cinemaInfo = cinemaAndCinemaShows.find(item => item.cinema_shows.find(movie => movie.movie == idMovie))
     const infoCinemaShow = cinemaInfo.cinema_shows.find(item => item.movie == idMovie)
     setInfoShow(infoCinemaShow)
-    console.log("cinemaInfo", infoCinemaShow);
-    setFoundSchedule(infoCinemaShow.schedules)
     cinemaInfo.name === valueToFilterMovies || !valueToFilterMovies ? setCinema(cinemaInfo.name) : setCinema(false)
     const videosInfo = await getTrailer(idMovie)
     const trailerInfo = videosInfo.find(video => video.type === 'Trailer')

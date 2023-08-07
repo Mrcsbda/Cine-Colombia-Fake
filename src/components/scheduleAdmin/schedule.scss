@@ -118,6 +118,14 @@
                 display: flex;
                 gap: 5px;
                 align-items: center;
+                input {
+                    width: 2rem;
+                    border-color: $text-blue;
+                    border-radius: 5px;
+                    outline: none;
+                    color: $text-blue;
+                    padding: 5px;
+                }
                 .actions-sala {
                     display: none;
                 }
@@ -134,6 +142,23 @@
                 padding: 1rem 0;
                 span {
                     @include button();
+                    form {
+                        display: flex;
+                        gap: 5px;
+                        input {
+                            width: 3rem;
+                            border-color: $text-blue;
+                            border-radius: 5px;
+                            outline: none;
+                            color: $text-blue;
+                            padding: 5px;
+                        }
+                        button {
+                            border: none;
+                            padding: 0;
+                        }    
+                    }
+                    
                 }
                 span:hover .actions {
                     display: flex;
