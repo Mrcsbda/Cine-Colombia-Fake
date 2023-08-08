@@ -13,7 +13,7 @@ const MainMovies = () => {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [moviesGenre, setMoviesGenre] = useState([]);
   const navigate = useNavigate()
-  const { date, isLogin, filteredMoviesBy, valueToFilterMovies, checkoutBuilderState, setCheckoutBuilderState, } = useContext(AppContext)
+  const { date, isLogin, filteredMoviesBy, valueToFilterMovies, checkoutBuilderState, setCheckoutBuilderState, setFoundSchedule } = useContext(AppContext)
 
   useEffect(() => {
     getData()
@@ -71,14 +71,10 @@ const MainMovies = () => {
   }
 
   const changeView = (id) => {
-    if (!isLogin) {
+    setFoundSchedule(false)
       const updatedBuilder = checkoutBuilderState.setSchedule(undefined)
       setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilder));
-      navigate(`${id}`)
-    }
-    else {
-      navigate("movie")
-    }
+    navigate(`${id}`)
   }
 
   return (
