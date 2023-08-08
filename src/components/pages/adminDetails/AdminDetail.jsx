@@ -16,7 +16,7 @@ const AdminDetail = () => {
   const [infoShow, setInfoShow] = useState('')
   const { idMovie } = useParams()
   const location = useLocation()
-  const { valueToFilterMovies, setFoundSchedule, newMultiplex, newShow } = useContext(AppContext)
+  const { valueToFilterMovies, newMultiplex, newShow } = useContext(AppContext)
   
   const getOneMovie = async () => {
     const movieInfo = await getMovieInfo(idMovie)
@@ -46,7 +46,9 @@ const propsMultiplex = {
   label1: "Nombre del Multiplex",
   label2: "Salas",
   example1: "Los Molinos",
-  example2: "1"
+  example2: "1",
+  name1: 'multiplex',
+  name2: "salas"
 }
 
 const propsShow = {
@@ -54,16 +56,18 @@ const propsShow = {
   label1: "Numero de la sala",
   label2: "Tiempo",
   example1: "1",
-  example2: "13:00"
+  example2: "13:00",
+  name1: 'sala',
+  name2: "show"
 }
 
   return (
     <section className='movie-details'>
       {
-        newMultiplex && <CreateNewForm props={propsMultiplex} infoShow={infoShow}/>
+        newMultiplex && <CreateNewForm props={propsMultiplex}/>
       }
       {
-        newShow && <CreateNewForm props={propsShow} infoShow={infoShow}/>
+        newShow && <CreateNewForm props={propsShow}/>
       }
       <MovieDetailsAdmin movie={movie} trailer={trailer}/>
       <DetailsShowsAdmin movie={movie} cinema={cinema} infoShow={infoShow}/>

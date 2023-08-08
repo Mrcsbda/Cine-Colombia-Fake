@@ -33,7 +33,6 @@ export const getCinemaShowsByMovie = async (movieId) => {
         ),
       }));
 
-      console.log("Results", results);
       return results.length ? results : null;
     
   } catch (error) {

@@ -25,12 +25,15 @@ const AdminSalas = ({
   const [editedSalaName, setEditedSalaName] = useState("");
   const [editedTime, setEditedTime] = useState("");
   const [editingTimeIndex, setEditingTimeIndex] = useState(-1);
+  
   useEffect(() => {
     if (cinema?.cinema_shows?.schedules && !foundSchedule) {
       setFoundSchedule(cinema?.cinema_shows?.schedules);
+      console.log(foundSchedule);
       getMovieSchedulesByDate(cinema?.cinema_shows?.schedules);
     }else if (cinema?.cinema_shows?.schedules && foundSchedule){
         setFoundSchedule(foundSchedule);
+        console.log(foundSchedule);
       getMovieSchedulesByDate(foundSchedule);
     }
   }, [foundSchedule, date, editedSalaName]);
@@ -52,17 +55,24 @@ const AdminSalas = ({
     };
     const response = await editElement(url, newShow);
     console.log(response);
-    Swal.fire("Sala editada", "", "success");
-    setEditMode(false);
-    setEditedSalaName(newShow.hall);
+        if (response) {
+            Swal.fire("Sala editada", "", "success");
+            setEditMode(false);
+            setEditedSalaName(newShow.hall);
+        }else {
+            Swal.fire('Error', `Hubo un problema al editar la sala`, 'error')
+    }
   };
 
-  const handleSaveClickTime = (e, index) => {
+  const handleSaveClickTime = async (e, index) => {
     e.preventDefault();
     const timestamp = hoursMinutesToTimestamp(editedTime, date);
     console.log(editedTime);
-    handleEditSchedule(index, cinema, timestamp);
+    const foundIndex = foundSchedule.findIndex(time => time === schedule[index]);
+  if (foundIndex !== -1) {
+    await handleEditSchedule(foundIndex, cinema, timestamp);
     setEditingTimeIndex(-1);
+  }
   };
 
   const handleEditSchedule = async (index, cinema, newValue) => {
@@ -80,19 +90,21 @@ const AdminSalas = ({
     const response = await editElement(url, newShow);
   
     console.log(response);
-    Swal.fire("Función editada", "", "success");
-    setFoundSchedule(editedSchedule);
+        if (response) {
+            Swal.fire("Función editada", "", "success");
+            setFoundSchedule(editedSchedule);
+        }else {
+            Swal.fire('Error', `Hubo un problema al editar la función`, 'error')
+    }
   };
   
   const hoursMinutesToTimestamp = (hoursMinutes, dateStr) => {
-    console.log(dateStr);
-    const dateObj = new Date(dateStr);
+    console.log(dateStr, hoursMinutes);
+    const [year, month, day] = dateStr.split('-')
     const [hours, minutes] = hoursMinutes.split(':');
-    dateObj.setHours(Number(hours));
-    dateObj.setMinutes(Number(minutes));
-    dateObj.setSeconds(0);
-    dateObj.setMilliseconds(0);
-    return dateObj.getTime();
+    const dateObj = new Date().setFullYear(+year, (+month - 1), +day);
+  const dateObjWithHours = new Date(dateObj).setHours(+hours, +minutes, 0, 0)
+  return dateObjWithHours;
   };
 
   return (

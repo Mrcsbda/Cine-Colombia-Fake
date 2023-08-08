@@ -13,7 +13,7 @@ const MainMovies = () => {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [moviesGenre, setMoviesGenre] = useState([]);
   const navigate = useNavigate()
-  const { date, isLogin, filteredMoviesBy, valueToFilterMovies } = useContext(AppContext)
+  const { date, isLogin, filteredMoviesBy, valueToFilterMovies, setFoundSchedule } = useContext(AppContext)
 
   useEffect(() => {
     getData()
@@ -71,6 +71,7 @@ const MainMovies = () => {
   }
 
   const changeView = (id) => {
+    setFoundSchedule(false)
     navigate(`${id}`)
   }
 

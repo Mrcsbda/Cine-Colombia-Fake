@@ -14,11 +14,10 @@ import { deleteElement, editElement } from "../../services/cinemasAndShows";
 import { getCinemaShowsByMovie, getCinemas } from "../../services/cinemasServices";
 import AdminSalas from "../admin-salas/AdminSalas";
 
-const ScheduleAdmin = ({ infoShow }) => {
-  const [cinemas, setCinemas] = useState([]);
+const ScheduleAdmin = () => {
   const [cinemaShows, setCinemaShows] = useState([]);
   const [showCalendar, setShowCalendar] = useState(false);
-  const [date, setDate] = useState("2023-08-14");
+//   const [date, setDate] = useState("2023-08-14");
   const [value, setValue] = useState(new Date());
   const [selectedDateIndex, setSelectedDateIndex] = useState(0);
   const [expandedCinemaId, setExpandedCinemaId] = useState(null);
@@ -27,6 +26,10 @@ const ScheduleAdmin = ({ infoShow }) => {
     foundSchedule,
     setNewMultiplex,
     setSchedule,
+    date,
+    setDate,
+    cinemas, 
+    setCinemas
   } = useContext(AppContext);
   const { idMovie } = useParams();
 
@@ -40,11 +43,14 @@ const ScheduleAdmin = ({ infoShow }) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        // const url = `${endpoints.urlCinemaShows}/?movie=${idMovie}&&cinemaId=${infoShow.cinemaId}&&hall=${infoShow.hall}`
         const url = `${endpoints.urlCinemaShows}`;
-        deleteElement(url, id);
-        Swal.fire("Función eliminada", "", "success");
-        setFoundSchedule([]);
+        const response = deleteElement(url, id);
+        if (response) {
+            Swal.fire("Función eliminada", "", "success");
+            setFoundSchedule([]);
+        }else {
+            Swal.fire('Error', `Hubo un problema al eliminar la función`, 'error')
+    }
       }
     });
   };
@@ -75,8 +81,12 @@ const ScheduleAdmin = ({ infoShow }) => {
       };
       const response = await editElement(url, newShow);
       console.log(response);
-      Swal.fire("Función eliminada", "", "success");
-      setFoundSchedule(newSchedule)
+      if (response) {
+        Swal.fire("Función eliminada", "", "success");
+        setFoundSchedule(newSchedule)
+    }else {
+        Swal.fire('Error', `Hubo un problema al eliminar la función`, 'error')
+}
   }
 
   const handleDateBoxClick = (index, dateInfo) => {
@@ -101,7 +111,7 @@ const ScheduleAdmin = ({ infoShow }) => {
     getCinemas()
       .then((response) => setCinemas(response))
       .catch((error) => console.log(error));
-
+    console.log(cinemas);
     getCinemaShowsByMovie(idMovie)
       .then((response) => {
         setCinemaShows(response)
@@ -223,8 +233,8 @@ const ScheduleAdmin = ({ infoShow }) => {
         </div>
         {cinemas &&
           cinemas.map((cine, index) => (
-            <>
-              <div className="show show-cinema" key={index}>
+            <div key={index}>
+              <div className="show show-cinema" >
                 <p>{cine.name}</p>
                 <span onClick={() => toggleCinemaExpansion(cine.id)}>
                   <img src={arrowDown} alt="Icon for arrow" />
@@ -232,7 +242,7 @@ const ScheduleAdmin = ({ infoShow }) => {
               </div>
               <AdminSalas cinemaShows={cinemaShows} idCinema={cine.id} handleDeleteShow={handleDeleteShow} handleDeleteSchedule={handleDeleteSchedule} getMovieSchedulesByDate={getMovieSchedulesByDate} date={date}
               expandedCinemaId={expandedCinemaId}/>
-            </>
+            </div>
           ))}
       </div>
     </div>

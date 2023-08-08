@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import close from "/images/close.svg"
 import "./create.scss"
 import useForm from '../../hooks/UseForm'
@@ -11,8 +11,12 @@ import { useParams } from 'react-router-dom'
 const CreateNewForm = ({props}) => {
     const label1 = props.label1
     const label2 = props.label2
+
+    const name1 = props.name1;
+    const name2 = props.name2
+
     const { idMovie } = useParams();
-    const {setNewMultiplex, setNewShow, schedule, setSchedule, foundSchedule, setFoundSchedule, newShow} = useContext(AppContext)
+    const {setNewMultiplex, setNewShow, schedule, foundSchedule, setFoundSchedule, newShow, date, setCinemas, cinemas} = useContext(AppContext)
 
     const handleClick = () => {
         if (props.toCreate === "nuevo Multiplex") {
@@ -22,63 +26,81 @@ const CreateNewForm = ({props}) => {
         }
     }
 
-    const [dataNewForm, handleChange, resetForm ] = useForm({
-        label1:'',
-        label2:''
-    })
+    useEffect(()=>{
+        console.log("Cinema updated");
+    }, [cinemas])
 
-    const handleSubmit = (event) => {
+    const [dataNewForm, handleChange, resetForm] = useForm({});
+
+    const handleSubmit = async (event) => {
         event.preventDefault()
+        console.log(dataNewForm);
         if (props.toCreate === "nuevo Multiplex") {
+            console.log(props.toCreate);
             const url = endpoints.urlTeatros
             const newEl = {
-                name: dataNewForm.label1,
-                halls: [dataNewForm.label2]
+                name: dataNewForm[name1],
+                halls: [dataNewForm[name2]]
             }
-            const elToSend = JSON.stringify(newEl)
-            const response = postElement(url, elToSend)
-            if (response) {
+            console.log(newEl);
+            const response = await postElement(url, newEl);
                 if (response) {
                     Swal.fire('Multiplex creado', `Nuevo multiplex fue creado con exito`, 'success')
+                    
+                    const updatedCinemas = [...cinemas, newEl];
+                    setCinemas(updatedCinemas)
                     setNewMultiplex(false)
                 }else {
                     Swal.fire('Error', `Hubo un problema al crear el multiplex`, 'error')
-            }}
-        }else if (props.toCreate === "nueva función") {
+            }
+        } else if (props.toCreate === "nueva función") {
+            console.log(props.toCreate);
             if (schedule) {
-                const newSchedule = foundSchedule.push(
-                    convertTimeToTimestamp(dataNewForm.label2)
-                  );
-                  setFoundSchedule(newSchedule)
+                const newSchedule = hoursMinutesToTimestamp(dataNewForm[name2], date);
+                const updatedSchedule = [...foundSchedule, newSchedule];
+                  console.log(newSchedule);
+                  
                   const newShowTime = {
-                    hall: dataNewForm.label1,
-                    schedules: newSchedule,
+                    hall: dataNewForm[name1],
+                    schedules: updatedSchedule,
                   };
-                  const url = `${endpoints.urlCinemaShows}/${newShow.cinema_shows.id}`;
-                  editElement(url, newShowTime);
+                const url = `${endpoints.urlCinemaShows}/${newShow.cinema_shows.id}`;
+                console.log(url);
+                  const response = await editElement(url, newShowTime);
+                    if (response) {
+                        Swal.fire('Función creada', `Nueva función fue creada con exito`, 'success')
+                        setNewShow(false)
+                        setFoundSchedule(updatedSchedule)
+                    }else {
+                        Swal.fire('Error', `Hubo un problema al crear la función`, 'error')
+                }
             }else {
-                const newShow = {
+                const newSchedule = hoursMinutesToTimestamp(dataNewForm[name2], date)
+                const newShowTime = {
                     cinemaId: newShow,
-                    hall: dataNewForm.label1,
-                    schedules: [dataNewForm.label2],
+                    hall: dataNewForm[name1],
+                    schedules: newSchedule,
                     movie: idMovie,
                   };
                   const url = `${endpoints.urlCinemaShows}`;
-                  postElement(url, newShow)
+                  const response = await postElement(url, newShowTime)
+                    if (response) {
+                        Swal.fire('Función creada', `Nueva función fue creada con exito`, 'success')
+                        setNewShow(false)
+                    }else {
+                        Swal.fire('Error', `Hubo un problema al crear la función`, 'error')
+                }
             }
         }
     }
 
-    const convertTimeToTimestamp = (userTime) => {
-        const [hours, minutes] = userTime.split(":");
-        const currentDate = new Date(); 
-      
-        currentDate.setHours(hours);
-        currentDate.setMinutes(minutes);
-        currentDate.setSeconds(0);
-        currentDate.setMilliseconds(0);
-      
-        return currentDate.getTime(); 
+    const hoursMinutesToTimestamp = (hoursMinutes, dateStr) => {
+        console.log(date);
+        const [year, month, day] = dateStr.split('-')
+        const [hours, minutes] = hoursMinutes.split(':');
+        const dateObj = new Date().setFullYear(+year, (+month - 1), +day);
+      const dateObjWithHours = new Date(dateObj).setHours(+hours, +minutes, 0, 0)
+      return dateObjWithHours;
       };
       
 
@@ -90,9 +112,9 @@ const CreateNewForm = ({props}) => {
             </figure>
             <h2>Crear {props.toCreate}</h2>
             <label>{label1}</label>
-            <input onChange={(e) => handleChange(e)} value={dataNewForm.label1} type="text" name={label1} placeholder={props.example1}/>
+            <input onChange={(e) => handleChange(e)} value={dataNewForm[name1]} type="text" name={name1} placeholder={props.example1}/>
             <label>{label2}</label>
-            <input onChange={(e) => handleChange(e)} value={dataNewForm.label2} type="text" name={label2} placeholder={props.example2}/>
+            <input onChange={(e) => handleChange(e)} value={dataNewForm[name2]} type="text" name={name2} placeholder={props.example2}/>
             <button type="submit">Enviar</button>
         </form>
     </div>

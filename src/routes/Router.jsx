@@ -20,12 +20,13 @@ const Router = () => {
     const [filteredMoviesBy, setFilteredMoviesBy] = useState(false)
     const [valueToFilterMovies, setValueToFilterMovies] = useState(false)
     const [isCheckout, setIsCheckout] = useState(false)
-    const [date, setDate] = useState(false)
+    const [date, setDate] = useState("2023-08-14")
     const [foundSchedule, setFoundSchedule] = useState('')
     const [checkoutBuilderState, setCheckBuilderState] = useState(new Checkout())
     const [newMultiplex, setNewMultiplex] = useState(false)
     const [newShow, setNewShow] = useState(null)
     const [schedule, setSchedule] = useState(false)
+    const [cinemas, setCinemas] = useState([]);
 
     useEffect(() => {
         const dataAdmin = JSON.parse(localStorage.getItem('admin')) || {}
@@ -70,7 +71,9 @@ const Router = () => {
                 newShow, 
                 setNewShow,
                 schedule, 
-                setSchedule
+                setSchedule,
+                cinemas, 
+                setCinemas
             }
         }>
             <BrowserRouter>
