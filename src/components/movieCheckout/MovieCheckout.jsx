@@ -36,6 +36,7 @@ const MovieCheckout = () => {
     dateExpiry: "",
     cvv: ""
   })
+
   const propsMovieSchedule = {
     movie,
     cinema,
@@ -82,7 +83,7 @@ const MovieCheckout = () => {
       const [year, month, day] = date.split("-")
       const dateInMiliseconds = new Date(year, (month - 1), day).setHours(0, 0, 0, 0)
       const limitDateInMiliseconds = new Date(dateInMiliseconds).setHours(23, 59, 59, 999999)
-      const cinemaShowSchedule = schedules.filter(item => item >= dateInMiliseconds && item <= limitDateInMiliseconds)
+      const cinemaShowSchedule = schedules.filter(item => item >= dateInMiliseconds && item <= limitDateInMiliseconds).sort((a,b)=> a-b)
       setSchedule(cinemaShowSchedule)
     }
   }
