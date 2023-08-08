@@ -14,7 +14,6 @@ const NavbarChoice = () => {
   const getDate = async () => {
     const infoCinemas = await getCinemas()
     setMultiplex(infoCinemas)
-    console.log(infoCinemas)
   }
 
   const {

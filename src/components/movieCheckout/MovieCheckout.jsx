@@ -150,7 +150,6 @@ const MovieCheckout = () => {
         setCheckoutBuilderState(Object.assign(Object.create(Object.getPrototypeOf(checkoutBuilderState)), updatedBuilderStep6));
         break;
     }
-    console.log(checkoutBuilderState)
   }
 
   return (

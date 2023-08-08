@@ -24,8 +24,6 @@ const Home = () => {
     const dataMoviesGenre = await getMoviesGenre()
     setFilteredMovies(filteredMovies)
     setMoviesGenre(dataMoviesGenre)
-    console.log(filteredMovies)
-    console.log(moviesId)
   }
 
   return (
