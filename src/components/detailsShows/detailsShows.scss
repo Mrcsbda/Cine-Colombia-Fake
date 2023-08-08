@@ -1,21 +1,28 @@
 @import "../../assets/styles/variables.scss";
 
-@mixin button {
-    background-color: white;
-    color: $text-blue;
-    border: 1px solid $text-blue;
-    border-radius: 20px;
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 12px;
-}
 
 .main-admin--second-section {
     display: flex;
+    margin-bottom: 2rem;
+    .long-info--button {
+        background-color: white;
+        color: $text-blue;
+        border: 1px solid $text-blue;
+        border-radius: 20px;
+        padding: 10px 15px;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+        width: fit-content;
+        cursor: pointer;
+        display: none;
+    }
+    .long-info--button:hover {
+        background-color: $text-blue;
+        color: white;
+    }
     .movie-long-info {
-        padding: 4rem 2rem 0;
+        padding: 6rem 2rem 0;
         max-width: 30%;
         p {
             color: $dark-gray;
@@ -29,145 +36,34 @@
             margin: 2rem 0 5px 0;
         }
     }
-    .schedules-cinemas {
-        width: 70%;
-        padding: 3rem 2rem;
-        display: flex;
+    .inactive {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .main-admin--second-section {
         flex-direction: column;
         align-items: center;
-        gap: 2rem;
-        .schedule {
-            position: relative;
-            .schedule--title {
-                color: $text-blue;
-                text-transform: uppercase;
-                margin-bottom: 15px;
-            }
-            .schedule--dates {
-                display: flex;
-                gap: 5%;
-                .date-box {
-                    background-color: $text-blue;
-                    opacity: 60%;
-                    color: white;
-                    border-radius: 5px;
-                    padding: 5px 15px;
-                    text-align: center;
-                    span {
-                        font-size: 26px;
-                    }
-                    p {
-                        text-transform: uppercase;
-                        font-size: 14px;
-                    }
-                }
-                .calendar {
-                    padding: 0 5px;
-                    display: flex;
-                    align-items: center;
-                }
-                .points {
-                    display: flex;
-                    align-items: center;
-                    opacity: 60%;
-                }
-            }
-            .opening-calendar {
-                position: absolute;
-                top: 7rem;
-                right: -15rem;
-                width: 20rem;
-                
-                .react-calendar {
-                    border-radius: 10px;
-                    border: none;
-                }
-            }
-            .inactive-calendar {
-                display: none;
-            }
-        }
-        .shows-container {
-            width: 100%;
-            border: 1px solid $light-gray;
-            border-radius: 10px;
-            .show {
-                border: 1px solid $light-gray;
-                border-radius: 5px;
-                background-color: #F6F6F6;
-                color: $dark-gray;
-                margin: 1px;
-                .show-title {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 2rem 1rem;
-                    p {
-                        text-transform: uppercase;
-                    }
-                    button {
-                        @include button();
-                    }
-                }
-                
-            }
-            .show-cinema {
-                display: flex;
-                justify-content: space-between;
-                padding: 1rem 1rem 1rem 3rem;
-                align-items: center;
-                span {
-                    background-color: white;
-                    border-radius: 50%;
-                    padding: 5px;
-                    height: fit-content;
-                }
-            }
-            .salas {
-                display: flex;
-                justify-content: space-between;
-                padding: 1rem;
-                .name-sala {
-                    display: flex;
-                    gap: 5px;
-                    align-items: center;
-                    .actions-sala {
-                        display: none;
-                    }
-                }
-                .name-sala:hover .actions-sala {
-                        display: flex;
-                        gap: 5px;
-                        cursor: pointer;
-                    }
-                
-                .show-time {
-                    display: flex;
-                    gap: 10px;
-                    padding: 1rem 0;
-                    span {
-                        @include button();
-                    }
-                    span:hover .actions {
-                        display: flex;
-                        gap: 5px;
-                        cursor: pointer;
-                    }
-                }
-                
-                button {
-                    height: fit-content;
-                    @include button();
-                }
-            }
-            
-            .actions {
-                display: none;
-            }
-            
-            .inactive-details {
-                display: none;
-            }
-        }
+        margin-top: 55vh;
+    .long-info--button{
+        display: flex;
+    }
+    .movie-long-info {
+        padding: 2rem;
+        max-width: 100%;
+    }
+}
+}
+
+@media (max-width: 750px) {
+    .main-admin--second-section {
+        margin-top: 45vh;
+    }
+}
+
+@media (max-width: 650px) {
+    .main-admin--second-section {
+        margin-top: 40vh;
     }
 }

@@ -6,7 +6,7 @@ import NavbarChoice from '../nav-choice/NavbarChoice'
 import { AppContext } from '../../routes/Router'
 
 const Header = () => {
-  const { isCheckout } = useContext(AppContext)
+  const { isCheckout, admin } = useContext(AppContext)
   const genres = [
     {
       name: "Aventura",
@@ -26,11 +26,14 @@ const Header = () => {
     }]
   return (
     <header>
-      <Navbar genres={genres} />
+      <Navbar genres={genres} isCheckout={isCheckout} />
       <section>
-        <div className='header--choice-container'>
-          <NavbarChoice  isCheckout={isCheckout} />
-        </div>
+        { !admin?.adminName &&
+          <div className='header--choice-container'>
+            <NavbarChoice  isCheckout={isCheckout} />
+          </div>
+        }
+        
         <div className={isCheckout ? 'hidden' : 'header--genre-container'}>
           <Genres genres={genres} />
         </div>
