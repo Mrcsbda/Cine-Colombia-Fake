@@ -1,0 +1,10 @@
+@import "../../../assets/styles/variables.scss";
+
+* {
+    font-family: $font-roboto;
+}
+
+.outlet {
+    padding: 2rem;
+    padding-bottom: 3rem;
+}

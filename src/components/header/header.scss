@@ -1,0 +1,41 @@
+@import "../../assets/styles/variables.scss";
+
+
+.hidden {
+    display: none;
+}
+
+section {
+    .header--choice-container {
+        margin: 2rem 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+    .header--genre-container {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin: 2rem 20px;
+        flex-wrap: wrap;
+    }
+}
+
+@media (min-width: 1100px) {
+    section {
+        .header--genre-container {
+            display: none;
+        }
+    }
+
+}
+
+@media (min-width: 850px) {
+    section {
+        .header--choice-container {
+            display: none;
+        }
+    }
+
+}
