@@ -62,6 +62,7 @@ const PurchaseForm = ({ handleChange, dataPurchaseForm }) => {
               className='purchase-form__input purchase-form__card-number'
               value={dataPurchaseForm.numberCard}
               onChange={(event) => handleChange(event)}
+              placeholder='1234 1234 1234 1234'
               mask='9999 9999 9999 9999'
             />
             <figure className='purchase-form__icons-container'>
@@ -79,6 +80,7 @@ const PurchaseForm = ({ handleChange, dataPurchaseForm }) => {
               className='purchase-form__input'
               value={dataPurchaseForm.dateExpiry}
               onChange={(event) => handleChange(event)}
+              placeholder='MM/YY'
               mask='99/99'
             />
           </label>

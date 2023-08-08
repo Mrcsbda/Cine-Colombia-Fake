@@ -16,8 +16,6 @@ const SuccessfullPurchase = () => {
     const getPurchases = async () => {
         const purchases = await getHistory()
         const findPurchase = purchases.find(item => item.transactionDate === checkoutBuilderState.transactionDate)
-        console.log(purchases)
-        console.log(checkoutBuilderState.transactionDate)
         setPurchase(findPurchase)
     }
 

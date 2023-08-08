@@ -4,8 +4,9 @@ import "./ticketsQuantity.scss"
 import { AppContext } from '../../routes/Router'
 
 const TicketsQuantity = ({ classification }) => {
-  const [totalTickets, setTotalTickets] = useState(0)
   const { checkoutBuilderState, setCheckoutBuilderState, setAvailable } = useContext(AppContext)
+  const allTitckets = checkoutBuilderState.totalTickets.kids + checkoutBuilderState.totalTickets.adults + checkoutBuilderState.totalTickets.thirdAge;
+  const [totalTickets, setTotalTickets] = useState(allTitckets)
 
   const handlePlus = (type) => {
     if (totalTickets !== 10) {
