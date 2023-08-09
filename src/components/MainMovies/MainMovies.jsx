@@ -38,7 +38,7 @@ const MainMovies = () => {
         break;
       case "cinema":
         const cinemasAndCinemaShows = await getCinemaAndCinemaShows()
-        const cinemaFiltered = cinemasAndCinemaShows.find(cinema => cinema.name === valueToFilterMovies)
+        const cinemaFiltered = cinemasAndCinemaShows.find(cinema => cinema.id === Number(valueToFilterMovies))
         const filteredMoviesByCinema = dataMovies.filter(item => cinemaFiltered.cinema_shows.find(movie => item.id === movie.movie))
         setFilteredMovies(filteredMoviesByCinema)
         break;
