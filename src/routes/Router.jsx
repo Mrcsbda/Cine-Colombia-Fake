@@ -13,7 +13,7 @@ import { Checkout } from '../models/checkoutBuilder';
 export const AppContext = createContext({})
 
 const Router = () => {
-    
+
     const [admin, setAdmin] = useState({})
     const [isLogin, setIsLogin] = useState(false)
     const [isBuying, setIsBuying] = useState(false)
@@ -51,7 +51,7 @@ const Router = () => {
             {
                 isLogin,
                 setIsLogin,
-                admin, 
+                admin,
                 handleLogout,
                 isBuying,
                 setIsBuying,
@@ -67,13 +67,13 @@ const Router = () => {
                 setFoundSchedule,
                 setCheckoutBuilderState,
                 checkoutBuilderState,
-                newMultiplex, 
+                newMultiplex,
                 setNewMultiplex,
-                newShow, 
+                newShow,
                 setNewShow,
-                schedule, 
+                schedule,
                 setSchedule,
-                cinemas, 
+                cinemas,
                 setCinemas,
                 available,
                 setAvailable
@@ -83,7 +83,7 @@ const Router = () => {
                 <Routes>
                     <Route path="/" element={<Layout />} >
                         <Route element={<PublicRouter isAutenticate={isLogin} />}>
-                            <Route path="/" element={<Home />}>
+                            <Route element={<Home />}>
                                 <Route index element={<MainMovies />} />
                                 <Route path=":idMovie" element={<MovieCheckout />} />
                             </Route>
